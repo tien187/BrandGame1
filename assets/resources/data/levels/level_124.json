@@ -145,39 +145,39 @@
       "items": [
         "12",
         "13",
-        "14"
+        "15"
       ]
     },
     {
       "id": "order_010",
       "items": [
         "15",
-        "11",
+        "16",
         "0"
       ]
     },
     {
       "id": "order_011",
       "items": [
-        "16",
+        "3",
         "2",
-        "3"
+        "6"
       ]
     },
     {
       "id": "order_012",
       "items": [
-        "3",
-        "5",
-        "7"
+        "4",
+        "8",
+        "15"
       ]
     },
     {
       "id": "order_013",
       "items": [
         "7",
-        "11",
-        "13"
+        "15",
+        "3"
       ]
     },
     {
@@ -185,14 +185,6 @@
       "items": [
         "3",
         "3",
-        "7"
-      ]
-    },
-    {
-      "id": "order_015",
-      "items": [
-        "3",
-        "7",
         "3"
       ]
     }
@@ -241,36 +233,31 @@
     [
       "12",
       "13",
-      "14"
+      "15"
     ],
     [
       "15",
-      "11",
+      "16",
       "0"
     ],
     [
-      "16",
+      "3",
       "2",
+      "6"
+    ],
+    [
+      "4",
+      "8",
+      "15"
+    ],
+    [
+      "7",
+      "15",
       "3"
     ],
     [
       "3",
-      "5",
-      "7"
-    ],
-    [
-      "7",
-      "11",
-      "13"
-    ],
-    [
       "3",
-      "3",
-      "7"
-    ],
-    [
-      "3",
-      "7",
       "3"
     ]
   ],
@@ -324,7 +311,7 @@
   "tiles": [
     {
       "id": "L124_T000",
-      "groupId": "5",
+      "groupId": "2",
       "tileType": 0,
       "gridX": 0,
       "gridY": 0,
@@ -369,7 +356,7 @@
     },
     {
       "id": "L124_T003",
-      "groupId": "13",
+      "groupId": "11",
       "tileType": 0,
       "gridX": 1,
       "gridY": 0,
@@ -384,7 +371,7 @@
     },
     {
       "id": "L124_T004",
-      "groupId": "7",
+      "groupId": "3",
       "tileType": 0,
       "gridX": 2,
       "gridY": 0,
@@ -399,7 +386,7 @@
     },
     {
       "id": "L124_T005",
-      "groupId": "16",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 2,
       "gridY": 0,
@@ -414,7 +401,7 @@
     },
     {
       "id": "L124_T006",
-      "groupId": "15",
+      "groupId": "11",
       "tileType": 0,
       "gridX": 2,
       "gridY": 0,
@@ -425,11 +412,13 @@
       "clusteredLayout": false,
       "clusterCount": 1,
       "sameLayerOverlapForbidden": true,
-      "designRole": "top"
+      "designRole": "top",
+      "strategyRole": "required_unlocker_wrong_tile",
+      "unlocksSolutionStep": 12
     },
     {
       "id": "L124_T007",
-      "groupId": "11",
+      "groupId": "8",
       "tileType": 0,
       "gridX": 3,
       "gridY": 0,
@@ -474,7 +463,7 @@
     },
     {
       "id": "L124_T010",
-      "groupId": "2",
+      "groupId": "16",
       "tileType": 0,
       "gridX": 4,
       "gridY": 0,
@@ -489,7 +478,7 @@
     },
     {
       "id": "L124_T011",
-      "groupId": "16",
+      "groupId": "0",
       "tileType": 0,
       "gridX": 4,
       "gridY": 0,
@@ -500,11 +489,13 @@
       "clusteredLayout": false,
       "clusterCount": 1,
       "sameLayerOverlapForbidden": true,
-      "designRole": "top"
+      "designRole": "top",
+      "strategyRole": "required_unlocker_wrong_tile",
+      "unlocksSolutionStep": 32
     },
     {
       "id": "L124_T012",
-      "groupId": "7",
+      "groupId": "3",
       "tileType": 0,
       "gridX": 0,
       "gridY": 1,
@@ -519,7 +510,7 @@
     },
     {
       "id": "L124_T013",
-      "groupId": "3",
+      "groupId": "0",
       "tileType": 0,
       "gridX": 0,
       "gridY": 1,
@@ -534,7 +525,7 @@
     },
     {
       "id": "L124_T014",
-      "groupId": "3",
+      "groupId": "7",
       "tileType": 0,
       "gridX": 4,
       "gridY": 1,
@@ -579,7 +570,7 @@
     },
     {
       "id": "L124_T017",
-      "groupId": "7",
+      "groupId": "4",
       "tileType": 0,
       "gridX": 0,
       "gridY": 2,
@@ -594,7 +585,7 @@
     },
     {
       "id": "L124_T018",
-      "groupId": "1",
+      "groupId": "0",
       "tileType": 0,
       "gridX": 0,
       "gridY": 2,
@@ -609,7 +600,7 @@
     },
     {
       "id": "L124_T019",
-      "groupId": "0",
+      "groupId": "16",
       "tileType": 0,
       "gridX": 0,
       "gridY": 2,
@@ -624,7 +615,7 @@
     },
     {
       "id": "L124_T020",
-      "groupId": "4",
+      "groupId": "3",
       "tileType": 0,
       "gridX": 2,
       "gridY": 2,
@@ -639,7 +630,7 @@
     },
     {
       "id": "L124_T021",
-      "groupId": "3",
+      "groupId": "2",
       "tileType": 0,
       "gridX": 2,
       "gridY": 2,
@@ -669,7 +660,7 @@
     },
     {
       "id": "L124_T023",
-      "groupId": "7",
+      "groupId": "6",
       "tileType": 0,
       "gridX": 3,
       "gridY": 2,
@@ -684,7 +675,7 @@
     },
     {
       "id": "L124_T024",
-      "groupId": "2",
+      "groupId": "1",
       "tileType": 0,
       "gridX": 3,
       "gridY": 2,
@@ -714,7 +705,7 @@
     },
     {
       "id": "L124_T026",
-      "groupId": "6",
+      "groupId": "5",
       "tileType": 0,
       "gridX": 4,
       "gridY": 2,
@@ -729,7 +720,7 @@
     },
     {
       "id": "L124_T027",
-      "groupId": "5",
+      "groupId": "4",
       "tileType": 0,
       "gridX": 4,
       "gridY": 2,
@@ -759,7 +750,7 @@
     },
     {
       "id": "L124_T029",
-      "groupId": "12",
+      "groupId": "10",
       "tileType": 0,
       "gridX": 0,
       "gridY": 3,
@@ -774,7 +765,7 @@
     },
     {
       "id": "L124_T030",
-      "groupId": "11",
+      "groupId": "9",
       "tileType": 0,
       "gridX": 0,
       "gridY": 3,
@@ -789,7 +780,7 @@
     },
     {
       "id": "L124_T031",
-      "groupId": "8",
+      "groupId": "6",
       "tileType": 0,
       "gridX": 3,
       "gridY": 3,
@@ -804,7 +795,7 @@
     },
     {
       "id": "L124_T032",
-      "groupId": "7",
+      "groupId": "12",
       "tileType": 0,
       "gridX": 3,
       "gridY": 3,
@@ -815,7 +806,9 @@
       "clusteredLayout": false,
       "clusterCount": 1,
       "sameLayerOverlapForbidden": true,
-      "designRole": "middle"
+      "designRole": "middle",
+      "strategyRole": "required_unlocker_wrong_tile",
+      "unlocksSolutionStep": 21
     },
     {
       "id": "L124_T033",
@@ -834,7 +827,7 @@
     },
     {
       "id": "L124_T034",
-      "groupId": "13",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 4,
       "gridY": 3,
@@ -879,7 +872,7 @@
     },
     {
       "id": "L124_T037",
-      "groupId": "15",
+      "groupId": "13",
       "tileType": 0,
       "gridX": 1,
       "gridY": 4,
@@ -894,7 +887,7 @@
     },
     {
       "id": "L124_T038",
-      "groupId": "14",
+      "groupId": "12",
       "tileType": 0,
       "gridX": 1,
       "gridY": 4,
@@ -924,7 +917,7 @@
     },
     {
       "id": "L124_T040",
-      "groupId": "10",
+      "groupId": "8",
       "tileType": 0,
       "gridX": 2,
       "gridY": 4,
@@ -939,7 +932,7 @@
     },
     {
       "id": "L124_T041",
-      "groupId": "3",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 3,
       "gridY": 4,
@@ -954,7 +947,7 @@
     },
     {
       "id": "L124_T042",
-      "groupId": "9",
+      "groupId": "7",
       "tileType": 0,
       "gridX": 3,
       "gridY": 4,
@@ -969,7 +962,7 @@
     },
     {
       "id": "L124_T043",
-      "groupId": "0",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 4,
       "gridY": 4,
@@ -984,7 +977,7 @@
     },
     {
       "id": "L124_T044",
-      "groupId": "11",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 4,
       "gridY": 4,
@@ -1009,28 +1002,30 @@
     "difficultyIndex": 24,
     "shapeName": "broken_ring",
     "totalTiles": 45,
-    "orderCount": 15,
+    "orderCount": 14,
     "distinctItemCount": 17,
     "maxLayers": 5,
     "startingSelectableTiles": 15,
-    "logicGateDecoyCount": 84,
-    "realTrapSteps": 6,
-    "stepsWhereNextItemHiddenBeforeMove": 10,
-    "forcedSteps": 27,
+    "logicGateDecoyCount": 78,
+    "interleavedUnlockerSteps": 3,
+    "forcedUnlockGates": 1,
+    "realTrapSteps": 3,
+    "stepsWhereNextItemHiddenBeforeMove": 7,
+    "forcedSteps": 25,
     "averageSelectableTilesDuringSolution": 10.78,
-    "averageSameItemChoicesDuringSolution": 1.71,
-    "maxSameItemChoicesDuringSolution": 5,
+    "averageSameItemChoicesDuringSolution": 1.6,
+    "maxSameItemChoicesDuringSolution": 4,
     "firstTenSameItemChoices": [
       1,
       1,
-      1,
-      1,
       2,
+      2,
+      2,
+      1,
       2,
       3,
       1,
-      1,
-      2
+      1
     ],
     "firstTenBranching": [
       {
@@ -1042,16 +1037,20 @@
         "winning": 1
       },
       {
-        "choices": 1,
-        "winning": 1
-      },
-      {
-        "choices": 1,
-        "winning": 1
+        "choices": 2,
+        "winning": 2
       },
       {
         "choices": 2,
         "winning": 2
+      },
+      {
+        "choices": 2,
+        "winning": 1
+      },
+      {
+        "choices": 1,
+        "winning": 1
       },
       {
         "choices": 2,
@@ -1059,7 +1058,7 @@
       },
       {
         "choices": 3,
-        "winning": 1
+        "winning": 3
       },
       {
         "choices": 1,
@@ -1068,10 +1067,6 @@
       {
         "choices": 1,
         "winning": 1
-      },
-      {
-        "choices": 2,
-        "winning": 2
       }
     ],
     "topLayerTileCount": 0,
@@ -1115,6 +1110,6 @@
     "screenFitValidated": true,
     "solutionValidated": true,
     "strategicGoal": "Escalating ORDER_MATCH logic gates: multiple visible same-item candidates exist, but only the key tile opens the next requested item.",
-    "progressiveDifficultyScore": 355.8
+    "progressiveDifficultyScore": 302.71
   }
 }

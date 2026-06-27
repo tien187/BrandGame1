@@ -25,17 +25,22 @@ export class BoosterManager extends Component {
     public static Instance: BoosterManager;
     public static getInstance(): BoosterManager { return BoosterManager.Instance; }
 
-    private readonly _defaultHintCount = 3;
-    private readonly _defaultUndoCount = 3;
+    private readonly _defaultHintCount = 50;
+    private readonly _defaultUndoCount = 50;
     private readonly _defaultSkipCount = 1;
 
-    private _hintCount: number = 3;
-    private _undoCount: number = 3;
+    private _hintCount: number = 50;
+    private _undoCount: number = 50;
     private _skipCount: number = 1;
+
     private _undoStack: IGameStateSnapshot[] = [];
     private _isRestoring: boolean = false;
     private _highlightedTileId: string | null = null;
     private _activeBooster: BoosterType = BoosterType.NONE;
+    private _isHintPicking: boolean = false;
+    private _queuedHintCount: number = 0;
+    private _isHintQueueScheduled: boolean = false;
+    private _hintQueueVersion: number = 0;
 
     protected onLoad(): void {
         if (BoosterManager.Instance) { this.destroy(); return; }
@@ -46,6 +51,10 @@ export class BoosterManager extends Component {
         this._hintCount = this._defaultHintCount;
         this._undoCount = this._defaultUndoCount;
         this._skipCount = this._defaultSkipCount;
+        this._isHintPicking = false;
+        this._queuedHintCount = 0;
+        this._isHintQueueScheduled = false;
+        this._hintQueueVersion++;
         this.clearUndoStack();
         this.clearHighlight();
         this.emitChanged();
@@ -59,13 +68,110 @@ export class BoosterManager extends Component {
     }
 
     public UseHint(): boolean {
-        if (this._hintCount <= 0 || !this.canUseBoosters()) return false;
-        const tile = this.GetBestHintTile();
-        if (!tile) return false;
-        this.HighlightTile(tile.id);
+        if (this._hintCount <= 0 || !LevelManager.getInstance().isLevelActive()) return false;
+        // Nếu không có tile nào để hint và board đã settle, không trừ item, rung nhẹ
+        if (this._queuedHintCount === 0 && !this.isHintWaitingForBoardSettle()) {
+            const tile = this.GetBestHintTile();
+            if (!tile) {
+                TileManager.getInstance().shakeAllTiles();
+                EventBus.getInstance().emit(GameEvent.HINT_FAILED);
+                return false;
+            }
+        }
         this._hintCount--;
-        this.emitUsed(BoosterType.HINT);
+        this._queuedHintCount++;
+        this.emitChanged();
+        this.processHintQueue();
         return true;
+    }
+
+    private processHintQueue(): void {
+        if (this._queuedHintCount <= 0) return;
+        if (this._isHintPicking) return;
+        if (!LevelManager.getInstance().isLevelActive()) {
+            this._queuedHintCount = 0;
+            this.emitChanged();
+            return;
+        }
+        if (this.isHintWaitingForBoardSettle()) {
+            this.scheduleHintQueue();
+            return;
+        }
+
+        const tile = this.GetBestHintTile();
+        if (!tile) {
+            this.refundQueuedHint();
+            TileManager.getInstance().shakeAllTiles();
+            EventBus.getInstance().emit(GameEvent.HINT_FAILED);
+            this.scheduleHintQueue();
+            return;
+        }
+
+        this.clearHighlight();
+        let picked = TileManager.getInstance().tryClickTile(tile.id);
+        if (!picked) {
+            TileManager.getInstance().refreshBlockStatus();
+            picked = TileManager.getInstance().tryClickTile(tile.id);
+        }
+        if (!picked) {
+            this.refundQueuedHint();
+            TileManager.getInstance().shakeAllTiles();
+            EventBus.getInstance().emit(GameEvent.HINT_FAILED);
+            this.scheduleHintQueue();
+            return;
+        }
+
+        this._queuedHintCount--;
+        this._isHintPicking = true;
+        this.emitUsed(BoosterType.HINT);
+        this.releaseHintPickingWhenSettled();
+    }
+
+    private scheduleHintQueue(): void {
+        if (this._isHintQueueScheduled) return;
+        this._isHintQueueScheduled = true;
+        const version = this._hintQueueVersion;
+        this.scheduleOnce(() => {
+            if (version !== this._hintQueueVersion || !LevelManager.getInstance().isLevelActive()) {
+                this._isHintQueueScheduled = false;
+                this._queuedHintCount = 0;
+                this.emitChanged();
+                return;
+            }
+            this._isHintQueueScheduled = false;
+            this.processHintQueue();
+        }, 0.1);
+    }
+
+    private refundQueuedHint(): void {
+        if (this._queuedHintCount <= 0) return;
+        this._queuedHintCount--;
+        this._hintCount++;
+        this.emitChanged();
+    }
+
+    private isHintWaitingForBoardSettle(): boolean {
+        return TileManager.getInstance().isInputLocked() ||
+            TrayManager.getInstance().getFlyCount() > 0 ||
+            TrayManager.getInstance().isClearingOrderTiles();
+    }
+
+    private releaseHintPickingWhenSettled(): void {
+        const version = this._hintQueueVersion;
+        this.scheduleOnce(() => {
+            if (version !== this._hintQueueVersion || !LevelManager.getInstance().isLevelActive()) {
+                this._isHintPicking = false;
+                this.emitChanged();
+                return;
+            }
+            if (this.isHintWaitingForBoardSettle()) {
+                this.releaseHintPickingWhenSettled();
+                return;
+            }
+            this._isHintPicking = false;
+            this.emitChanged();
+            this.processHintQueue();
+        }, 0.08);
     }
 
     public GetBestHintTile(): ITileData | null {
@@ -78,6 +184,58 @@ export class BoosterManager extends Component {
         const solution = level?.solutionMoveTileIds || [];
         const solutionIndex = new Map<string, number>();
         for (let i = 0; i < solution.length; i++) solutionIndex.set(solution[i], i);
+
+        const rankCandidates = (candidates: ITileData[]): ITileData | null => {
+            if (candidates.length === 0) return null;
+            candidates.sort((a, b) => {
+                const ai = solutionIndex.has(a.id) ? solutionIndex.get(a.id)! : Number.MAX_SAFE_INTEGER;
+                const bi = solutionIndex.has(b.id) ? solutionIndex.get(b.id)! : Number.MAX_SAFE_INTEGER;
+                if (ai !== bi) return ai - bi;
+                if (a.layer !== b.layer) return b.layer - a.layer;
+                if (a.gridY !== b.gridY) return b.gridY - a.gridY;
+                return a.gridX - b.gridX;
+            });
+            return candidates[0];
+        };
+
+        const trayTiles = TrayManager.getInstance().getTrayTiles();
+        const freeSlots = TrayManager.getInstance().getMaxSlots() - trayTiles.length;
+
+        if (OrderManager.getInstance().isActive()) {
+            if (solution.length > 0) {
+                for (const tileId of solution) {
+                    const tile = allTiles.find(t => t.id === tileId);
+                    if (!tile || !tile.active) continue;
+                    if (!tile.selectable) return null;
+                    if (tile.groupId === expected || (tile as any).strategyRole === 'required_unlocker_wrong_tile') {
+                        return tile;
+                    }
+                    break;
+                }
+            }
+
+            if (expected) {
+                const expectedTile = rankCandidates(selectable.filter(t => t.groupId === expected));
+                if (expectedTile) return expectedTile;
+            }
+
+            // Never suggest an off-order tile in ORDER_MATCH.
+            return null;
+        } else {
+            const matchCount = TrayManager.getInstance().getMatchCount();
+            const trayCounts: Record<string, number> = {};
+            for (const tile of trayTiles) {
+                trayCounts[tile.groupId] = (trayCounts[tile.groupId] || 0) + 1;
+            }
+            const nearMatchGroups = Object.keys(trayCounts)
+                .filter(groupId => trayCounts[groupId] >= matchCount - 1);
+            const completingTile = rankCandidates(
+                selectable.filter(t => nearMatchGroups.indexOf(t.groupId) !== -1)
+            );
+            if (completingTile) return completingTile;
+
+            if (freeSlots <= 1) return null;
+        }
 
         if (solution.length > 0) {
             const activeSelectableById = new Map(selectable.map(t => [t.id, t]));
@@ -101,17 +259,7 @@ export class BoosterManager extends Component {
             ? selectable.filter(t => t.groupId === expected)
             : selectable;
         const candidates = expectedSelectable.length > 0 ? expectedSelectable : selectable;
-
-        candidates.sort((a, b) => {
-            const ai = solutionIndex.has(a.id) ? solutionIndex.get(a.id)! : Number.MAX_SAFE_INTEGER;
-            const bi = solutionIndex.has(b.id) ? solutionIndex.get(b.id)! : Number.MAX_SAFE_INTEGER;
-            if (ai !== bi) return ai - bi;
-            if (a.layer !== b.layer) return b.layer - a.layer;
-            if (a.gridY !== b.gridY) return b.gridY - a.gridY;
-            return a.gridX - b.gridX;
-        });
-
-        return candidates[0];
+        return rankCandidates(candidates);
     }
 
     public HighlightTile(tileId: string): void {
@@ -130,18 +278,19 @@ export class BoosterManager extends Component {
 
     public UseUndo(): boolean {
         if (this._undoCount <= 0 || !this.canUseBoosters()) return false;
+        const tray = TrayManager.getInstance();
         const snapshot = this._undoStack.pop();
         if (!snapshot) return false;
 
         this._isRestoring = true;
         this.clearHighlight();
+        tray.cancelPendingOrderClearEffects();
         TileManager.getInstance().restoreTilesFromSnapshot(snapshot.tiles);
-        TrayManager.getInstance().restoreSnapshot(snapshot.tray);
+        tray.restoreSnapshot(snapshot.tray);
         OrderManager.getInstance().restoreSnapshot(snapshot.order);
-        OrderManager.getInstance().syncWithSettledTray();
         OrderTrayManager.getInstance()?.refreshFromOrderManager();
         if (snapshot.wrongTray) WrongTrayManager.getInstance()?.restoreSnapshot(snapshot.wrongTray);
-        TileManager.getInstance().refreshBlockStatus();
+        TileManager.getInstance().refreshBlockStatus(true);
         this._isRestoring = false;
 
         this._undoCount--;
@@ -150,7 +299,7 @@ export class BoosterManager extends Component {
     }
 
     public UseSkipLevel(): boolean {
-        if (this._skipCount <= 0 || !this.canUseBoosters()) return false;
+        if (this._skipCount <= 0 || !LevelManager.getInstance().isLevelActive()) return false;
         const confirmFn = (globalThis as any).confirm;
         if (typeof confirmFn === 'function' && !confirmFn('Skip this level?')) {
             return false;
@@ -229,6 +378,21 @@ export class BoosterManager extends Component {
 
     public canUseBoosters(): boolean {
         return LevelManager.getInstance().isLevelActive() && !TileManager.getInstance().isInputLocked();
+    }
+
+    public canUseHint(): boolean {
+        return LevelManager.getInstance().isLevelActive() && this._hintCount > 0;
+    }
+
+    public canUseUndo(): boolean {
+        return LevelManager.getInstance().isLevelActive() &&
+            !TileManager.getInstance().isInputLocked() &&
+            this._undoCount > 0 &&
+            this.hasUndoSnapshot();
+    }
+
+    public canUseSkip(): boolean {
+        return LevelManager.getInstance().isLevelActive() && this._skipCount > 0;
     }
 
     private captureSnapshot(): IGameStateSnapshot {

@@ -547,6 +547,14 @@ export class TrayManager extends Component {
     public getFlyCount(): number { return this._flyCount; }
     public isClearingOrderTiles(): boolean { return this._pendingOrderClearEffects > 0; }
 
+    public cancelPendingOrderClearEffects(): void {
+        this._lifecycleId++;
+        this.unscheduleAllCallbacks();
+        this._flyCount = 0;
+        this._pendingOrderClearEffects = 0;
+        OrderTrayManager.getInstance()?.cancelPendingTransitionForRestore();
+    }
+
     public captureSnapshot(): ITraySnapshot {
         return {
             tileIds: this._trayTiles.map(t => t.id),
@@ -575,6 +583,7 @@ export class TrayManager extends Component {
                 const prefabKey = SkinManager.getInstance().getTilePrefabKey(data.groupId);
                 node = PoolManager.getInstance().get(prefabKey);
                 if (!node) continue;
+                this.prepareTileNodeForTray(node);
 
                 const tileComponent = node.getComponent('Tile') || node.addComponent('Tile');
                 if (tileComponent) {
@@ -593,6 +602,7 @@ export class TrayManager extends Component {
             this._trayTiles.push(data);
 
             if (this.trayContainer) {
+                this.prepareTileNodeForTray(node);
                 node.setParent(this.trayContainer);
                 node.setPosition(this.getSlotPosition(i));
             }
@@ -605,6 +615,28 @@ export class TrayManager extends Component {
     }
 
     /** Cập nhật label hiển thị số slot đã dùng / tổng số slot */
+    private prepareTileNodeForTray(node: Node): void {
+        if (!node || !node.isValid) return;
+        Tween.stopAllByTarget(node);
+        node.active = true;
+        node.angle = 0;
+        node.setRotationFromEuler(0, 0, 0);
+        node.setScale(1, 1, 1);
+
+        const opacity = node.getComponent(UIOpacity);
+        if (opacity) opacity.opacity = 255;
+
+        const visualNode = node.getChildByName('visual');
+        if (visualNode && visualNode.isValid) {
+            Tween.stopAllByTarget(visualNode);
+            visualNode.angle = 0;
+            visualNode.setRotationFromEuler(0, 0, 0);
+            visualNode.setScale(1, 1, 1);
+            const visualOpacity = visualNode.getComponent(UIOpacity);
+            if (visualOpacity) visualOpacity.opacity = 255;
+        }
+    }
+
     public updateSlotLabel(): void {
         if (!this.slotLabel) return;
         const curr = this._trayTiles.length;

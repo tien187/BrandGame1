@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3, tween, UITransform } from 'cc';
+import { _decorator, Component, Node, Vec3, tween, Tween, UITransform, UIOpacity } from 'cc';
 import { ITileData } from '../interfaces/ITileData';
 import { GameEvent } from '../enums/GameEvent';
 import { EventBus } from '../core/EventBus';
@@ -135,6 +135,7 @@ export class TileManager extends Component {
         const node = PoolManager.getInstance().get(prefabKey);
 
         if (!node) return;
+        this.prepareTileNodeForGameplay(node);
 
         node.setParent(this.tileContainer);
         this._tileNodeMap.set(data.id, node);
@@ -180,6 +181,7 @@ export class TileManager extends Component {
         const prefabKey = SkinManager.getInstance().getTilePrefabKey(data.groupId);
         const node = PoolManager.getInstance().get(prefabKey);
         if (!node) return;
+        this.prepareTileNodeForGameplay(node);
 
         node.setParent(this.tileContainer);
         this._tileNodeMap.set(data.id, node);
@@ -229,13 +231,38 @@ export class TileManager extends Component {
         skinMgr.applyTileSkin(node, skinOverride);
     }
 
+    private prepareTileNodeForGameplay(node: Node): void {
+        Tween.stopAllByTarget(node);
+        node.active = true;
+        node.angle = 0;
+        node.setRotationFromEuler(0, 0, 0);
+        node.setScale(1, 1, 1);
+
+        const opacity = node.getComponent(UIOpacity);
+        if (opacity) opacity.opacity = 255;
+
+        const visualNode = node.getChildByName('visual');
+        if (visualNode && visualNode.isValid) {
+            Tween.stopAllByTarget(visualNode);
+            visualNode.angle = 0;
+            visualNode.setRotationFromEuler(0, 0, 0);
+            visualNode.setScale(1, 1, 1);
+            const visualOpacity = visualNode.getComponent(UIOpacity);
+            if (visualOpacity) visualOpacity.opacity = 255;
+        }
+    }
+
     /** Xử lý khi người chơi click tile */
     public onTileClicked(tileId: string): void {
-        if (this._isInputLocked) return;
-        if (!this._clickableTiles.has(tileId)) return;
+        this.tryClickTile(tileId);
+    }
+
+    public tryClickTile(tileId: string, ignoreInputLock: boolean = false): boolean {
+        if (this._isInputLocked && !ignoreInputLock) return false;
+        if (!this._clickableTiles.has(tileId)) return false;
 
         const data = this._tileDataMap.get(tileId);
-        if (!data || !data.active || !data.selectable) return;
+        if (!data || !data.active || !data.selectable) return false;
         // Update visual selected state
         const node = this._tileNodeMap.get(tileId);
         if (node) {
@@ -244,6 +271,7 @@ export class TileManager extends Component {
         }
 
         EventBus.getInstance().emit(GameEvent.TILE_CLICKED, data);
+        return true;
     }
 
     /** Mở/khóa input toàn cục */
@@ -361,7 +389,7 @@ export class TileManager extends Component {
     }
 
     /** Refresh block status sau khi tile bị xóa */
-    public refreshBlockStatus(): void {
+    public refreshBlockStatus(forceVisual: boolean = false): void {
         const allData = Array.from(this._tileDataMap.values());
         const matchCount = TrayManager.getInstance().getMatchCount();
         const trayTiles = TrayManager.getInstance().getTrayTiles();
@@ -402,7 +430,13 @@ export class TileManager extends Component {
             const node = this._tileNodeMap.get(data.id);
             if (node) {
                 const tileComp = node.getComponent('Tile') as any;
-                if (tileComp) tileComp.updateVisualState();
+                if (tileComp) {
+                    if (forceVisual && tileComp.forceUpdateVisualState) {
+                        tileComp.forceUpdateVisualState();
+                    } else {
+                        tileComp.updateVisualState();
+                    }
+                }
             }
 
             if (data.selectable) {
@@ -497,6 +531,20 @@ export class TileManager extends Component {
         this._isInputLocked = false;
         this._enforceGroupMatchBlock = true;
         BoardManager.getInstance().clearBoard();
+    }
+
+    /** Rung toàn bộ tile container (feedback khi không tìm được hint) */
+    public shakeAllTiles(): void {
+        if (!this.tileContainer || !this.tileContainer.isValid) return;
+        const node = this.tileContainer;
+        const originalPos = node.position.clone();
+        tween(node)
+            .to(0.05, { position: new Vec3(originalPos.x - 8, originalPos.y, originalPos.z) })
+            .to(0.05, { position: new Vec3(originalPos.x + 8, originalPos.y, originalPos.z) })
+            .to(0.05, { position: new Vec3(originalPos.x - 8, originalPos.y, originalPos.z) })
+            .to(0.05, { position: new Vec3(originalPos.x + 8, originalPos.y, originalPos.z) })
+            .to(0.05, { position: originalPos })
+            .start();
     }
 
     protected onDestroy(): void {

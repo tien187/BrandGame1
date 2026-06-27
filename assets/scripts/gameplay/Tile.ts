@@ -73,6 +73,10 @@ export class Tile extends Component {
         if (!this.visualNode) {
             this.visualNode = this.node.getChildByName('visual');
         }
+        this._originalScale = this.node.scale.clone();
+        if (this.visualNode) {
+            this._originalVisualScale = this.visualNode.scale.clone();
+        }
         this._isInTrayVisual = false;
         this._data = data;
         this._isSelected = false;
@@ -139,6 +143,7 @@ export class Tile extends Component {
             const tweenOpts: any = {
                 easing: 'sineOut',
                 onUpdate: (target: any) => {
+                    if (!sprite || !sprite.node || !sprite.node.isValid || !target) return;
                     sprite.color = new Color(target.r, target.g, target.b, target.a);
                 },
             };
@@ -164,6 +169,10 @@ export class Tile extends Component {
 
     /** Đặt trạng thái selected và cập nhật visual */
     public forceUpdateVisualState(): void {
+        if (this._glowTween) { this._glowTween.stop(); this._glowTween = null; }
+        if (this._unlockTween) { this._unlockTween.stop(); this._unlockTween = null; }
+        this._isGlowing = false;
+        this._isInTrayVisual = false;
         this._lastVisualState = null;
         this.updateVisualState();
     }
@@ -175,18 +184,24 @@ export class Tile extends Component {
 
     /** Đặt visual về màu bình thường khi tile xuống tray (không phụ thuộc data) */
     public setTrayVisual(): void {
+        Tween.stopAllByTarget(this.node);
+        if (this.visualNode) Tween.stopAllByTarget(this.visualNode);
+        if (this._glowTween) { this._glowTween.stop(); this._glowTween = null; }
+        if (this._unlockTween) { this._unlockTween.stop(); this._unlockTween = null; }
         this._isInTrayVisual = true;
         this._isSelected = false;
         this._lastVisualState = null;
+        this._originalScale = new Vec3(1, 1, 1);
+        this._originalVisualScale = new Vec3(1, 1, 1);
         const opacity = this.node.getComponent(UIOpacity);
         if (opacity) opacity.opacity = 255;
         this.node.angle = 0;
         const sprite = this.visualNode?.getComponent(Sprite) || this.getComponent(Sprite);
         if (sprite) {
             sprite.color = this.selectableColor;
-            sprite.node.setScale(this._originalVisualScale.x, this._originalVisualScale.y, this._originalVisualScale.z);
+            sprite.node.setScale(1, 1, 1);
         }
-        this.node.setScale(this._originalScale.x, this._originalScale.y, 1);
+        this.node.setScale(1, 1, 1);
     }
 
     /** Glow effect: tile sáng nhấp nháy khi sắp match */
@@ -209,6 +224,7 @@ export class Tile extends Component {
                 : this.blockedColor;
             const proxy = { r: originalColor.r, g: originalColor.g, b: originalColor.b };
             const updateColor = () => {
+                if (!sprite || !sprite.node || !sprite.node.isValid) return;
                 sprite.color = new Color(proxy.r, proxy.g, proxy.b, 255);
             };
             this._glowTween = tween(proxy)
@@ -523,6 +539,10 @@ export class Tile extends Component {
     /** Reset state để recycle qua pool */
     public reset(): void {
         this.stopAllTweens();
+        this._originalScale = this.node.scale.clone();
+        if (this.visualNode) {
+            this._originalVisualScale = this.visualNode.scale.clone();
+        }
         (this.node as any).__skinApplyId = ((this.node as any).__skinApplyId || 0) + 1;
         this._data = null;
         this._isAnimating = false;

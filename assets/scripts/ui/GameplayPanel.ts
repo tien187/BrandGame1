@@ -1,4 +1,4 @@
-import { _decorator, Component, Label, Button } from 'cc';
+import { _decorator, Component, Label, Button, tween, Vec3 } from 'cc';
 import { BasePanel } from './BasePanel';
 import { GameEvent } from '../enums/GameEvent';
 import { EventBus } from '../core/EventBus';
@@ -55,6 +55,7 @@ export class GameplayPanel extends BasePanel {
         EventBus.getInstance().on(GameEvent.BOOSTER_USED, this.onBoosterChanged, this);
         EventBus.getInstance().on(GameEvent.LEVEL_STARTED, this.onLevelStarted, this);
         EventBus.getInstance().on(GameEvent.LEVEL_FAILED, this.onLevelEnded, this);
+        EventBus.getInstance().on(GameEvent.HINT_FAILED, this.onHintFailed, this);
         this.bindBoosterButtons();
         this.updateBoosterUI();
     }
@@ -66,6 +67,7 @@ export class GameplayPanel extends BasePanel {
         EventBus.getInstance().off(GameEvent.BOOSTER_USED, this.onBoosterChanged, this);
         EventBus.getInstance().off(GameEvent.LEVEL_STARTED, this.onLevelStarted, this);
         EventBus.getInstance().off(GameEvent.LEVEL_FAILED, this.onLevelEnded, this);
+        EventBus.getInstance().off(GameEvent.HINT_FAILED, this.onHintFailed, this);
         this.unbindBoosterButtons();
     }
 
@@ -105,6 +107,25 @@ export class GameplayPanel extends BasePanel {
         this.updateBoosterUI();
     }
 
+    private onHintFailed(): void {
+        if (BoosterManager.getInstance()?.getBoosterCount(BoosterType.UNDO) > 0) {
+            this.shakeUndoButton();
+        }
+    }
+
+    private shakeUndoButton(): void {
+        if (!this.undoButton || !this.undoButton.node.isValid) return;
+        const node = this.undoButton.node;
+        const originalPos = node.position.clone();
+        tween(node)
+            .to(0.05, { position: new Vec3(originalPos.x - 8, originalPos.y, originalPos.z) })
+            .to(0.05, { position: new Vec3(originalPos.x + 8, originalPos.y, originalPos.z) })
+            .to(0.05, { position: new Vec3(originalPos.x - 8, originalPos.y, originalPos.z) })
+            .to(0.05, { position: new Vec3(originalPos.x + 8, originalPos.y, originalPos.z) })
+            .to(0.05, { position: originalPos })
+            .start();
+    }
+
     private bindBoosterButtons(): void {
         this.unbindBoosterButtons();
         this.undoButton?.node.on(Button.EventType.CLICK, this.onUndoClicked, this);
@@ -136,7 +157,6 @@ export class GameplayPanel extends BasePanel {
     private updateBoosterUI(): void {
         const booster = BoosterManager.getInstance();
         if (!booster) return;
-        const canUse = booster.canUseBoosters();
         const undoCount = booster.getBoosterCount(BoosterType.UNDO);
         const hintCount = booster.getBoosterCount(BoosterType.HINT);
         const skipCount = booster.getBoosterCount(BoosterType.SKIP);
@@ -145,9 +165,9 @@ export class GameplayPanel extends BasePanel {
         if (this.hintCountLabel) this.hintCountLabel.string = `${hintCount}`;
         if (this.skipCountLabel) this.skipCountLabel.string = `${skipCount}`;
 
-        if (this.undoButton) this.undoButton.interactable = canUse && undoCount > 0 && booster.hasUndoSnapshot();
-        if (this.hintButton) this.hintButton.interactable = canUse && hintCount > 0;
-        if (this.skipButton) this.skipButton.interactable = canUse && skipCount > 0;
+        if (this.undoButton) this.undoButton.interactable = booster.canUseUndo();
+        if (this.hintButton) this.hintButton.interactable = booster.canUseHint();
+        if (this.skipButton) this.skipButton.interactable = booster.canUseSkip();
     }
 
     private updateOrderLabel(): void {

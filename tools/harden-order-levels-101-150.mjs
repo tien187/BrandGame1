@@ -294,13 +294,150 @@ function assignLogicGroups(level, tiles, solutionIds, ratio, rng) {
   return decoyEvents;
 }
 
-function buildOrders(tiles, solutionIds) {
+function selectUnlockerSteps(tiles, solutionIds, ratio, rng) {
   const byId = new Map(tiles.map(tile => [tile.id, tile]));
+  const candidates = [];
+
+  for (let step = 0; step < solutionIds.length - 1; step++) {
+    const tile = byId.get(solutionIds[step]);
+    const next = byId.get(solutionIds[step + 1]);
+    if (!tile || !next) continue;
+    if (tile.logicStackKey !== next.logicStackKey) continue;
+    if (tile.layer <= next.layer) continue;
+    candidates.push(step);
+  }
+
+  const wanted = candidates.length >= 3 ? 3 : 0;
+  if (wanted <= 0) return new Set();
+
+  const selected = [];
+  const spread = candidates.length / wanted;
+  for (let i = 0; i < wanted; i++) {
+    const start = Math.floor(i * spread);
+    const end = Math.max(start + 1, Math.floor((i + 1) * spread));
+    const segment = candidates.slice(start, end);
+    const pick = segment[Math.floor(rng() * segment.length)] ?? candidates[start];
+    if (pick !== undefined) selected.push(pick);
+  }
+
+  const minGap = ratio < 0.4 ? 5 : ratio < 0.75 ? 4 : 3;
+  const spaced = [];
+  for (const step of [...new Set(selected)].sort((a, b) => a - b)) {
+    if (spaced.some(existing => Math.abs(existing - step) < minGap)) continue;
+    spaced.push(step);
+  }
+
+  for (const step of candidates) {
+    if (spaced.length >= wanted) break;
+    if (spaced.some(existing => Math.abs(existing - step) < minGap)) continue;
+    spaced.push(step);
+  }
+
+  for (const step of candidates) {
+    if (spaced.length >= wanted) break;
+    if (spaced.includes(step)) continue;
+    spaced.push(step);
+  }
+
+  return new Set(spaced.slice(0, wanted));
+}
+
+function assignInterleavedLogicGroups(level, tiles, solutionIds, unlockerSteps, ratio, rng) {
+  const poolSize = Math.min(25, 9 + Math.ceil(ratio * 16));
+  const pool = ITEM_IDS.slice(0, poolSize);
+  const groupById = new Map();
+  const groupCounts = new Map(pool.map(group => [group, 0]));
+  const tileById = new Map(tiles.map(tile => [tile.id, tile]));
+  const activeIds = new Set(tiles.map(tile => tile.id));
+  const solutionIndex = new Map(solutionIds.map((id, index) => [id, index]));
+  const decoyEvents = [];
+
+  let correctOrdinal = 0;
+  for (let step = 0; step < solutionIds.length; step++) {
+    const tileId = solutionIds[step];
+    const expectedGroup = pool[(correctOrdinal + level.levelId) % pool.length];
+
+    if (unlockerSteps.has(step)) {
+      const unlockGroup = pool[(correctOrdinal + level.levelId + 3 + (step % Math.max(2, pool.length - 1))) % pool.length];
+      const group = unlockGroup === expectedGroup
+        ? pool[(pool.indexOf(unlockGroup) + 1) % pool.length]
+        : unlockGroup;
+      groupById.set(tileId, group);
+      groupCounts.set(group, (groupCounts.get(group) || 0) + 1);
+
+      const tile = tileById.get(tileId);
+      if (tile) {
+        tile.strategyRole = 'required_unlocker_wrong_tile';
+        tile.unlocksSolutionStep = step + 2;
+      }
+      continue;
+    }
+
+    groupById.set(tileId, expectedGroup);
+    groupCounts.set(expectedGroup, (groupCounts.get(expectedGroup) || 0) + 1);
+    correctOrdinal++;
+  }
+
+  for (let step = 0; step < solutionIds.length; step++) {
+    const tileId = solutionIds[step];
+    const group = groupById.get(tileId);
+    const keyTile = tileById.get(tileId);
+    if (!keyTile) continue;
+
+    const selectable = selectableAt(tiles, level.board, activeIds);
+    const decoyWanted = ratio < 0.2 ? 1 : ratio < 0.62 ? 2 : 3;
+    const shouldAddDecoy = !unlockerSteps.has(step) && (ratio > 0.1 || step % 2 === 0);
+    const candidates = selectable
+      .filter(tile => tile.id !== tileId)
+      .filter(tile => tile.logicStackKey !== keyTile.logicStackKey)
+      .filter(tile => groupById.get(tile.id) !== group)
+      .filter(tile => !unlockerSteps.has(solutionIndex.get(tile.id) ?? -1))
+      .filter(tile => (groupCounts.get(groupById.get(tile.id)) || 0) > 1)
+      .filter(tile => (solutionIndex.get(tile.id) ?? 0) > step + 1)
+      .sort((a, b) => {
+        const ia = solutionIndex.get(a.id) ?? 0;
+        const ib = solutionIndex.get(b.id) ?? 0;
+        return ib - ia || b.layer - a.layer || rng() - 0.5;
+      });
+
+    if (shouldAddDecoy) {
+      for (let i = 0; i < Math.min(decoyWanted, candidates.length); i++) {
+        const decoy = candidates[i];
+        const previousGroup = groupById.get(decoy.id);
+        groupCounts.set(previousGroup, (groupCounts.get(previousGroup) || 1) - 1);
+        groupCounts.set(group, (groupCounts.get(group) || 0) + 1);
+        groupById.set(decoy.id, group);
+        decoy.strategyRole = 'logic_gate_same_item_decoy';
+        decoy.decoyForStep = step + 1;
+        decoy.decoyAgainstKeyTile = tileId;
+        decoyEvents.push({
+          step: step + 1,
+          expectedGroup: group,
+          keyTile: tileId,
+          decoyTile: decoy.id,
+        });
+      }
+    }
+
+    activeIds.delete(tileId);
+  }
+
+  for (const tile of tiles) {
+    tile.groupId = groupById.get(tile.id) || pool[0];
+    delete tile.logicStackKey;
+  }
+
+  return decoyEvents;
+}
+
+function buildOrders(tiles, solutionIds, unlockerSteps = new Set()) {
+  const byId = new Map(tiles.map(tile => [tile.id, tile]));
+  const orderTileIds = solutionIds.filter((_, index) => !unlockerSteps.has(index));
   const orders = [];
   const solutionOrders = [];
 
-  for (let i = 0; i < solutionIds.length; i += 3) {
-    const items = solutionIds.slice(i, i + 3).map(id => byId.get(id).groupId);
+  for (let i = 0; i < orderTileIds.length; i += 3) {
+    const items = orderTileIds.slice(i, i + 3).map(id => byId.get(id).groupId);
     orders.push({ id: `order_${String(orders.length + 1).padStart(3, '0')}`, items });
     solutionOrders.push([...items]);
   }
@@ -322,9 +459,10 @@ function computeScreenBounds(tiles, board) {
   return Object.fromEntries(Object.entries(bounds).map(([key, value]) => [key, +value.toFixed(2)]));
 }
 
-function validateAndAnalyze(level, decoyEvents) {
+function validateAndAnalyze(level, decoyEvents, unlockerSteps = new Set()) {
   const activeIds = new Set(level.tiles.map(tile => tile.id));
   const byId = new Map(level.tiles.map(tile => [tile.id, tile]));
+  const orderItems = level.orders.flatMap(order => order.items);
   const errors = [];
   const sameItemChoices = [];
   const branching = [];
@@ -332,38 +470,64 @@ function validateAndAnalyze(level, decoyEvents) {
   let realTrapSteps = 0;
   let forcedSteps = 0;
   let selectableSum = 0;
+  let correctProgress = 0;
+  let forcedUnlockGates = 0;
 
   for (let step = 0; step < level.solutionMoveTileIds.length; step++) {
     const tileId = level.solutionMoveTileIds[step];
-    const expected = level.orders[Math.floor(step / 3)]?.items[step % 3];
+    const expected = orderItems[correctProgress] || null;
     const tile = byId.get(tileId);
     const selectable = selectableAt(level.tiles, level.board, activeIds);
     const selectableIds = new Set(selectable.map(t => t.id));
-    const legal = selectable.filter(t => t.groupId === expected);
-    const nextExpected = level.orders[Math.floor((step + 1) / 3)]?.items[(step + 1) % 3] || null;
+    const legal = expected ? selectable.filter(t => t.groupId === expected) : [];
+    const isUnlocker = unlockerSteps.has(step);
+    const nextExpected = isUnlocker
+      ? expected
+      : orderItems[correctProgress + 1] || null;
 
     selectableSum += selectable.length;
     if (!selectableIds.has(tileId)) errors.push(`step ${step + 1}: ${tileId} is blocked`);
-    if (!tile || tile.groupId !== expected) errors.push(`step ${step + 1}: expected ${expected}, got ${tile?.groupId || 'missing'}`);
 
-    let winning = 0;
-    for (const choice of legal) {
+    if (isUnlocker) {
+      if (!tile) {
+        errors.push(`step ${step + 1}: missing unlocker tile`);
+      } else if (expected && tile.groupId === expected) {
+        errors.push(`step ${step + 1}: unlocker ${tileId} matches expected ${expected}`);
+      }
+
+      const beforeHasExpected = expected ? selectable.some(t => t.groupId === expected) : false;
       const testActive = new Set(activeIds);
-      testActive.delete(choice.id);
+      testActive.delete(tileId);
       const after = selectableAt(level.tiles, level.board, testActive);
-      if (!nextExpected || after.some(t => t.groupId === nextExpected)) winning++;
+      const afterHasExpected = expected ? after.some(t => t.groupId === expected) : false;
+      if (!beforeHasExpected && afterHasExpected) forcedUnlockGates++;
+    } else {
+      if (!tile || tile.groupId !== expected) errors.push(`step ${step + 1}: expected ${expected}, got ${tile?.groupId || 'missing'}`);
     }
 
-    if (nextExpected && !selectable.some(t => t.groupId === nextExpected)) hiddenNext++;
-    if (legal.length <= 1) forcedSteps++;
-    if (legal.length > 1 && winning < legal.length) realTrapSteps++;
+    let winning = 0;
+    if (!isUnlocker) {
+      for (const choice of legal) {
+        const testActive = new Set(activeIds);
+        testActive.delete(choice.id);
+        const after = selectableAt(level.tiles, level.board, testActive);
+        if (!nextExpected || after.some(t => t.groupId === nextExpected)) winning++;
+      }
 
-    sameItemChoices.push(legal.length);
-    branching.push({ choices: legal.length, winning });
+      if (nextExpected && !selectable.some(t => t.groupId === nextExpected)) hiddenNext++;
+      if (legal.length <= 1) forcedSteps++;
+      if (legal.length > 1 && winning < legal.length) realTrapSteps++;
+
+      sameItemChoices.push(legal.length);
+      branching.push({ choices: legal.length, winning });
+      correctProgress++;
+    }
+
     activeIds.delete(tileId);
   }
 
   if (activeIds.size > 0) errors.push(`${activeIds.size} active tiles left after solution`);
+  if (correctProgress !== orderItems.length) errors.push(`orders incomplete: ${correctProgress}/${orderItems.length}`);
 
   const groupIds = new Set(level.tiles.map(tile => tile.groupId));
   const layerCounts = {};
@@ -403,6 +567,8 @@ function validateAndAnalyze(level, decoyEvents) {
     maxLayers: level.board.maxLayers,
     startingSelectableTiles: selectableAt(level.tiles, level.board, new Set(level.tiles.map(tile => tile.id))).length,
     logicGateDecoyCount: decoyEvents.length,
+    interleavedUnlockerSteps: unlockerSteps.size,
+    forcedUnlockGates,
     realTrapSteps,
     stepsWhereNextItemHiddenBeforeMove: hiddenNext,
     forcedSteps,
@@ -436,8 +602,14 @@ function hardenLevel(level, ratio) {
   const targetTileCount = getTargetTileCount(level, ratio);
   const tiles = buildTiles(level, targetTileCount, rng);
   const solutionMoveTileIds = buildSolutionIds(tiles, preservedBoard, rng);
-  const decoyEvents = assignLogicGroups(level, tiles, solutionMoveTileIds, ratio, rng);
-  const { orders, solutionOrders } = buildOrders(tiles, solutionMoveTileIds);
+  const shouldUseInterleavedUnlockers = level.levelId % 2 === 0;
+  const unlockerSteps = shouldUseInterleavedUnlockers
+    ? selectUnlockerSteps(tiles, solutionMoveTileIds, ratio, rng)
+    : new Set();
+  const decoyEvents = shouldUseInterleavedUnlockers
+    ? assignInterleavedLogicGroups(level, tiles, solutionMoveTileIds, unlockerSteps, ratio, rng)
+    : assignLogicGroups(level, tiles, solutionMoveTileIds, ratio, rng);
+  const { orders, solutionOrders } = buildOrders(tiles, solutionMoveTileIds, unlockerSteps);
 
   const hardened = {
     ...level,
@@ -460,7 +632,7 @@ function hardenLevel(level, ratio) {
     tiles,
   };
 
-  const errors = validateAndAnalyze(hardened, decoyEvents);
+  const errors = validateAndAnalyze(hardened, decoyEvents, unlockerSteps);
   if (errors.length > 0) {
     throw new Error(`Level ${level.levelId} validation failed:\n${errors.join('\n')}`);
   }
@@ -483,6 +655,8 @@ function main() {
       items: hardened.difficultyMetrics.distinctItemCount,
       traps: hardened.difficultyMetrics.realTrapSteps,
       hiddenNext: hardened.difficultyMetrics.stepsWhereNextItemHiddenBeforeMove,
+      unlockers: hardened.difficultyMetrics.interleavedUnlockerSteps,
+      forcedUnlocks: hardened.difficultyMetrics.forcedUnlockGates,
       maxChoices: hardened.difficultyMetrics.maxSameItemChoicesDuringSolution,
       score: hardened.difficultyMetrics.progressiveDifficultyScore,
     });
@@ -490,7 +664,7 @@ function main() {
 
   for (const row of report) {
     console.log(
-      `L${row.id}: tiles=${row.tiles} orders=${row.orders} items=${row.items} traps=${row.traps} hiddenNext=${row.hiddenNext} maxChoices=${row.maxChoices} score=${row.score}`
+      `L${row.id}: tiles=${row.tiles} orders=${row.orders} items=${row.items} unlockers=${row.unlockers} forcedUnlocks=${row.forcedUnlocks} traps=${row.traps} hiddenNext=${row.hiddenNext} maxChoices=${row.maxChoices} score=${row.score}`
     );
   }
 }

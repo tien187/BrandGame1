@@ -128,6 +128,7 @@ export class OrderManager {
         }
         const order = this.getCurrentOrder();
         if (!order) return { correct: false, orderComplete: false };
+        this._submittedTileIds.add(tileData.id);
 
         if (this._orderConfig?.orderMode === 'ANY_ORDER') {
             const remIdx = this._currentOrderRemainingItems.indexOf(tileData.groupId);
@@ -144,7 +145,6 @@ export class OrderManager {
                     EventBus.getInstance().emit(GameEvent.ORDER_CHANGED, this.getCurrentOrder(), this._currentOrderIndex);
                 }
 
-                this._submittedTileIds.add(tileData.id);
                 return { correct: true, orderComplete };
             }
         } else {
@@ -162,13 +162,11 @@ export class OrderManager {
                     EventBus.getInstance().emit(GameEvent.ORDER_CHANGED, this.getCurrentOrder(), this._currentOrderIndex);
                 }
 
-                this._submittedTileIds.add(tileData.id);
                 return { correct: true, orderComplete };
             }
         }
 
         EventBus.getInstance().emit(GameEvent.ORDER_ITEM_WRONG, tileData);
-        this._submittedTileIds.add(tileData.id);
         console.log(`[OM_DEBUG] WRONG tile=${tileData.id}:${tileData.groupId} expected=${this.getExpectedItem()}`);
         return { correct: false, orderComplete: false };
     }

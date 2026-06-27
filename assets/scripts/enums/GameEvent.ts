@@ -26,4 +26,5 @@ export enum GameEvent {
     ORDER_ITEM_WRONG = 'order_item_wrong',
     TRAY_SETTLED = 'tray_settled',
     ORDER_TILES_CLEARED = 'order_tiles_cleared',
+    HINT_FAILED = 'hint_failed',
 }

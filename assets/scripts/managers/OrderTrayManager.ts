@@ -235,11 +235,16 @@ export class OrderTrayManager extends Component {
         const mgr = OrderManager.getInstance();
         const all = mgr.getAllOrders();
         const curIdx = mgr.getCurrentOrderIndex();
+        this._consumeEffectWorldPos = null;
+        this._pendingTransition = false;
+        this._isTransitioning = false;
+        this._isClearing = false;
         this._allOrders = all.slice(curIdx);
         this._currentOrder = mgr.getCurrentOrder();
         this._orderConfig = mgr.getOrderConfig();
         // Sau khi cắt còn lại, current luôn là index 0 trong UI
         this._lastOrderIndex = 0;
+        this._lastGlobalOrderIndex = curIdx;
         this._visibleStartOrder = 0;
         this._orderStartMap.clear();
         this._filledCount = 0;
@@ -280,10 +285,11 @@ export class OrderTrayManager extends Component {
 
     private setPreviewColor(previewNode: Node | null, color: Color): void {
         if (!previewNode || !previewNode.isValid) return;
+        const safeColor = this.cloneColorOrWhite(color);
 
         const sprite = previewNode.getComponent(Sprite);
         if (sprite) {
-            sprite.color = color;
+            sprite.color = safeColor;
             return;
         }
 
@@ -291,7 +297,7 @@ export class OrderTrayManager extends Component {
         for (const child of previewNode.children) {
             const childSprite = child.getComponent(Sprite);
             if (childSprite) {
-                childSprite.color = color;
+                childSprite.color = safeColor;
                 return;
             }
         }
@@ -321,10 +327,11 @@ export class OrderTrayManager extends Component {
 
     private setPanelColor(panel: Node | null, color: Color): void {
         if (!panel || !panel.isValid) return;
+        const safeColor = this.cloneColorOrWhite(color);
 
         const sprite = panel.getComponent(Sprite);
         if (sprite) {
-            sprite.color = color;
+            sprite.color = safeColor;
             return;
         }
 
@@ -332,7 +339,7 @@ export class OrderTrayManager extends Component {
         for (const child of panel.children) {
             const childSprite = child.getComponent(Sprite);
             if (childSprite) {
-                childSprite.color = color;
+                childSprite.color = safeColor;
                 return;
             }
         }
@@ -496,6 +503,13 @@ export class OrderTrayManager extends Component {
             this._pendingTransition = false;
             this.playOrderTransitionAnimation();
         }
+    }
+
+    public cancelPendingTransitionForRestore(): void {
+        this._consumeEffectWorldPos = null;
+        this._pendingTransition = false;
+        this._isTransitioning = false;
+        this._isClearing = false;
     }
 
     private playOrderTransitionAnimation(): void {
@@ -674,20 +688,29 @@ export class OrderTrayManager extends Component {
     }
 
     private tweenColor(sprite: Sprite, from: Color, to: Color, duration: number): void {
+        if (!sprite || !sprite.node || !sprite.node.isValid) return;
+        const fromColor = this.cloneColorOrWhite(from);
+        const toColor = this.cloneColorOrWhite(to);
         const obj = { t: 0 };
         tween(obj)
             .to(duration, { t: 1 }, {
-                onUpdate: (target: { t: number }) => {
-                    const ratio = target.t;
+                onUpdate: (target: { t: number } | null) => {
+                    if (!sprite || !sprite.node || !sprite.node.isValid || !target) return;
+                    const ratio = Math.max(0, Math.min(1, target.t ?? 1));
                     sprite.color = new Color(
-                        Math.round(from.r + (to.r - from.r) * ratio),
-                        Math.round(from.g + (to.g - from.g) * ratio),
-                        Math.round(from.b + (to.b - from.b) * ratio),
-                        Math.round(from.a + (to.a - from.a) * ratio)
+                        Math.round(fromColor.r + (toColor.r - fromColor.r) * ratio),
+                        Math.round(fromColor.g + (toColor.g - fromColor.g) * ratio),
+                        Math.round(fromColor.b + (toColor.b - fromColor.b) * ratio),
+                        Math.round(fromColor.a + (toColor.a - fromColor.a) * ratio)
                     );
                 }
             })
             .start();
+    }
+
+    private cloneColorOrWhite(color: Color | null | undefined): Color {
+        if (!color) return new Color(255, 255, 255, 255);
+        return new Color(color.r, color.g, color.b, color.a);
     }
 
     private playOrderCompleteAnimation(): void {
@@ -741,6 +764,7 @@ export class OrderTrayManager extends Component {
         for (const slot of this._slots) {
             if (slot.previewNode && slot.previewNode.isValid) {
                 Tween.stopAllByTarget(slot.previewNode);
+                this.resetPreviewNodeForPool(slot.previewNode);
                 slot.previewNode.removeFromParent();
                 PoolManager.getInstance().put(prefabKey, slot.previewNode);
             }
@@ -780,6 +804,27 @@ export class OrderTrayManager extends Component {
         this._lastGlobalOrderIndex = -1;
         this._orderStartMap.clear();
         this._visibleStartOrder = 0;
+    }
+
+    private resetPreviewNodeForPool(node: Node): void {
+        if (!node || !node.isValid) return;
+        node.active = true;
+        node.angle = 0;
+        node.setRotationFromEuler(0, 0, 0);
+        node.setScale(1, 1, 1);
+
+        const opacity = node.getComponent(UIOpacity);
+        if (opacity) opacity.opacity = 255;
+
+        const visualNode = node.getChildByName('visual');
+        if (visualNode && visualNode.isValid) {
+            Tween.stopAllByTarget(visualNode);
+            visualNode.angle = 0;
+            visualNode.setRotationFromEuler(0, 0, 0);
+            visualNode.setScale(1, 1, 1);
+            const visualOpacity = visualNode.getComponent(UIOpacity);
+            if (visualOpacity) visualOpacity.opacity = 255;
+        }
     }
 
     protected onDestroy(): void {

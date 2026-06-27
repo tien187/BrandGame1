@@ -20,9 +20,7 @@ function formatTile(tile) {
   return `${tile.id} | ${tile.groupId} | layer=${tile.layer} | grid=(${tile.gridX},${tile.gridY})${role}${decoy}`;
 }
 
-function getOrderItem(level, stepIndex) {
-  const orderIndex = Math.floor(stepIndex / 3);
-  const itemIndex = stepIndex % 3;
+function getOrderItem(level, orderIndex, itemIndex) {
   return {
     orderIndex,
     itemIndex,
@@ -46,10 +44,12 @@ function buildLevelGuide(level) {
   lines.push('| Step | Order | Slot | Need | Tile | Layer | Grid | Notes |');
   lines.push('|---:|---|---:|---|---|---:|---|---|');
 
+  let orderIndex = 0;
+  let itemIndex = 0;
   for (let i = 0; i < level.solutionMoveTileIds.length; i++) {
     const tileId = level.solutionMoveTileIds[i];
     const tile = tileById.get(tileId);
-    const { orderId, orderIndex, itemIndex, item } = getOrderItem(level, i);
+    const { orderId, item } = getOrderItem(level, orderIndex, itemIndex);
     const group = tile?.groupId ?? '';
     const mismatch = item && group && item !== group ? `expected ${item}, tile group ${group}` : '';
     const role = tile?.strategyRole ? tile.strategyRole : '';
@@ -65,8 +65,14 @@ function buildLevelGuide(level) {
       note,
     ].join(' | '));
 
-    if ((i + 1) % 3 === 0 && i < level.solutionMoveTileIds.length - 1) {
+    if (item && group === item) {
+      itemIndex++;
+    }
+
+    if (itemIndex >= (level.orders?.[orderIndex]?.items?.length ?? 3)) {
       lines.push(`|  |  |  |  |  |  |  | Complete order ${orderIndex + 1} |`);
+      orderIndex++;
+      itemIndex = 0;
     }
   }
 
@@ -93,7 +99,7 @@ function main() {
   chunks.push('# Level Solution Guide');
   chunks.push('');
   chunks.push('Generated from `solutionMoveTileIds`, `orders`, and `tiles` in `generated_levels_full_pack/levels`.');
-  chunks.push('Follow the steps top-to-bottom; every 3 steps completes one order.');
+  chunks.push('Follow the steps top-to-bottom; some steps may be required unlockers that do not advance the current order.');
   chunks.push('');
 
   for (let id = 1; id <= 50; id++) {

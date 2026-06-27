@@ -141,14 +141,14 @@
       "id": "order_008",
       "items": [
         "2",
-        "3",
+        "7",
         "4"
       ]
     },
     {
       "id": "order_009",
       "items": [
-        "7",
+        "5",
         "6",
         "7"
       ]
@@ -157,14 +157,14 @@
       "id": "order_010",
       "items": [
         "8",
-        "9",
+        "15",
         "10"
       ]
     },
     {
       "id": "order_011",
       "items": [
-        "10",
+        "11",
         "12",
         "13"
       ]
@@ -181,7 +181,7 @@
       "id": "order_013",
       "items": [
         "17",
-        "18",
+        "17",
         "19"
       ]
     },
@@ -189,16 +189,16 @@
       "id": "order_014",
       "items": [
         "20",
-        "10",
+        "21",
         "22"
       ]
     },
     {
       "id": "order_015",
       "items": [
-        "10",
+        "15",
         "1",
-        "10"
+        "15"
       ]
     },
     {
@@ -212,49 +212,41 @@
     {
       "id": "order_017",
       "items": [
-        "10",
-        "7",
-        "12"
+        "6",
+        "11",
+        "13"
       ]
     },
     {
       "id": "order_018",
       "items": [
-        "9",
-        "13",
-        "15"
+        "17",
+        "17",
+        "17"
       ]
     },
     {
       "id": "order_019",
       "items": [
-        "12",
-        "16",
+        "17",
+        "17",
         "17"
       ]
     },
     {
       "id": "order_020",
       "items": [
-        "20",
-        "16",
-        "10"
+        "17",
+        "17",
+        "17"
       ]
     },
     {
       "id": "order_021",
       "items": [
-        "18",
-        "19",
-        "10"
-      ]
-    },
-    {
-      "id": "order_022",
-      "items": [
-        "19",
-        "10",
-        "19"
+        "17",
+        "17",
+        "17"
       ]
     }
   ],
@@ -296,21 +288,21 @@
     ],
     [
       "2",
-      "3",
+      "7",
       "4"
     ],
     [
-      "7",
+      "5",
       "6",
       "7"
     ],
     [
       "8",
-      "9",
+      "15",
       "10"
     ],
     [
-      "10",
+      "11",
       "12",
       "13"
     ],
@@ -321,18 +313,18 @@
     ],
     [
       "17",
-      "18",
+      "17",
       "19"
     ],
     [
       "20",
-      "10",
+      "21",
       "22"
     ],
     [
-      "10",
+      "15",
       "1",
-      "10"
+      "15"
     ],
     [
       "3",
@@ -340,34 +332,29 @@
       "5"
     ],
     [
-      "10",
-      "7",
-      "12"
+      "6",
+      "11",
+      "13"
     ],
     [
-      "9",
-      "13",
-      "15"
-    ],
-    [
-      "12",
-      "16",
+      "17",
+      "17",
       "17"
     ],
     [
-      "20",
-      "16",
-      "10"
+      "17",
+      "17",
+      "17"
     ],
     [
-      "18",
-      "19",
-      "10"
+      "17",
+      "17",
+      "17"
     ],
     [
-      "19",
-      "10",
-      "19"
+      "17",
+      "17",
+      "17"
     ]
   ],
   "solutionMoveTileIds": [
@@ -441,7 +428,7 @@
   "tiles": [
     {
       "id": "L142_T000",
-      "groupId": "7",
+      "groupId": "5",
       "tileType": 0,
       "gridX": 1,
       "gridY": 0,
@@ -456,7 +443,7 @@
     },
     {
       "id": "L142_T001",
-      "groupId": "6",
+      "groupId": "4",
       "tileType": 0,
       "gridX": 1,
       "gridY": 0,
@@ -486,7 +473,7 @@
     },
     {
       "id": "L142_T003",
-      "groupId": "17",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 2,
       "gridY": 0,
@@ -501,7 +488,7 @@
     },
     {
       "id": "L142_T004",
-      "groupId": "16",
+      "groupId": "14",
       "tileType": 0,
       "gridX": 2,
       "gridY": 0,
@@ -531,7 +518,7 @@
     },
     {
       "id": "L142_T006",
-      "groupId": "10",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 3,
       "gridY": 0,
@@ -546,7 +533,7 @@
     },
     {
       "id": "L142_T007",
-      "groupId": "15",
+      "groupId": "13",
       "tileType": 0,
       "gridX": 3,
       "gridY": 0,
@@ -576,7 +563,7 @@
     },
     {
       "id": "L142_T009",
-      "groupId": "19",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 4,
       "gridY": 0,
@@ -591,7 +578,7 @@
     },
     {
       "id": "L142_T010",
-      "groupId": "4",
+      "groupId": "2",
       "tileType": 0,
       "gridX": 4,
       "gridY": 0,
@@ -606,7 +593,7 @@
     },
     {
       "id": "L142_T011",
-      "groupId": "3",
+      "groupId": "5",
       "tileType": 0,
       "gridX": 4,
       "gridY": 0,
@@ -617,11 +604,13 @@
       "clusteredLayout": false,
       "clusterCount": 1,
       "sameLayerOverlapForbidden": true,
-      "designRole": "top"
+      "designRole": "top",
+      "strategyRole": "required_unlocker_wrong_tile",
+      "unlocksSolutionStep": 24
     },
     {
       "id": "L142_T012",
-      "groupId": "1",
+      "groupId": "22",
       "tileType": 0,
       "gridX": 0,
       "gridY": 1,
@@ -636,7 +625,7 @@
     },
     {
       "id": "L142_T013",
-      "groupId": "10",
+      "groupId": "21",
       "tileType": 0,
       "gridX": 0,
       "gridY": 1,
@@ -651,7 +640,7 @@
     },
     {
       "id": "L142_T014",
-      "groupId": "10",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 1,
       "gridY": 1,
@@ -696,7 +685,7 @@
     },
     {
       "id": "L142_T017",
-      "groupId": "12",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 2,
       "gridY": 1,
@@ -711,7 +700,7 @@
     },
     {
       "id": "L142_T018",
-      "groupId": "10",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 2,
       "gridY": 1,
@@ -756,7 +745,7 @@
     },
     {
       "id": "L142_T021",
-      "groupId": "10",
+      "groupId": "8",
       "tileType": 0,
       "gridX": 3,
       "gridY": 1,
@@ -786,7 +775,7 @@
     },
     {
       "id": "L142_T023",
-      "groupId": "19",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 4,
       "gridY": 1,
@@ -801,7 +790,7 @@
     },
     {
       "id": "L142_T024",
-      "groupId": "18",
+      "groupId": "16",
       "tileType": 0,
       "gridX": 4,
       "gridY": 1,
@@ -831,7 +820,7 @@
     },
     {
       "id": "L142_T026",
-      "groupId": "7",
+      "groupId": "5",
       "tileType": 0,
       "gridX": 5,
       "gridY": 1,
@@ -861,7 +850,7 @@
     },
     {
       "id": "L142_T028",
-      "groupId": "19",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 0,
       "gridY": 2,
@@ -876,7 +865,7 @@
     },
     {
       "id": "L142_T029",
-      "groupId": "0",
+      "groupId": "22",
       "tileType": 0,
       "gridX": 0,
       "gridY": 2,
@@ -891,7 +880,7 @@
     },
     {
       "id": "L142_T030",
-      "groupId": "22",
+      "groupId": "21",
       "tileType": 0,
       "gridX": 0,
       "gridY": 2,
@@ -906,7 +895,7 @@
     },
     {
       "id": "L142_T031",
-      "groupId": "13",
+      "groupId": "11",
       "tileType": 0,
       "gridX": 2,
       "gridY": 2,
@@ -921,7 +910,7 @@
     },
     {
       "id": "L142_T032",
-      "groupId": "8",
+      "groupId": "6",
       "tileType": 0,
       "gridX": 2,
       "gridY": 2,
@@ -951,7 +940,7 @@
     },
     {
       "id": "L142_T034",
-      "groupId": "15",
+      "groupId": "13",
       "tileType": 0,
       "gridX": 3,
       "gridY": 2,
@@ -966,7 +955,7 @@
     },
     {
       "id": "L142_T035",
-      "groupId": "9",
+      "groupId": "7",
       "tileType": 0,
       "gridX": 3,
       "gridY": 2,
@@ -996,7 +985,7 @@
     },
     {
       "id": "L142_T037",
-      "groupId": "18",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 5,
       "gridY": 2,
@@ -1011,7 +1000,7 @@
     },
     {
       "id": "L142_T038",
-      "groupId": "21",
+      "groupId": "20",
       "tileType": 0,
       "gridX": 5,
       "gridY": 2,
@@ -1026,7 +1015,7 @@
     },
     {
       "id": "L142_T039",
-      "groupId": "20",
+      "groupId": "19",
       "tileType": 0,
       "gridX": 5,
       "gridY": 2,
@@ -1041,7 +1030,7 @@
     },
     {
       "id": "L142_T040",
-      "groupId": "5",
+      "groupId": "3",
       "tileType": 0,
       "gridX": 0,
       "gridY": 3,
@@ -1056,7 +1045,7 @@
     },
     {
       "id": "L142_T041",
-      "groupId": "10",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 0,
       "gridY": 3,
@@ -1071,7 +1060,7 @@
     },
     {
       "id": "L142_T042",
-      "groupId": "19",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 1,
       "gridY": 3,
@@ -1086,7 +1075,7 @@
     },
     {
       "id": "L142_T043",
-      "groupId": "19",
+      "groupId": "18",
       "tileType": 0,
       "gridX": 1,
       "gridY": 3,
@@ -1101,7 +1090,7 @@
     },
     {
       "id": "L142_T044",
-      "groupId": "18",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 1,
       "gridY": 3,
@@ -1116,7 +1105,7 @@
     },
     {
       "id": "L142_T045",
-      "groupId": "14",
+      "groupId": "12",
       "tileType": 0,
       "gridX": 2,
       "gridY": 3,
@@ -1131,7 +1120,7 @@
     },
     {
       "id": "L142_T046",
-      "groupId": "13",
+      "groupId": "11",
       "tileType": 0,
       "gridX": 2,
       "gridY": 3,
@@ -1161,7 +1150,7 @@
     },
     {
       "id": "L142_T048",
-      "groupId": "16",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 3,
       "gridY": 3,
@@ -1176,7 +1165,7 @@
     },
     {
       "id": "L142_T049",
-      "groupId": "12",
+      "groupId": "10",
       "tileType": 0,
       "gridX": 3,
       "gridY": 3,
@@ -1206,7 +1195,7 @@
     },
     {
       "id": "L142_T051",
-      "groupId": "20",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 4,
       "gridY": 3,
@@ -1221,7 +1210,7 @@
     },
     {
       "id": "L142_T052",
-      "groupId": "2",
+      "groupId": "1",
       "tileType": 0,
       "gridX": 4,
       "gridY": 3,
@@ -1236,7 +1225,7 @@
     },
     {
       "id": "L142_T053",
-      "groupId": "1",
+      "groupId": "0",
       "tileType": 0,
       "gridX": 4,
       "gridY": 3,
@@ -1251,7 +1240,7 @@
     },
     {
       "id": "L142_T054",
-      "groupId": "22",
+      "groupId": "20",
       "tileType": 0,
       "gridX": 5,
       "gridY": 3,
@@ -1266,7 +1255,7 @@
     },
     {
       "id": "L142_T055",
-      "groupId": "10",
+      "groupId": "19",
       "tileType": 0,
       "gridX": 5,
       "gridY": 3,
@@ -1281,7 +1270,7 @@
     },
     {
       "id": "L142_T056",
-      "groupId": "9",
+      "groupId": "6",
       "tileType": 0,
       "gridX": 1,
       "gridY": 4,
@@ -1296,7 +1285,7 @@
     },
     {
       "id": "L142_T057",
-      "groupId": "12",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 1,
       "gridY": 4,
@@ -1307,11 +1296,13 @@
       "clusteredLayout": false,
       "clusterCount": 1,
       "sameLayerOverlapForbidden": true,
-      "designRole": "top"
+      "designRole": "top",
+      "strategyRole": "required_unlocker_wrong_tile",
+      "unlocksSolutionStep": 52
     },
     {
       "id": "L142_T058",
-      "groupId": "16",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 2,
       "gridY": 4,
@@ -1326,7 +1317,7 @@
     },
     {
       "id": "L142_T059",
-      "groupId": "20",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 2,
       "gridY": 4,
@@ -1356,7 +1347,7 @@
     },
     {
       "id": "L142_T061",
-      "groupId": "10",
+      "groupId": "17",
       "tileType": 0,
       "gridX": 3,
       "gridY": 4,
@@ -1371,7 +1362,7 @@
     },
     {
       "id": "L142_T062",
-      "groupId": "17",
+      "groupId": "16",
       "tileType": 0,
       "gridX": 3,
       "gridY": 4,
@@ -1386,7 +1377,7 @@
     },
     {
       "id": "L142_T063",
-      "groupId": "16",
+      "groupId": "8",
       "tileType": 0,
       "gridX": 3,
       "gridY": 4,
@@ -1397,11 +1388,13 @@
       "clusteredLayout": false,
       "clusterCount": 1,
       "sameLayerOverlapForbidden": true,
-      "designRole": "top"
+      "designRole": "top",
+      "strategyRole": "required_unlocker_wrong_tile",
+      "unlocksSolutionStep": 14
     },
     {
       "id": "L142_T064",
-      "groupId": "3",
+      "groupId": "1",
       "tileType": 0,
       "gridX": 4,
       "gridY": 4,
@@ -1416,7 +1409,7 @@
     },
     {
       "id": "L142_T065",
-      "groupId": "10",
+      "groupId": "15",
       "tileType": 0,
       "gridX": 4,
       "gridY": 4,
@@ -1441,27 +1434,29 @@
     "difficultyIndex": 42,
     "shapeName": "orbit_frame",
     "totalTiles": 66,
-    "orderCount": 22,
+    "orderCount": 21,
     "distinctItemCount": 23,
     "maxLayers": 4,
     "startingSelectableTiles": 20,
-    "logicGateDecoyCount": 189,
-    "realTrapSteps": 11,
-    "stepsWhereNextItemHiddenBeforeMove": 17,
-    "forcedSteps": 41,
+    "logicGateDecoyCount": 161,
+    "interleavedUnlockerSteps": 3,
+    "forcedUnlockGates": 3,
+    "realTrapSteps": 7,
+    "stepsWhereNextItemHiddenBeforeMove": 16,
+    "forcedSteps": 36,
     "averageSelectableTilesDuringSolution": 13.91,
-    "averageSameItemChoicesDuringSolution": 1.85,
-    "maxSameItemChoicesDuringSolution": 7,
+    "averageSameItemChoicesDuringSolution": 2.59,
+    "maxSameItemChoicesDuringSolution": 12,
     "firstTenSameItemChoices": [
       1,
+      2,
       1,
-      1,
+      2,
       2,
       1,
       1,
-      4,
       1,
-      2,
+      1,
       1
     ],
     "firstTenBranching": [
@@ -1470,12 +1465,16 @@
         "winning": 1
       },
       {
-        "choices": 1,
-        "winning": 1
+        "choices": 2,
+        "winning": 2
       },
       {
         "choices": 1,
         "winning": 1
+      },
+      {
+        "choices": 2,
+        "winning": 2
       },
       {
         "choices": 2,
@@ -1490,15 +1489,11 @@
         "winning": 1
       },
       {
-        "choices": 4,
-        "winning": 4
-      },
-      {
         "choices": 1,
         "winning": 1
       },
       {
-        "choices": 2,
+        "choices": 1,
         "winning": 1
       },
       {
@@ -1545,6 +1540,6 @@
     "screenFitValidated": true,
     "solutionValidated": true,
     "strategicGoal": "Escalating ORDER_MATCH logic gates: multiple visible same-item candidates exist, but only the key tile opens the next requested item.",
-    "progressiveDifficultyScore": 526.37
+    "progressiveDifficultyScore": 559.67
   }
 }

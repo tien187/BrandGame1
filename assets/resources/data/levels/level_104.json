@@ -109,16 +109,8 @@
       "id": "order_006",
       "items": [
         "9",
-        "0",
-        "1"
-      ]
-    },
-    {
-      "id": "order_007",
-      "items": [
-        "2",
-        "0",
-        "2"
+        "6",
+        "9"
       ]
     }
   ],
@@ -150,13 +142,8 @@
     ],
     [
       "9",
-      "0",
-      "1"
-    ],
-    [
-      "2",
-      "0",
-      "2"
+      "6",
+      "9"
     ]
   ],
   "solutionMoveTileIds": [
@@ -185,7 +172,7 @@
   "tiles": [
     {
       "id": "L104_T000",
-      "groupId": "0",
+      "groupId": "6",
       "tileType": 0,
       "gridX": 0,
       "gridY": 0,
@@ -200,7 +187,7 @@
     },
     {
       "id": "L104_T001",
-      "groupId": "9",
+      "groupId": "8",
       "tileType": 0,
       "gridX": 1,
       "gridY": 0,
@@ -215,7 +202,7 @@
     },
     {
       "id": "L104_T002",
-      "groupId": "8",
+      "groupId": "5",
       "tileType": 0,
       "gridX": 1,
       "gridY": 0,
@@ -226,11 +213,13 @@
       "clusteredLayout": false,
       "clusterCount": 1,
       "sameLayerOverlapForbidden": true,
-      "designRole": "top"
+      "designRole": "top",
+      "strategyRole": "required_unlocker_wrong_tile",
+      "unlocksSolutionStep": 6
     },
     {
       "id": "L104_T003",
-      "groupId": "1",
+      "groupId": "9",
       "tileType": 0,
       "gridX": 2,
       "gridY": 0,
@@ -245,7 +234,7 @@
     },
     {
       "id": "L104_T004",
-      "groupId": "0",
+      "groupId": "8",
       "tileType": 0,
       "gridX": 2,
       "gridY": 0,
@@ -256,11 +245,13 @@
       "clusteredLayout": false,
       "clusterCount": 1,
       "sameLayerOverlapForbidden": true,
-      "designRole": "top"
+      "designRole": "top",
+      "strategyRole": "required_unlocker_wrong_tile",
+      "unlocksSolutionStep": 8
     },
     {
       "id": "L104_T005",
-      "groupId": "2",
+      "groupId": "9",
       "tileType": 0,
       "gridX": 3,
       "gridY": 0,
@@ -275,7 +266,7 @@
     },
     {
       "id": "L104_T006",
-      "groupId": "8",
+      "groupId": "5",
       "tileType": 0,
       "gridX": 1,
       "gridY": 1,
@@ -305,7 +296,7 @@
     },
     {
       "id": "L104_T008",
-      "groupId": "9",
+      "groupId": "6",
       "tileType": 0,
       "gridX": 2,
       "gridY": 1,
@@ -335,7 +326,7 @@
     },
     {
       "id": "L104_T010",
-      "groupId": "3",
+      "groupId": "1",
       "tileType": 0,
       "gridX": 0,
       "gridY": 2,
@@ -350,7 +341,7 @@
     },
     {
       "id": "L104_T011",
-      "groupId": "2",
+      "groupId": "0",
       "tileType": 0,
       "gridX": 0,
       "gridY": 2,
@@ -365,7 +356,7 @@
     },
     {
       "id": "L104_T012",
-      "groupId": "1",
+      "groupId": "8",
       "tileType": 0,
       "gridX": 1,
       "gridY": 2,
@@ -395,7 +386,7 @@
     },
     {
       "id": "L104_T014",
-      "groupId": "0",
+      "groupId": "7",
       "tileType": 0,
       "gridX": 2,
       "gridY": 2,
@@ -425,7 +416,7 @@
     },
     {
       "id": "L104_T016",
-      "groupId": "7",
+      "groupId": "4",
       "tileType": 0,
       "gridX": 3,
       "gridY": 2,
@@ -440,7 +431,7 @@
     },
     {
       "id": "L104_T017",
-      "groupId": "6",
+      "groupId": "3",
       "tileType": 0,
       "gridX": 3,
       "gridY": 2,
@@ -455,7 +446,7 @@
     },
     {
       "id": "L104_T018",
-      "groupId": "5",
+      "groupId": "2",
       "tileType": 0,
       "gridX": 1,
       "gridY": 3,
@@ -470,7 +461,7 @@
     },
     {
       "id": "L104_T019",
-      "groupId": "4",
+      "groupId": "6",
       "tileType": 0,
       "gridX": 1,
       "gridY": 3,
@@ -481,11 +472,13 @@
       "clusteredLayout": false,
       "clusterCount": 1,
       "sameLayerOverlapForbidden": true,
-      "designRole": "top"
+      "designRole": "top",
+      "strategyRole": "required_unlocker_wrong_tile",
+      "unlocksSolutionStep": 12
     },
     {
       "id": "L104_T020",
-      "groupId": "2",
+      "groupId": "9",
       "tileType": 0,
       "gridX": 2,
       "gridY": 3,
@@ -510,57 +503,43 @@
     "difficultyIndex": 4,
     "shapeName": "hourglass_path",
     "totalTiles": 21,
-    "orderCount": 7,
+    "orderCount": 6,
     "distinctItemCount": 10,
     "maxLayers": 2,
     "startingSelectableTiles": 10,
-    "logicGateDecoyCount": 10,
-    "realTrapSteps": 2,
-    "stepsWhereNextItemHiddenBeforeMove": 5,
-    "forcedSteps": 15,
+    "logicGateDecoyCount": 7,
+    "interleavedUnlockerSteps": 3,
+    "forcedUnlockGates": 2,
+    "realTrapSteps": 1,
+    "stepsWhereNextItemHiddenBeforeMove": 4,
+    "forcedSteps": 12,
     "averageSelectableTilesDuringSolution": 6.81,
-    "averageSameItemChoicesDuringSolution": 1.33,
+    "averageSameItemChoicesDuringSolution": 1.39,
     "maxSameItemChoicesDuringSolution": 3,
     "firstTenSameItemChoices": [
-      2,
       1,
       2,
-      1,
-      1,
-      1,
       3,
       1,
       2,
+      2,
+      1,
+      1,
+      1,
       1
     ],
     "firstTenBranching": [
       {
-        "choices": 2,
-        "winning": 2
-      },
-      {
         "choices": 1,
         "winning": 1
       },
       {
         "choices": 2,
         "winning": 2
-      },
-      {
-        "choices": 1,
-        "winning": 1
-      },
-      {
-        "choices": 1,
-        "winning": 1
-      },
-      {
-        "choices": 1,
-        "winning": 1
       },
       {
         "choices": 3,
-        "winning": 1
+        "winning": 3
       },
       {
         "choices": 1,
@@ -568,6 +547,22 @@
       },
       {
         "choices": 2,
+        "winning": 1
+      },
+      {
+        "choices": 2,
+        "winning": 2
+      },
+      {
+        "choices": 1,
+        "winning": 1
+      },
+      {
+        "choices": 1,
+        "winning": 0
+      },
+      {
+        "choices": 1,
         "winning": 1
       },
       {
@@ -610,6 +605,6 @@
     "screenFitValidated": true,
     "solutionValidated": true,
     "strategicGoal": "Escalating ORDER_MATCH logic gates: multiple visible same-item candidates exist, but only the key tile opens the next requested item.",
-    "progressiveDifficultyScore": 187.1
+    "progressiveDifficultyScore": 175.1
   }
 }

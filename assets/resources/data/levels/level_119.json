@@ -892,6 +892,8 @@
     "maxLayers": 3,
     "startingSelectableTiles": 15,
     "logicGateDecoyCount": 72,
+    "interleavedUnlockerSteps": 0,
+    "forcedUnlockGates": 0,
     "realTrapSteps": 5,
     "stepsWhereNextItemHiddenBeforeMove": 9,
     "forcedSteps": 22,

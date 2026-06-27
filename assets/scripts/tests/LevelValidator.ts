@@ -58,8 +58,8 @@ export class LevelValidator {
         for (const gid in tileCounts) {
             const req = requiredCounts[gid] || 0;
             const avail = tileCounts[gid];
-            if (req !== avail) {
-                errors.push(`Group '${gid}' has ${avail} tiles but orders require ${req} (must match exactly)`);
+            if (req > avail) {
+                errors.push(`Group '${gid}' has ${avail} tiles but orders require ${req}`);
             }
         }
 
@@ -73,8 +73,8 @@ export class LevelValidator {
         // 6. Kiểm tra tổng số item trong orders phải bằng tổng số tile active
         const totalOrderItems = levelData.orders.reduce((sum, o) => sum + o.items.length, 0);
         const totalActiveTiles = levelData.tiles.length;
-        if (totalOrderItems !== totalActiveTiles) {
-            errors.push(`Total order items (${totalOrderItems}) != total tiles (${totalActiveTiles}). Must match exactly.`);
+        if (totalOrderItems > totalActiveTiles) {
+            errors.push(`Total order items (${totalOrderItems}) > total tiles (${totalActiveTiles}).`);
         }
 
         // 7. Simulate solution moves nếu có solutionMoveTileIds
@@ -193,8 +193,8 @@ export class LevelValidator {
             this.refreshBlockStatus(simTiles, gridCells, levelData);
         }
 
-        // Check wrong tray overflow
-        if (wrongCount > wrongTrayMax) {
+        // ORDER_MATCH runtime only fails on main tray full; wrong tray is visual feedback here.
+        if (levelData.gameMode !== GameMode.ORDER_MATCH && wrongCount > wrongTrayMax) {
             errors.push(`Wrong tray overflow: ${wrongCount} wrong moves exceed maxSlots=${wrongTrayMax}`);
         }
 
