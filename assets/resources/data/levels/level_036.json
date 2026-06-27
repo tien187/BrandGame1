@@ -1,0 +1,1102 @@
+{
+    "levelId":  36,
+    "displayName":  "Level 036 - expert_spiral_lock",
+    "defaultSkin":  "uma",
+    "gameMode":  "ORDER_MATCH",
+    "board":  {
+                  "rows":  5,
+                  "cols":  5,
+                  "maxLayers":  4,
+                  "tileSpacing":  130,
+                  "tileSpacingY":  150,
+                  "centerOffset":  {
+                                       "x":  -230,
+                                       "y":  345.88
+                                   },
+                  "tileWidth":  100,
+                  "tileHeight":  120,
+                  "jitterX":  0.6,
+                  "jitterY":  0.7,
+                  "jitterMode":  "layer_visible_mixed_shape",
+                  "blockMode":  "overlap",
+                  "minBlockOverlapPixels":  120,
+                  "coverThreshold":  0.01,
+                  "shapePattern":  [
+                                       [
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           0,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ]
+                                   ],
+                  "shapeName":  "expert_spiral_lock"
+              },
+    "tray":  {
+                 "maxSlots":  7,
+                 "matchCount":  3,
+                 "screenPosition":  {
+                                        "x":  540,
+                                        "y":  200
+                                    },
+                 "slotSpacing":  110
+             },
+    "orderConfig":  {
+                        "orderSize":  3,
+                        "orderMode":  "EXACT_ORDER",
+                        "wrongTrayMaxSlots":  1,
+                        "consumeWrongTile":  true
+                    },
+    "orders":  [
+                   {
+                       "id":  "order_001",
+                       "items":  [
+                                     "6",
+                                     "14",
+                                     "15"
+                                 ]
+                   },
+                   {
+                       "id":  "order_002",
+                       "items":  [
+                                     "16",
+                                     "17",
+                                     "0"
+                                 ]
+                   },
+                   {
+                       "id":  "order_003",
+                       "items":  [
+                                     "2",
+                                     "4",
+                                     "6"
+                                 ]
+                   },
+                   {
+                       "id":  "order_004",
+                       "items":  [
+                                     "14",
+                                     "15",
+                                     "16"
+                                 ]
+                   },
+                   {
+                       "id":  "order_005",
+                       "items":  [
+                                     "17",
+                                     "0",
+                                     "2"
+                                 ]
+                   },
+                   {
+                       "id":  "order_006",
+                       "items":  [
+                                     "4",
+                                     "6",
+                                     "14"
+                                 ]
+                   },
+                   {
+                       "id":  "order_007",
+                       "items":  [
+                                     "15",
+                                     "16",
+                                     "17"
+                                 ]
+                   },
+                   {
+                       "id":  "order_008",
+                       "items":  [
+                                     "0",
+                                     "2",
+                                     "4"
+                                 ]
+                   },
+                   {
+                       "id":  "order_009",
+                       "items":  [
+                                     "6",
+                                     "14",
+                                     "15"
+                                 ]
+                   },
+                   {
+                       "id":  "order_010",
+                       "items":  [
+                                     "16",
+                                     "17",
+                                     "0"
+                                 ]
+                   },
+                   {
+                       "id":  "order_011",
+                       "items":  [
+                                     "2",
+                                     "4",
+                                     "6"
+                                 ]
+                   },
+                   {
+                       "id":  "order_012",
+                       "items":  [
+                                     "14",
+                                     "15",
+                                     "16"
+                                 ]
+                   },
+                   {
+                       "id":  "order_013",
+                       "items":  [
+                                     "17",
+                                     "0",
+                                     "2"
+                                 ]
+                   }
+               ],
+    "solutionOrders":  [
+                           [
+                               "6",
+                               "14",
+                               "15"
+                           ],
+                           [
+                               "16",
+                               "17",
+                               "0"
+                           ],
+                           [
+                               "2",
+                               "4",
+                               "6"
+                           ],
+                           [
+                               "14",
+                               "15",
+                               "16"
+                           ],
+                           [
+                               "17",
+                               "0",
+                               "2"
+                           ],
+                           [
+                               "4",
+                               "6",
+                               "14"
+                           ],
+                           [
+                               "15",
+                               "16",
+                               "17"
+                           ],
+                           [
+                               "0",
+                               "2",
+                               "4"
+                           ],
+                           [
+                               "6",
+                               "14",
+                               "15"
+                           ],
+                           [
+                               "16",
+                               "17",
+                               "0"
+                           ],
+                           [
+                               "2",
+                               "4",
+                               "6"
+                           ],
+                           [
+                               "14",
+                               "15",
+                               "16"
+                           ],
+                           [
+                               "17",
+                               "0",
+                               "2"
+                           ]
+                       ],
+    "solutionMoveTileIds":  [
+                                "L36_T036",
+                                "L36_T033",
+                                "L36_T037",
+                                "L36_T034",
+                                "L36_T038",
+                                "L36_T032",
+                                "L36_T029",
+                                "L36_T017",
+                                "L36_T030",
+                                "L36_T018",
+                                "L36_T031",
+                                "L36_T019",
+                                "L36_T035",
+                                "L36_T024",
+                                "L36_T020",
+                                "L36_T003",
+                                "L36_T021",
+                                "L36_T005",
+                                "L36_T022",
+                                "L36_T006",
+                                "L36_T023",
+                                "L36_T007",
+                                "L36_T025",
+                                "L36_T010",
+                                "L36_T026",
+                                "L36_T013",
+                                "L36_T027",
+                                "L36_T014",
+                                "L36_T028",
+                                "L36_T011",
+                                "L36_T000",
+                                "L36_T001",
+                                "L36_T002",
+                                "L36_T004",
+                                "L36_T008",
+                                "L36_T009",
+                                "L36_T012",
+                                "L36_T015",
+                                "L36_T016"
+                            ],
+    "tiles":  [
+                  {
+                      "id":  "L36_T000",
+                      "groupId":  "2",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom",
+                      "strategyRole":  "forced_path_same_item_decoy",
+                      "decoyForStep":  11,
+                      "decoyAgainstKeyTile":  "L36_T031",
+                      "decoyBlocksNextTile":  "L36_T019"
+                  },
+                  {
+                      "id":  "L36_T001",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T002",
+                      "groupId":  "6",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T003",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T004",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T005",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T006",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T007",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T008",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T009",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T010",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  3,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T011",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  3,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T012",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  4,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T013",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  4,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T014",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  4,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T015",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  4,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T016",
+                      "groupId":  "2",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  4,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L36_T017",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  0.5,
+                      "gridY":  0.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T018",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  1.5,
+                      "gridY":  0.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T019",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  2.5,
+                      "gridY":  0.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T020",
+                      "groupId":  "2",
+                      "tileType":  0,
+                      "gridX":  3.5,
+                      "gridY":  0.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T021",
+                      "groupId":  "6",
+                      "tileType":  0,
+                      "gridX":  3.5,
+                      "gridY":  1.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T022",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  0.5,
+                      "gridY":  2.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle",
+                      "strategyRole":  "forced_path_same_item_decoy",
+                      "decoyForStep":  7,
+                      "decoyAgainstKeyTile":  "L36_T029",
+                      "decoyBlocksNextTile":  "L36_T017"
+                  },
+                  {
+                      "id":  "L36_T023",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  1.5,
+                      "gridY":  2.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T024",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  3.5,
+                      "gridY":  2.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T025",
+                      "groupId":  "2",
+                      "tileType":  0,
+                      "gridX":  0.5,
+                      "gridY":  3.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T026",
+                      "groupId":  "6",
+                      "tileType":  0,
+                      "gridX":  1.5,
+                      "gridY":  3.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T027",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  2.5,
+                      "gridY":  3.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T028",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  3.5,
+                      "gridY":  3.5,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T029",
+                      "groupId":  "2",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle",
+                      "strategyRole":  "forced_path_same_item_decoy",
+                      "decoyForStep":  1,
+                      "decoyAgainstKeyTile":  "L36_T036",
+                      "decoyBlocksNextTile":  "L36_T033"
+                  },
+                  {
+                      "id":  "L36_T030",
+                      "groupId":  "6",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T031",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T032",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T033",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  3,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T034",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  3,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T035",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  3,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "middle"
+                  },
+                  {
+                      "id":  "L36_T036",
+                      "groupId":  "6",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "top"
+                  },
+                  {
+                      "id":  "L36_T037",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "top"
+                  },
+                  {
+                      "id":  "L36_T038",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  2,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "top"
+                  }
+              ],
+    "starThresholds":  [
+                           0,
+                           500,
+                           1000
+                       ],
+    "difficultyMetrics":  {
+                              "designType":  "slice_040_050_forced_path_order_match",
+                              "difficultyBand":  "expert",
+                              "clusterCount":  1,
+                              "shapeName":  "expert_spiral_lock",
+                              "totalTiles":  39,
+                              "orderCount":  13,
+                              "maxLayers":  4,
+                              "topLayerTileCount":  3,
+                              "bottomLayerTileCount":  17,
+                              "phaseCountsTopToBottom":  [
+                                                             3,
+                                                             7,
+                                                             12,
+                                                             17
+                                                         ],
+                              "strategicGoal":  "Early forced-path decisions: the correct visible item unlocks the next hidden order item; same-item decoys punish choosing the wrong tile.",
+                              "solutionValidated":  true,
+                              "sameItemChoiceSteps":  22,
+                              "trapSteps":  8,
+                              "stepsWhereNextItemHiddenBeforeMove":  9,
+                              "forcedUnlockSteps":  9,
+                              "averageLegalExpectedTiles":  0.56,
+                              "maxLegalExpectedTiles":  3,
+                              "first5TrapSteps":  2,
+                              "first10TrapSteps":  5,
+                              "first5HiddenNextSteps":  0,
+                              "first10HiddenNextSteps":  5,
+                              "earlySameItemChoiceSteps":  9,
+                              "first3OrdersForcedUnlockSteps":  5,
+                              "forcedPathDecoyCount":  8,
+                              "forcedPathDecoyChanges":  [
+                                                             {
+                                                                 "step":  1,
+                                                                 "keyTile":  "L36_T036",
+                                                                 "nextTileUnlockedByKey":  "L36_T033",
+                                                                 "decoyTile":  "L36_T030",
+                                                                 "decoySolutionStep":  9,
+                                                                 "group":  "12",
+                                                                 "consequence":  "decoy_does_not_unlock_carpet"
+                                                             },
+                                                             {
+                                                                 "step":  3,
+                                                                 "keyTile":  "L36_T037",
+                                                                 "nextTileUnlockedByKey":  "L36_T034",
+                                                                 "decoyTile":  "L36_T031",
+                                                                 "decoySolutionStep":  11,
+                                                                 "group":  "14",
+                                                                 "consequence":  "decoy_does_not_unlock_carpet"
+                                                             },
+                                                             {
+                                                                 "step":  5,
+                                                                 "keyTile":  "L36_T038",
+                                                                 "nextTileUnlockedByKey":  "L36_T032",
+                                                                 "decoyTile":  "L36_T023",
+                                                                 "decoySolutionStep":  21,
+                                                                 "group":  "8",
+                                                                 "consequence":  "decoy_does_not_unlock_carpet"
+                                                             },
+                                                             {
+                                                                 "step":  7,
+                                                                 "keyTile":  "L36_T029",
+                                                                 "nextTileUnlockedByKey":  "L36_T017",
+                                                                 "decoyTile":  "L36_T022",
+                                                                 "decoySolutionStep":  19,
+                                                                 "group":  "10",
+                                                                 "consequence":  "decoy_does_not_unlock_carpet"
+                                                             },
+                                                             {
+                                                                 "step":  9,
+                                                                 "keyTile":  "L36_T030",
+                                                                 "nextTileUnlockedByKey":  "L36_T018",
+                                                                 "decoyTile":  "L36_T026",
+                                                                 "decoySolutionStep":  25,
+                                                                 "group":  "12",
+                                                                 "consequence":  "decoy_does_not_unlock_carpet"
+                                                             },
+                                                             {
+                                                                 "step":  11,
+                                                                 "keyTile":  "L36_T031",
+                                                                 "nextTileUnlockedByKey":  "L36_T019",
+                                                                 "decoyTile":  "L36_T000",
+                                                                 "decoySolutionStep":  31,
+                                                                 "group":  "14",
+                                                                 "consequence":  "decoy_does_not_unlock_carpet"
+                                                             },
+                                                             {
+                                                                 "step":  13,
+                                                                 "keyTile":  "L36_T035",
+                                                                 "nextTileUnlockedByKey":  "L36_T024",
+                                                                 "decoyTile":  "L36_T023",
+                                                                 "decoySolutionStep":  21,
+                                                                 "group":  "8",
+                                                                 "consequence":  "decoy_does_not_unlock_carpet"
+                                                             },
+                                                             {
+                                                                 "step":  29,
+                                                                 "keyTile":  "L36_T028",
+                                                                 "nextTileUnlockedByKey":  "L36_T011",
+                                                                 "decoyTile":  "L36_T012",
+                                                                 "decoySolutionStep":  37,
+                                                                 "group":  "8",
+                                                                 "consequence":  "decoy_does_not_unlock_carpet"
+                                                             }
+                                                         ],
+                              "sameLayerOverlapPairCount":  0,
+                              "sameLayerOverlapByLayer":  {
+                                                              "layer_0":  0,
+                                                              "layer_1":  0,
+                                                              "layer_2":  0,
+                                                              "layer_3":  0
+                                                          },
+                              "sameLayerOverlapValidated":  true,
+                              "screenBounds":  {
+                                                   "minX":  -281,
+                                                   "maxX":  259,
+                                                   "minY":  -192,
+                                                   "maxY":  432
+                                               },
+                              "screenSafeBounds":  {
+                                                       "minX":  -500,
+                                                       "maxX":  500,
+                                                       "minY":  -700,
+                                                       "maxY":  780
+                                                   },
+                              "screenFitValidated":  true,
+                              "totalTrapSteps":  8,
+                              "trueForcedPathDecoyCount":  8,
+                              "forcedDependencyPairs":  [
+                                                            {
+                                                                "step":  1,
+                                                                "keyTile":  "L36_T036",
+                                                                "nextTileUnlockedByKey":  "L36_T033"
+                                                            },
+                                                            {
+                                                                "step":  3,
+                                                                "keyTile":  "L36_T037",
+                                                                "nextTileUnlockedByKey":  "L36_T034"
+                                                            },
+                                                            {
+                                                                "step":  5,
+                                                                "keyTile":  "L36_T038",
+                                                                "nextTileUnlockedByKey":  "L36_T032"
+                                                            },
+                                                            {
+                                                                "step":  7,
+                                                                "keyTile":  "L36_T029",
+                                                                "nextTileUnlockedByKey":  "L36_T017"
+                                                            },
+                                                            {
+                                                                "step":  9,
+                                                                "keyTile":  "L36_T030",
+                                                                "nextTileUnlockedByKey":  "L36_T018"
+                                                            },
+                                                            {
+                                                                "step":  11,
+                                                                "keyTile":  "L36_T031",
+                                                                "nextTileUnlockedByKey":  "L36_T019"
+                                                            },
+                                                            {
+                                                                "step":  13,
+                                                                "keyTile":  "L36_T035",
+                                                                "nextTileUnlockedByKey":  "L36_T024"
+                                                            },
+                                                            {
+                                                                "step":  15,
+                                                                "keyTile":  "L36_T020",
+                                                                "nextTileUnlockedByKey":  "L36_T003"
+                                                            },
+                                                            {
+                                                                "step":  17,
+                                                                "keyTile":  "L36_T021",
+                                                                "nextTileUnlockedByKey":  "L36_T005"
+                                                            },
+                                                            {
+                                                                "step":  19,
+                                                                "keyTile":  "L36_T022",
+                                                                "nextTileUnlockedByKey":  "L36_T006"
+                                                            },
+                                                            {
+                                                                "step":  21,
+                                                                "keyTile":  "L36_T023",
+                                                                "nextTileUnlockedByKey":  "L36_T007"
+                                                            },
+                                                            {
+                                                                "step":  23,
+                                                                "keyTile":  "L36_T025",
+                                                                "nextTileUnlockedByKey":  "L36_T010"
+                                                            },
+                                                            {
+                                                                "step":  25,
+                                                                "keyTile":  "L36_T026",
+                                                                "nextTileUnlockedByKey":  "L36_T013"
+                                                            },
+                                                            {
+                                                                "step":  27,
+                                                                "keyTile":  "L36_T027",
+                                                                "nextTileUnlockedByKey":  "L36_T014"
+                                                            },
+                                                            {
+                                                                "step":  29,
+                                                                "keyTile":  "L36_T028",
+                                                                "nextTileUnlockedByKey":  "L36_T011"
+                                                            }
+                                                        ]
+                          }
+}

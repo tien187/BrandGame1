@@ -1,0 +1,416 @@
+{
+    "levelId":  1,
+    "displayName":  "Level 001 - mini_pyramid",
+    "defaultSkin":  "uma",
+    "gameMode":  "ORDER_MATCH",
+    "board":  {
+                  "rows":  3,
+                  "cols":  3,
+                  "maxLayers":  2,
+                  "tileSpacing":  130,
+                  "tileSpacingY":  150,
+                  "centerOffset":  {
+                                       "x":  -118.9,
+                                       "y":  195.88
+                                   },
+                  "tileWidth":  100,
+                  "tileHeight":  120,
+                  "jitterX":  0.45,
+                  "jitterY":  0.45,
+                  "jitterMode":  "layer_visible_mixed_shape",
+                  "blockMode":  "overlap",
+                  "minBlockOverlapPixels":  120,
+                  "coverThreshold":  0.01,
+                  "shapePattern":  [
+                                       [
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           1,
+                                           1,
+                                           1
+                                       ]
+                                   ],
+                  "shapeName":  "mini_pyramid"
+              },
+    "tray":  {
+                 "maxSlots":  7,
+                 "matchCount":  3,
+                 "screenPosition":  {
+                                        "x":  540,
+                                        "y":  200
+                                    },
+                 "slotSpacing":  110
+             },
+    "orderConfig":  {
+                        "orderSize":  3,
+                        "orderMode":  "EXACT_ORDER",
+                        "wrongTrayMaxSlots":  1,
+                        "consumeWrongTile":  true
+                    },
+    "orders":  [
+                   {
+                       "id":  "order_001",
+                       "items":  [
+                                     "0",
+                                     "1",
+                                     "2"
+                                 ]
+                   },
+                   {
+                       "id":  "order_002",
+                       "items":  [
+                                     "3",
+                                     "4",
+                                     "5"
+                                 ]
+                   },
+                   {
+                       "id":  "order_003",
+                       "items":  [
+                                     "6",
+                                     "7",
+                                     "0"
+                                 ]
+                   },
+                   {
+                       "id":  "order_004",
+                       "items":  [
+                                     "1",
+                                     "2",
+                                     "3"
+                                 ]
+                   }
+               ],
+    "solutionOrders":  [
+                           [
+                               "0",
+                               "1",
+                               "2"
+                           ],
+                           [
+                               "3",
+                               "4",
+                               "5"
+                           ],
+                           [
+                               "6",
+                               "7",
+                               "0"
+                           ],
+                           [
+                               "1",
+                               "2",
+                               "3"
+                           ]
+                       ],
+    "solutionMoveTileIds":  [
+                                "L1_T009",
+                                "L1_T003",
+                                "L1_T010",
+                                "L1_T004",
+                                "L1_T011",
+                                "L1_T005",
+                                "L1_T000",
+                                "L1_T001",
+                                "L1_T002",
+                                "L1_T006",
+                                "L1_T007",
+                                "L1_T008"
+                            ],
+    "tiles":  [
+                  {
+                      "id":  "L1_T000",
+                      "groupId":  "6",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom",
+                      "strategyRole":  "forced_path_same_item_decoy",
+                      "decoyForStep":  1,
+                      "decoyAgainstKeyTile":  "L1_T009",
+                      "decoyBlocksNextTile":  "L1_T003"
+                  },
+                  {
+                      "id":  "L1_T001",
+                      "groupId":  "7",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L1_T002",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L1_T003",
+                      "groupId":  "1",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L1_T004",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L1_T005",
+                      "groupId":  "5",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L1_T006",
+                      "groupId":  "1",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L1_T007",
+                      "groupId":  "2",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L1_T008",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "bottom"
+                  },
+                  {
+                      "id":  "L1_T009",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "top"
+                  },
+                  {
+                      "id":  "L1_T010",
+                      "groupId":  "2",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "top"
+                  },
+                  {
+                      "id":  "L1_T011",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "clusteredLayout":  false,
+                      "clusterCount":  1,
+                      "sameLayerOverlapForbidden":  true,
+                      "designRole":  "top"
+                  }
+              ],
+    "starThresholds":  [
+                           0,
+                           500,
+                           1000
+                       ],
+    "difficultyMetrics":  {
+                              "designType":  "slice_040_050_forced_path_order_match",
+                              "difficultyBand":  "tutorial",
+                              "clusterCount":  1,
+                              "shapeName":  "mini_pyramid",
+                              "totalTiles":  12,
+                              "orderCount":  4,
+                              "maxLayers":  2,
+                              "topLayerTileCount":  3,
+                              "bottomLayerTileCount":  9,
+                              "phaseCountsTopToBottom":  [
+                                                             3,
+                                                             9
+                                                         ],
+                              "strategicGoal":  "Early forced-path decisions: the correct visible item unlocks the next hidden order item; same-item decoys punish choosing the wrong tile.",
+                              "solutionValidated":  true,
+                              "sameItemChoiceSteps":  6,
+                              "trapSteps":  3,
+                              "stepsWhereNextItemHiddenBeforeMove":  3,
+                              "forcedUnlockSteps":  3,
+                              "averageLegalExpectedTiles":  0.5,
+                              "maxLegalExpectedTiles":  3,
+                              "first5TrapSteps":  2,
+                              "first10TrapSteps":  3,
+                              "first5HiddenNextSteps":  0,
+                              "first10HiddenNextSteps":  3,
+                              "earlySameItemChoiceSteps":  2,
+                              "first3OrdersForcedUnlockSteps":  3,
+                              "forcedPathDecoyCount":  3,
+                              "forcedPathDecoyChanges":  [
+                                                             {
+                                                                 "step":  1,
+                                                                 "keyTile":  "L1_T009",
+                                                                 "nextTileUnlockedByKey":  "L1_T003",
+                                                                 "decoyTile":  "L1_T000",
+                                                                 "decoySolutionStep":  7,
+                                                                 "group":  "9",
+                                                                 "consequence":  "decoy_does_not_unlock_chair"
+                                                             },
+                                                             {
+                                                                 "step":  3,
+                                                                 "keyTile":  "L1_T010",
+                                                                 "nextTileUnlockedByKey":  "L1_T004",
+                                                                 "decoyTile":  "L1_T001",
+                                                                 "decoySolutionStep":  8,
+                                                                 "group":  "8",
+                                                                 "consequence":  "decoy_does_not_unlock_bedroom_lamp"
+                                                             },
+                                                             {
+                                                                 "step":  5,
+                                                                 "keyTile":  "L1_T011",
+                                                                 "nextTileUnlockedByKey":  "L1_T005",
+                                                                 "decoyTile":  "L1_T001",
+                                                                 "decoySolutionStep":  8,
+                                                                 "group":  "8",
+                                                                 "consequence":  "decoy_does_not_unlock_bedroom_lamp"
+                                                             }
+                                                         ],
+                              "sameLayerOverlapPairCount":  0,
+                              "sameLayerOverlapByLayer":  {
+                                                              "layer_0":  0,
+                                                              "layer_1":  0
+                                                          },
+                              "sameLayerOverlapValidated":  true,
+                              "screenBounds":  {
+                                                   "minX":  -172.9,
+                                                   "maxX":  192.14,
+                                                   "minY":  -164.79,
+                                                   "maxY":  255.21
+                                               },
+                              "screenSafeBounds":  {
+                                                       "minX":  -500,
+                                                       "maxX":  500,
+                                                       "minY":  -700,
+                                                       "maxY":  780
+                                                   },
+                              "screenFitValidated":  true,
+                              "totalTrapSteps":  3,
+                              "trueForcedPathDecoyCount":  3,
+                              "forcedDependencyPairs":  [
+                                                            {
+                                                                "step":  1,
+                                                                "keyTile":  "L1_T009",
+                                                                "nextTileUnlockedByKey":  "L1_T003"
+                                                            },
+                                                            {
+                                                                "step":  3,
+                                                                "keyTile":  "L1_T010",
+                                                                "nextTileUnlockedByKey":  "L1_T004"
+                                                            },
+                                                            {
+                                                                "step":  5,
+                                                                "keyTile":  "L1_T011",
+                                                                "nextTileUnlockedByKey":  "L1_T005"
+                                                            }
+                                                        ]
+                          }
+}

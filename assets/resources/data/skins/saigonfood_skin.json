@@ -1,0 +1,45 @@
+{
+  "skinId": "saigonfood",
+  "displayName": "Saigon Food",
+  "assets": {
+    "tiles": [
+      { "key": "tile_0", "path": "skins/saigonfood/tiles/springroll", "assetType": "sprite" },
+      { "key": "tile_1", "path": "skins/saigonfood/tiles/sauce", "assetType": "sprite" },
+      { "key": "tile_2", "path": "skins/saigonfood/tiles/mealbox", "assetType": "sprite" },
+      { "key": "tile_3", "path": "skins/saigonfood/tiles/noodlebowl", "assetType": "sprite" },
+      { "key": "tile_4", "path": "skins/saigonfood/tiles/fishball", "assetType": "sprite" },
+      { "key": "tile_5", "path": "skins/saigonfood/tiles/spicepack", "assetType": "sprite" }
+    ],
+    "background": [
+      { "key": "bg_gameplay", "path": "skins/saigonfood/bg/bg_gameplay", "assetType": "sprite" }
+    ],
+    "board": [
+      { "key": "board_frame", "path": "skins/saigonfood/board/frame", "assetType": "sprite" }
+    ],
+    "tray": [
+      { "key": "tray_bg", "path": "skins/saigonfood/tray/tray_bg", "assetType": "sprite" }
+    ],
+    "ui": [
+      { "key": "panel_mainmenu", "path": "prefabs/ui/panel_mainmenu", "assetType": "prefab" },
+      { "key": "panel_GameplayPanel", "path": "prefabs/ui/panel_gameplay", "assetType": "prefab" },
+      { "key": "panel_LevelSelectPanel", "path": "prefabs/ui/panel_levelselect", "assetType": "prefab" }
+    ],
+    "particle": [
+      { "key": "fx_match", "path": "skins/saigonfood/fx/match", "assetType": "particle" }
+    ],
+    "audio": [
+      { "key": "bgm_main", "path": "skins/saigonfood/audio/bgm_main", "assetType": "audio" }
+    ],
+    "font": [
+      { "key": "default_font", "path": "skins/saigonfood/font/main", "assetType": "font" }
+    ]
+  },
+  "themeColors": {
+    "primary": "#D9381E",
+    "secondary": "#F2A900",
+    "accent": "#2E8B57",
+    "background": "#FFF8F0"
+  },
+  "defaultFont": "default_font",
+  "itemGroups": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
+}

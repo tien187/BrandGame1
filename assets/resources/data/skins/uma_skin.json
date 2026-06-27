@@ -1,0 +1,64 @@
+{
+  "skinId": "uma",
+  "displayName": "UMA Home",
+  "assets": {
+    "tiles": [
+      { "key": "tile_0", "path": "skins/uma/tiles/0", "assetType": "sprite" },
+      { "key": "tile_1", "path": "skins/uma/tiles/1", "assetType": "sprite" },
+      { "key": "tile_2", "path": "skins/uma/tiles/2", "assetType": "sprite" },
+      { "key": "tile_3", "path": "skins/uma/tiles/3", "assetType": "sprite" },
+      { "key": "tile_4", "path": "skins/uma/tiles/4", "assetType": "sprite" },
+      { "key": "tile_5", "path": "skins/uma/tiles/5", "assetType": "sprite" },
+      { "key": "tile_6", "path": "skins/uma/tiles/25", "assetType": "sprite" },
+      { "key": "tile_7", "path": "skins/uma/tiles/7", "assetType": "sprite" },
+      { "key": "tile_8", "path": "skins/uma/tiles/8", "assetType": "sprite" },
+      { "key": "tile_9", "path": "skins/uma/tiles/9", "assetType": "sprite" },
+      { "key": "tile_10", "path": "skins/uma/tiles/10", "assetType": "sprite" },
+      { "key": "tile_11", "path": "skins/uma/tiles/11", "assetType": "sprite" },
+      { "key": "tile_12", "path": "skins/uma/tiles/12", "assetType": "sprite" },
+      { "key": "tile_13", "path": "skins/uma/tiles/13", "assetType": "sprite" },
+      { "key": "tile_14", "path": "skins/uma/tiles/14", "assetType": "sprite" },
+      { "key": "tile_15", "path": "skins/uma/tiles/15", "assetType": "sprite" },
+      { "key": "tile_16", "path": "skins/uma/tiles/16", "assetType": "sprite" },
+      { "key": "tile_17", "path": "skins/uma/tiles/17", "assetType": "sprite" },
+      { "key": "tile_18", "path": "skins/uma/tiles/18", "assetType": "sprite" },
+      { "key": "tile_19", "path": "skins/uma/tiles/19", "assetType": "sprite" },
+      { "key": "tile_20", "path": "skins/uma/tiles/20", "assetType": "sprite" },
+      { "key": "tile_21", "path": "skins/uma/tiles/21", "assetType": "sprite" },
+      { "key": "tile_22", "path": "skins/uma/tiles/22", "assetType": "sprite" },
+      { "key": "tile_23", "path": "skins/uma/tiles/23", "assetType": "sprite" },
+      { "key": "tile_24", "path": "skins/uma/tiles/24", "assetType": "sprite" }
+    ],
+    "background": [
+      { "key": "bg_gameplay", "path": "skins/uma/bg/bg_gameplay", "assetType": "sprite" }
+    ],
+    "board": [
+      { "key": "board_frame", "path": "skins/uma/board/frame", "assetType": "sprite" }
+    ],
+    "tray": [
+      { "key": "tray_bg", "path": "skins/uma/tray/tray_bg", "assetType": "sprite" }
+    ],
+    "ui": [
+      { "key": "panel_mainmenu", "path": "prefabs/ui/panel_mainmenu", "assetType": "prefab" },
+      { "key": "panel_GameplayPanel", "path": "prefabs/ui/panel_gameplay", "assetType": "prefab" },
+      { "key": "panel_LevelSelectPanel", "path": "prefabs/ui/panel_levelselect", "assetType": "prefab" }
+    ],
+    "particle": [
+      { "key": "fx_match", "path": "skins/uma/fx/match", "assetType": "particle" }
+    ],
+    "audio": [
+      { "key": "bgm_main", "path": "skins/uma/audio/bgm_main", "assetType": "audio" }
+    ],
+    "font": [
+      { "key": "default_font", "path": "skins/uma/font/main", "assetType": "font" }
+    ]
+  },
+  "themeColors": {
+    "primary": "#E8B87D",
+    "secondary": "#C4956A",
+    "accent": "#F4A261",
+    "background": "#FAF3E8"
+  },
+  "defaultFont": "default_font",
+  "itemGroups": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
+}

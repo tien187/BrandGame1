@@ -1,0 +1,1611 @@
+{
+    "levelId":  53,
+    "displayName":  "Level 053 - Hard - Normal Deep Trap",
+    "defaultSkin":  "uma",
+    "gameMode":  "ORDER_MATCH",
+    "board":  {
+                  "rows":  5,
+                  "cols":  5,
+                  "maxLayers":  3,
+                  "tileSpacing":  160,
+                  "tileSpacingY":  180,
+                  "centerOffset":  {
+                                       "x":  -313.34,
+                                       "y":  483.024
+                                   },
+                  "tileWidth":  100,
+                  "tileHeight":  120,
+                  "jitterX":  0.36,
+                  "jitterY":  0.36,
+                  "jitterMode":  "layer",
+                  "blockMode":  "overlap",
+                  "minBlockOverlapPixels":  1,
+                  "coverThreshold":  0.3,
+                  "shapePattern":  [
+                                       [
+                                           0,
+                                           0,
+                                           1,
+                                           0,
+                                           0
+                                       ],
+                                       [
+                                           0,
+                                           1,
+                                           1,
+                                           1,
+                                           0
+                                       ],
+                                       [
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           0,
+                                           0,
+                                           1,
+                                           0,
+                                           0
+                                       ]
+                                   ]
+              },
+    "tray":  {
+                 "maxSlots":  7,
+                 "matchCount":  3,
+                 "screenPosition":  {
+                                        "x":  540,
+                                        "y":  200
+                                    },
+                 "slotSpacing":  110
+             },
+    "orderConfig":  {
+                        "orderSize":  3,
+                        "orderMode":  "EXACT_ORDER",
+                        "wrongTrayMaxSlots":  2,
+                        "consumeWrongTile":  true
+                    },
+    "orders":  [
+                   {
+                       "id":  "order_001",
+                       "items":  [
+                                     "10",
+                                     "11",
+                                     "12"
+                                 ]
+                   },
+                   {
+                       "id":  "order_002",
+                       "items":  [
+                                     "13",
+                                     "0",
+                                     "4"
+                                 ]
+                   },
+                   {
+                       "id":  "order_003",
+                       "items":  [
+                                     "8",
+                                     "9",
+                                     "10"
+                                 ]
+                   },
+                   {
+                       "id":  "order_004",
+                       "items":  [
+                                     "11",
+                                     "12",
+                                     "13"
+                                 ]
+                   },
+                   {
+                       "id":  "order_005",
+                       "items":  [
+                                     "0",
+                                     "4",
+                                     "8"
+                                 ]
+                   },
+                   {
+                       "id":  "order_006",
+                       "items":  [
+                                     "9",
+                                     "10",
+                                     "11"
+                                 ]
+                   },
+                   {
+                       "id":  "order_007",
+                       "items":  [
+                                     "12",
+                                     "13",
+                                     "0"
+                                 ]
+                   },
+                   {
+                       "id":  "order_008",
+                       "items":  [
+                                     "4",
+                                     "8",
+                                     "9"
+                                 ]
+                   },
+                   {
+                       "id":  "order_009",
+                       "items":  [
+                                     "10",
+                                     "11",
+                                     "12"
+                                 ]
+                   },
+                   {
+                       "id":  "order_010",
+                       "items":  [
+                                     "13",
+                                     "0",
+                                     "4"
+                                 ]
+                   },
+                   {
+                       "id":  "order_011",
+                       "items":  [
+                                     "8",
+                                     "9",
+                                     "10"
+                                 ]
+                   },
+                   {
+                       "id":  "order_012",
+                       "items":  [
+                                     "11",
+                                     "12",
+                                     "13"
+                                 ]
+                   },
+                   {
+                       "id":  "order_013",
+                       "items":  [
+                                     "0",
+                                     "4",
+                                     "8"
+                                 ]
+                   },
+                   {
+                       "id":  "order_014",
+                       "items":  [
+                                     "9",
+                                     "10",
+                                     "11"
+                                 ]
+                   },
+                   {
+                       "id":  "order_015",
+                       "items":  [
+                                     "12",
+                                     "13",
+                                     "0"
+                                 ]
+                   }
+               ],
+    "solutionOrders":  [
+                           [
+                               "10",
+                               "11",
+                               "12"
+                           ],
+                           [
+                               "13",
+                               "0",
+                               "4"
+                           ],
+                           [
+                               "8",
+                               "9",
+                               "10"
+                           ],
+                           [
+                               "11",
+                               "12",
+                               "13"
+                           ],
+                           [
+                               "0",
+                               "4",
+                               "8"
+                           ],
+                           [
+                               "9",
+                               "10",
+                               "11"
+                           ],
+                           [
+                               "12",
+                               "13",
+                               "0"
+                           ],
+                           [
+                               "4",
+                               "8",
+                               "9"
+                           ],
+                           [
+                               "10",
+                               "11",
+                               "12"
+                           ],
+                           [
+                               "13",
+                               "0",
+                               "4"
+                           ],
+                           [
+                               "8",
+                               "9",
+                               "10"
+                           ],
+                           [
+                               "11",
+                               "12",
+                               "13"
+                           ],
+                           [
+                               "0",
+                               "4",
+                               "8"
+                           ],
+                           [
+                               "9",
+                               "10",
+                               "11"
+                           ],
+                           [
+                               "12",
+                               "13",
+                               "0"
+                           ]
+                       ],
+    "solutionMoveTileIds":  [
+                                "L53_T000",
+                                "L53_T001",
+                                "L53_T002",
+                                "L53_T015",
+                                "L53_T016",
+                                "L53_T017",
+                                "L53_T003",
+                                "L53_T004",
+                                "L53_T005",
+                                "L53_T018",
+                                "L53_T019",
+                                "L53_T020",
+                                "L53_T006",
+                                "L53_T007",
+                                "L53_T008",
+                                "L53_T021",
+                                "L53_T022",
+                                "L53_T023",
+                                "L53_T009",
+                                "L53_T010",
+                                "L53_T011",
+                                "L53_T024",
+                                "L53_T025",
+                                "L53_T026",
+                                "L53_T012",
+                                "L53_T013",
+                                "L53_T014",
+                                "L53_T027",
+                                "L53_T028",
+                                "L53_T029",
+                                "L53_T030",
+                                "L53_T031",
+                                "L53_T032",
+                                "L53_T033",
+                                "L53_T034",
+                                "L53_T035",
+                                "L53_T036",
+                                "L53_T037",
+                                "L53_T038",
+                                "L53_T039",
+                                "L53_T040",
+                                "L53_T041",
+                                "L53_T042",
+                                "L53_T043",
+                                "L53_T044"
+                            ],
+    "tiles":  [
+                  {
+                      "id":  "L53_T000",
+                      "groupId":  "10",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  0,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  0,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T001",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  0,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  0,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T002",
+                      "groupId":  "12",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  0,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T003",
+                      "groupId":  "8",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  1,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T004",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  1,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T005",
+                      "groupId":  "10",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  1,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T006",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  2,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T007",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  2,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T008",
+                      "groupId":  "8",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  2,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T009",
+                      "groupId":  "12",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  3,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T010",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  3,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T011",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  3,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T012",
+                      "groupId":  "10",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  4,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T013",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  4,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T014",
+                      "groupId":  "12",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  4,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T015",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  5,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T016",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  5,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T017",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  5,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T018",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  6,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T019",
+                      "groupId":  "12",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  6,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T020",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  6,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T021",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  7,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T022",
+                      "groupId":  "10",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  7,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T023",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  7,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T024",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  8,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T025",
+                      "groupId":  "8",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  8,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T026",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  8,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T027",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  3,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  9,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T028",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  3,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  9,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T029",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  3,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  9,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T030",
+                      "groupId":  "8",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  3,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  10,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T031",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  3,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  10,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T032",
+                      "groupId":  "10",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  3,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  10,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T033",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  3,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  11,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T034",
+                      "groupId":  "12",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  3,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  11,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T035",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  3,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  11,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T036",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  4,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  12,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T037",
+                      "groupId":  "4",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  4,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  12,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T038",
+                      "groupId":  "8",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  4,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  12,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T039",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  3,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  13,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T040",
+                      "groupId":  "10",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  3,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  13,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T041",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  3,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  13,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T042",
+                      "groupId":  "12",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  3,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  14,
+                      "designRole":  "top_key_trap_candidate"
+                  },
+                  {
+                      "id":  "L53_T043",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  3,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  14,
+                      "designRole":  "hidden_unlock_item"
+                  },
+                  {
+                      "id":  "L53_T044",
+                      "groupId":  "0",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  3,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  14,
+                      "designRole":  "hidden_unlock_item"
+                  }
+              ],
+    "difficultyMetrics":  {
+                              "designType":  "normal_trap_order_match",
+                              "difficultyBand":  "level_026_045_normal_start_traps",
+                              "difficultyNote":  "45 tiles, 3 layers. Medium-high normal levels with more same-item traps.",
+                              "totalTiles":  45,
+                              "stackCount":  15,
+                              "orderCount":  15,
+                              "maxLayers":  3,
+                              "hiddenTileCount":  30,
+                              "itemPoolSize":  8,
+                              "centerOffsetMode":  "auto_center_by_tile_bounds",
+                              "centeringDebug":  {
+                                                     "targetCenter":  {
+                                                                          "x":  0,
+                                                                          "y":  120
+                                                                      },
+                                                     "computedCenterOffset":  {
+                                                                                  "x":  -313.34,
+                                                                                  "y":  483.024
+                                                                              }
+                                                 },
+                              "strategicGoal":  "Normal levels: start using real same-item traps. The player must choose the correct visible key to reveal the next required hidden item.",
+                              "solutionValidated":  true,
+                              "sameItemChoiceSteps":  11,
+                              "trapSteps":  11,
+                              "stepsWhereNextItemHiddenBeforeMove":  30,
+                              "averageLegalExpectedTiles":  1.47,
+                              "maxLegalExpectedTiles":  4,
+                              "solutionDebugLog":  [
+                                                       {
+                                                           "step":  1,
+                                                           "expected":  "9",
+                                                           "chosenTileId":  "L42_T000",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T000",
+                                                                                             "L42_T006",
+                                                                                             "L42_T012",
+                                                                                             "L42_T036"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "11",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T006",
+                                                                                          "L42_T036"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  2,
+                                                           "expected":  "11",
+                                                           "chosenTileId":  "L42_T001",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T001"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "8",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  3,
+                                                           "expected":  "8",
+                                                           "chosenTileId":  "L42_T002",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T002"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "12",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  4,
+                                                           "expected":  "12",
+                                                           "chosenTileId":  "L42_T015",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T015",
+                                                                                             "L42_T021",
+                                                                                             "L42_T027",
+                                                                                             "L42_T039"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "10",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T021",
+                                                                                          "L42_T039"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  5,
+                                                           "expected":  "10",
+                                                           "chosenTileId":  "L42_T016",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T016"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "15",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  6,
+                                                           "expected":  "15",
+                                                           "chosenTileId":  "L42_T017",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T017"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "13",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  7,
+                                                           "expected":  "13",
+                                                           "chosenTileId":  "L42_T003",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T003",
+                                                                                             "L42_T009",
+                                                                                             "L42_T030",
+                                                                                             "L42_T042"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "8",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T009",
+                                                                                          "L42_T042"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  8,
+                                                           "expected":  "8",
+                                                           "chosenTileId":  "L42_T004",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T004"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "11",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  9,
+                                                           "expected":  "11",
+                                                           "chosenTileId":  "L42_T005",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T005"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "14",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  10,
+                                                           "expected":  "14",
+                                                           "chosenTileId":  "L42_T018",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T018",
+                                                                                             "L42_T024",
+                                                                                             "L42_T033"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "15",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T024"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  11,
+                                                           "expected":  "15",
+                                                           "chosenTileId":  "L42_T019",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T019"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "10",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  12,
+                                                           "expected":  "10",
+                                                           "chosenTileId":  "L42_T020",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T020"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "9",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  13,
+                                                           "expected":  "9",
+                                                           "chosenTileId":  "L42_T006",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T006",
+                                                                                             "L42_T012",
+                                                                                             "L42_T036"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "10",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T012"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  14,
+                                                           "expected":  "10",
+                                                           "chosenTileId":  "L42_T007",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T007"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "15",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  15,
+                                                           "expected":  "15",
+                                                           "chosenTileId":  "L42_T008",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T008"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "12",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  16,
+                                                           "expected":  "12",
+                                                           "chosenTileId":  "L42_T021",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T021",
+                                                                                             "L42_T027",
+                                                                                             "L42_T039"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "11",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T027"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  17,
+                                                           "expected":  "11",
+                                                           "chosenTileId":  "L42_T022",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T022"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "8",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  18,
+                                                           "expected":  "8",
+                                                           "chosenTileId":  "L42_T023",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T023"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "13",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  19,
+                                                           "expected":  "13",
+                                                           "chosenTileId":  "L42_T009",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T009",
+                                                                                             "L42_T030",
+                                                                                             "L42_T042"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "15",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T030"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  20,
+                                                           "expected":  "15",
+                                                           "chosenTileId":  "L42_T010",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T010"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "10",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  21,
+                                                           "expected":  "10",
+                                                           "chosenTileId":  "L42_T011",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T011"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "14",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  22,
+                                                           "expected":  "14",
+                                                           "chosenTileId":  "L42_T024",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T024",
+                                                                                             "L42_T033"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "8",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T033"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  23,
+                                                           "expected":  "8",
+                                                           "chosenTileId":  "L42_T025",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T025"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "11",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  24,
+                                                           "expected":  "11",
+                                                           "chosenTileId":  "L42_T026",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T026"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "9",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  25,
+                                                           "expected":  "9",
+                                                           "chosenTileId":  "L42_T012",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T012",
+                                                                                             "L42_T036"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "11",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T036"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  26,
+                                                           "expected":  "11",
+                                                           "chosenTileId":  "L42_T013",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T013"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "8",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  27,
+                                                           "expected":  "8",
+                                                           "chosenTileId":  "L42_T014",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T014"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "12",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  28,
+                                                           "expected":  "12",
+                                                           "chosenTileId":  "L42_T027",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T027",
+                                                                                             "L42_T039"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "10",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T039"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  29,
+                                                           "expected":  "10",
+                                                           "chosenTileId":  "L42_T028",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T028"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "15",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  30,
+                                                           "expected":  "15",
+                                                           "chosenTileId":  "L42_T029",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T029"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "13",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  31,
+                                                           "expected":  "13",
+                                                           "chosenTileId":  "L42_T030",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T030",
+                                                                                             "L42_T042"
+                                                                                         ],
+                                                           "sameItemChoice":  true,
+                                                           "nextExpectedItem":  "8",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+                                                                                          "L42_T042"
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  32,
+                                                           "expected":  "8",
+                                                           "chosenTileId":  "L42_T031",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T031"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "11",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  33,
+                                                           "expected":  "11",
+                                                           "chosenTileId":  "L42_T032",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T032"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "14",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  34,
+                                                           "expected":  "14",
+                                                           "chosenTileId":  "L42_T033",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T033"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "15",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  35,
+                                                           "expected":  "15",
+                                                           "chosenTileId":  "L42_T034",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T034"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "10",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  36,
+                                                           "expected":  "10",
+                                                           "chosenTileId":  "L42_T035",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T035"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "9",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  37,
+                                                           "expected":  "9",
+                                                           "chosenTileId":  "L42_T036",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T036"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "10",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  38,
+                                                           "expected":  "10",
+                                                           "chosenTileId":  "L42_T037",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T037"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "15",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  39,
+                                                           "expected":  "15",
+                                                           "chosenTileId":  "L42_T038",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T038"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "12",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  40,
+                                                           "expected":  "12",
+                                                           "chosenTileId":  "L42_T039",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T039"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "11",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  41,
+                                                           "expected":  "11",
+                                                           "chosenTileId":  "L42_T040",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T040"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "8",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  42,
+                                                           "expected":  "8",
+                                                           "chosenTileId":  "L42_T041",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T041"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "13",
+                                                           "nextExpectedAvailableBeforeMove":  true,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  43,
+                                                           "expected":  "13",
+                                                           "chosenTileId":  "L42_T042",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T042"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "15",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  44,
+                                                           "expected":  "15",
+                                                           "chosenTileId":  "L42_T043",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T043"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  "10",
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       },
+                                                       {
+                                                           "step":  45,
+                                                           "expected":  "10",
+                                                           "chosenTileId":  "L42_T044",
+                                                           "selectableExpectedTileIds":  [
+                                                                                             "L42_T044"
+                                                                                         ],
+                                                           "sameItemChoice":  false,
+                                                           "nextExpectedItem":  null,
+                                                           "nextExpectedAvailableBeforeMove":  false,
+                                                           "trapAlternativeTileIds":  [
+
+                                                                                      ]
+                                                       }
+                                                   ],
+                              "sourceLevelId":  42,
+                              "sourceDisplayName":  "Level 42 - Normal Deep Trap",
+                              "sourceBand":  "normal_026_045",
+                              "rebalanceVersion":  "smooth_001_100_v1",
+                              "balancedLevelId":  53,
+                              "balancedBand":  "hard",
+                              "originalDifficultyScore":  187.46,
+                              "balancedDifficultyScore":  187.46,
+                              "originalWrongTrayMaxSlots":  2,
+                              "balancedWrongTrayMaxSlots":  2,
+                              "rebalanceNotes":  "Reordered by difficulty score for smoother 1-100 progression; wrongTrayMaxSlots adjusted by new band. Board, orders, tile positions, and solution path are preserved."
+                          },
+    "starThresholds":  [
+                           0,
+                           500,
+                           1000
+                       ]
+}

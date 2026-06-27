@@ -1,0 +1,1441 @@
+{
+    "levelId":  88,
+    "displayName":  "Level 088 - Very_Hard - Expert Intro B",
+    "defaultSkin":  "uma",
+    "gameMode":  "ORDER_MATCH",
+    "board":  {
+                  "rows":  3,
+                  "cols":  6,
+                  "maxLayers":  4,
+                  "tileSpacing":  190,
+                  "tileSpacingY":  210,
+                  "centerOffset":  {
+                                       "x":  -473.35,
+                                       "y":  332.52
+                                   },
+                  "tileWidth":  100,
+                  "tileHeight":  120,
+                  "jitterX":  0.3,
+                  "jitterY":  0.3,
+                  "jitterMode":  "layer",
+                  "blockMode":  "overlap",
+                  "minBlockOverlapPixels":  1,
+                  "coverThreshold":  0.3,
+                  "shapePattern":  [
+                                       [
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ],
+                                       [
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1,
+                                           1
+                                       ]
+                                   ]
+              },
+    "tray":  {
+                 "maxSlots":  7,
+                 "matchCount":  3,
+                 "screenPosition":  {
+                                        "x":  540,
+                                        "y":  200
+                                    },
+                 "slotSpacing":  110
+             },
+    "orderConfig":  {
+                        "orderSize":  3,
+                        "orderMode":  "EXACT_ORDER",
+                        "wrongTrayMaxSlots":  1,
+                        "consumeWrongTile":  true
+                    },
+    "orders":  [
+                   {
+                       "id":  "order_001",
+                       "items":  [
+                                     "17",
+                                     "3",
+                                     "9"
+                                 ]
+                   },
+                   {
+                       "id":  "order_002",
+                       "items":  [
+                                     "11",
+                                     "13",
+                                     "14"
+                                 ]
+                   },
+                   {
+                       "id":  "order_003",
+                       "items":  [
+                                     "15",
+                                     "16",
+                                     "17"
+                                 ]
+                   },
+                   {
+                       "id":  "order_004",
+                       "items":  [
+                                     "3",
+                                     "9",
+                                     "11"
+                                 ]
+                   },
+                   {
+                       "id":  "order_005",
+                       "items":  [
+                                     "13",
+                                     "14",
+                                     "15"
+                                 ]
+                   },
+                   {
+                       "id":  "order_006",
+                       "items":  [
+                                     "16",
+                                     "17",
+                                     "3"
+                                 ]
+                   },
+                   {
+                       "id":  "order_007",
+                       "items":  [
+                                     "9",
+                                     "11",
+                                     "13"
+                                 ]
+                   },
+                   {
+                       "id":  "order_008",
+                       "items":  [
+                                     "14",
+                                     "15",
+                                     "16"
+                                 ]
+                   },
+                   {
+                       "id":  "order_009",
+                       "items":  [
+                                     "17",
+                                     "3",
+                                     "9"
+                                 ]
+                   },
+                   {
+                       "id":  "order_010",
+                       "items":  [
+                                     "11",
+                                     "13",
+                                     "14"
+                                 ]
+                   },
+                   {
+                       "id":  "order_011",
+                       "items":  [
+                                     "15",
+                                     "16",
+                                     "17"
+                                 ]
+                   },
+                   {
+                       "id":  "order_012",
+                       "items":  [
+                                     "3",
+                                     "9",
+                                     "11"
+                                 ]
+                   },
+                   {
+                       "id":  "order_013",
+                       "items":  [
+                                     "13",
+                                     "14",
+                                     "15"
+                                 ]
+                   },
+                   {
+                       "id":  "order_014",
+                       "items":  [
+                                     "16",
+                                     "17",
+                                     "3"
+                                 ]
+                   },
+                   {
+                       "id":  "order_015",
+                       "items":  [
+                                     "9",
+                                     "11",
+                                     "13"
+                                 ]
+                   },
+                   {
+                       "id":  "order_016",
+                       "items":  [
+                                     "14",
+                                     "15",
+                                     "16"
+                                 ]
+                   },
+                   {
+                       "id":  "order_017",
+                       "items":  [
+                                     "17",
+                                     "3",
+                                     "9"
+                                 ]
+                   },
+                   {
+                       "id":  "order_018",
+                       "items":  [
+                                     "11",
+                                     "13",
+                                     "14"
+                                 ]
+                   },
+                   {
+                       "id":  "order_019",
+                       "items":  [
+                                     "15",
+                                     "16",
+                                     "17"
+                                 ]
+                   },
+                   {
+                       "id":  "order_020",
+                       "items":  [
+                                     "3",
+                                     "9",
+                                     "11"
+                                 ]
+                   },
+                   {
+                       "id":  "order_021",
+                       "items":  [
+                                     "13",
+                                     "14",
+                                     "15"
+                                 ]
+                   },
+                   {
+                       "id":  "order_022",
+                       "items":  [
+                                     "16",
+                                     "17",
+                                     "3"
+                                 ]
+                   },
+                   {
+                       "id":  "order_023",
+                       "items":  [
+                                     "9",
+                                     "11",
+                                     "13"
+                                 ]
+                   },
+                   {
+                       "id":  "order_024",
+                       "items":  [
+                                     "14",
+                                     "15",
+                                     "16"
+                                 ]
+                   }
+               ],
+    "solutionOrders":  [
+                           [
+                               "17",
+                               "3",
+                               "9"
+                           ],
+                           [
+                               "11",
+                               "13",
+                               "14"
+                           ],
+                           [
+                               "15",
+                               "16",
+                               "17"
+                           ],
+                           [
+                               "3",
+                               "9",
+                               "11"
+                           ],
+                           [
+                               "13",
+                               "14",
+                               "15"
+                           ],
+                           [
+                               "16",
+                               "17",
+                               "3"
+                           ],
+                           [
+                               "9",
+                               "11",
+                               "13"
+                           ],
+                           [
+                               "14",
+                               "15",
+                               "16"
+                           ],
+                           [
+                               "17",
+                               "3",
+                               "9"
+                           ],
+                           [
+                               "11",
+                               "13",
+                               "14"
+                           ],
+                           [
+                               "15",
+                               "16",
+                               "17"
+                           ],
+                           [
+                               "3",
+                               "9",
+                               "11"
+                           ],
+                           [
+                               "13",
+                               "14",
+                               "15"
+                           ],
+                           [
+                               "16",
+                               "17",
+                               "3"
+                           ],
+                           [
+                               "9",
+                               "11",
+                               "13"
+                           ],
+                           [
+                               "14",
+                               "15",
+                               "16"
+                           ],
+                           [
+                               "17",
+                               "3",
+                               "9"
+                           ],
+                           [
+                               "11",
+                               "13",
+                               "14"
+                           ],
+                           [
+                               "15",
+                               "16",
+                               "17"
+                           ],
+                           [
+                               "3",
+                               "9",
+                               "11"
+                           ],
+                           [
+                               "13",
+                               "14",
+                               "15"
+                           ],
+                           [
+                               "16",
+                               "17",
+                               "3"
+                           ],
+                           [
+                               "9",
+                               "11",
+                               "13"
+                           ],
+                           [
+                               "14",
+                               "15",
+                               "16"
+                           ]
+                       ],
+    "solutionMoveTileIds":  [
+                                "L88_T000",
+                                "L88_T001",
+                                "L88_T002",
+                                "L88_T003",
+                                "L88_T020",
+                                "L88_T021",
+                                "L88_T022",
+                                "L88_T023",
+                                "L88_T040",
+                                "L88_T041",
+                                "L88_T042",
+                                "L88_T043",
+                                "L88_T060",
+                                "L88_T061",
+                                "L88_T062",
+                                "L88_T063",
+                                "L88_T004",
+                                "L88_T005",
+                                "L88_T006",
+                                "L88_T007",
+                                "L88_T024",
+                                "L88_T025",
+                                "L88_T026",
+                                "L88_T027",
+                                "L88_T044",
+                                "L88_T045",
+                                "L88_T046",
+                                "L88_T047",
+                                "L88_T064",
+                                "L88_T065",
+                                "L88_T066",
+                                "L88_T067",
+                                "L88_T008",
+                                "L88_T009",
+                                "L88_T010",
+                                "L88_T011",
+                                "L88_T028",
+                                "L88_T029",
+                                "L88_T030",
+                                "L88_T031",
+                                "L88_T048",
+                                "L88_T049",
+                                "L88_T050",
+                                "L88_T051",
+                                "L88_T068",
+                                "L88_T069",
+                                "L88_T070",
+                                "L88_T071",
+                                "L88_T012",
+                                "L88_T013",
+                                "L88_T014",
+                                "L88_T015",
+                                "L88_T032",
+                                "L88_T033",
+                                "L88_T034",
+                                "L88_T035",
+                                "L88_T052",
+                                "L88_T053",
+                                "L88_T054",
+                                "L88_T055",
+                                "L88_T016",
+                                "L88_T017",
+                                "L88_T018",
+                                "L88_T019",
+                                "L88_T036",
+                                "L88_T037",
+                                "L88_T038",
+                                "L88_T039",
+                                "L88_T056",
+                                "L88_T057",
+                                "L88_T058",
+                                "L88_T059"
+                            ],
+    "tiles":  [
+                  {
+                      "id":  "L88_T000",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  0,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  0,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T001",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  0,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  0,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T002",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  0,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  0,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T003",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  0,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T004",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  0,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  1,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T005",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  0,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  1,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T006",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  0,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  1,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T007",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  1,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T008",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  0,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  2,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T009",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  0,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  2,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T010",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  0,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  2,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T011",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  2,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T012",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  0,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  3,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T013",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  0,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  3,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T014",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  0,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  3,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T015",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  3,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T016",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  0,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  4,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T017",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  0,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  4,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T018",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  0,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  4,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T019",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  4,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T020",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  0,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  5,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T021",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  0,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  5,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T022",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  0,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  5,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T023",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  0,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  5,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T024",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  1,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  6,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T025",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  6,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T026",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  6,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T027",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  6,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T028",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  1,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  7,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T029",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  7,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T030",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  7,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T031",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  7,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T032",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  1,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  8,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T033",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  8,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T034",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  8,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T035",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  8,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T036",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  9,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T037",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  9,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T038",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  9,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T039",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  9,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T040",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  10,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T041",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  10,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T042",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  10,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T043",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  10,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T044",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  1,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  11,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T045",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  1,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  11,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T046",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  1,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  11,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T047",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  1,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  11,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T048",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  2,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  12,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T049",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  12,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T050",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  12,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T051",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  0,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  12,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T052",
+                      "groupId":  "17",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  13,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T053",
+                      "groupId":  "3",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  13,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T054",
+                      "groupId":  "9",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  13,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T055",
+                      "groupId":  "11",
+                      "tileType":  0,
+                      "gridX":  1,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  13,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T056",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  14,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T057",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  14,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T058",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  14,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T059",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  2,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  14,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T060",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  2,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  15,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T061",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  15,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T062",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  15,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T063",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  3,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  15,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T064",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  2,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  16,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T065",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  16,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T066",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  16,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T067",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  4,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  16,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T068",
+                      "groupId":  "13",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  2,
+                      "layer":  3,
+                      "active":  true,
+                      "selectable":  true,
+                      "isBlocked":  false,
+                      "stackId":  17,
+                      "designRole":  "visible_key_heavy_decoy"
+                  },
+                  {
+                      "id":  "L88_T069",
+                      "groupId":  "14",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  2,
+                      "layer":  2,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  17,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T070",
+                      "groupId":  "15",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  2,
+                      "layer":  1,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  17,
+                      "designRole":  "expert_hidden_unlock"
+                  },
+                  {
+                      "id":  "L88_T071",
+                      "groupId":  "16",
+                      "tileType":  0,
+                      "gridX":  5,
+                      "gridY":  2,
+                      "layer":  0,
+                      "active":  true,
+                      "selectable":  false,
+                      "isBlocked":  true,
+                      "stackId":  17,
+                      "designRole":  "expert_hidden_unlock"
+                  }
+              ],
+    "difficultyMetrics":  {
+                              "designType":  "expert_many_traps_order_match",
+                              "difficultyBand":  "level_091_100_expert_many_traps",
+                              "difficultyNote":  "72 tiles, 4 layers, expert intro with snake path.",
+                              "totalTiles":  72,
+                              "stackCount":  18,
+                              "orderCount":  24,
+                              "maxLayers":  4,
+                              "hiddenTileCount":  54,
+                              "itemPoolSize":  8,
+                              "visibleKeyPoolSize":  3,
+                              "wrongTrayMaxSlots":  1,
+                              "centerOffsetMode":  "auto_center_by_tile_bounds",
+                              "centeringDebug":  {
+                                                     "targetCenter":  {
+                                                                          "x":  0,
+                                                                          "y":  120
+                                                                      },
+                                                     "computedCenterOffset":  {
+                                                                                  "x":  -473.35,
+                                                                                  "y":  332.52
+                                                                              }
+                                                 },
+                              "strategicGoal":  "Expert levels: 4 layers, wrong slot very low, many key/decoy traps, many hidden-next steps.",
+                              "solutionValidated":  true,
+                              "sameItemChoiceSteps":  18,
+                              "trapSteps":  15,
+                              "stepsWhereNextItemHiddenBeforeMove":  47,
+                              "averageLegalExpectedTiles":  1.83,
+                              "maxLegalExpectedTiles":  8,
+                              "sourceLevelId":  92,
+                              "sourceDisplayName":  "Level 92 - Expert Intro B",
+                              "sourceBand":  "expert_091_100",
+                              "rebalanceVersion":  "smooth_001_100_v1",
+                              "balancedLevelId":  88,
+                              "balancedBand":  "very_hard",
+                              "originalDifficultyScore":  298.14,
+                              "balancedDifficultyScore":  298.14,
+                              "originalWrongTrayMaxSlots":  1,
+                              "balancedWrongTrayMaxSlots":  1,
+                              "rebalanceNotes":  "Reordered by difficulty score for smoother 1-100 progression; wrongTrayMaxSlots adjusted by new band. Board, orders, tile positions, and solution path are preserved."
+                          },
+    "starThresholds":  [
+                           0,
+                           500,
+                           1000
+                       ]
+}

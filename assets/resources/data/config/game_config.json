@@ -1,0 +1,107 @@
+{
+  "version": "1.0.0",
+  "defaults": {
+    "skinId": "default",
+    "musicVolume": 0.8,
+    "sfxVolume": 0.9,
+    "language": "vi"
+  },
+  "boosters": [
+    {
+      "type": 1,
+      "id": "UNDO",
+      "displayName": "Undo",
+      "description": "Hoàn tác nước đi cuối",
+      "coinCost": 100,
+      "gemCost": 0,
+      "maxStack": 99,
+      "iconKey": "booster_undo",
+      "effectKey": "effect_undo"
+    },
+    {
+      "type": 2,
+      "id": "SHUFFLE",
+      "displayName": "Shuffle",
+      "description": "Xáo trộn các tile trên board",
+      "coinCost": 150,
+      "gemCost": 0,
+      "maxStack": 99,
+      "iconKey": "booster_shuffle",
+      "effectKey": "effect_shuffle"
+    },
+    {
+      "type": 3,
+      "id": "HINT",
+      "displayName": "Hint",
+      "description": "Gợi ý tile có thể match",
+      "coinCost": 50,
+      "gemCost": 0,
+      "maxStack": 99,
+      "iconKey": "booster_hint"
+    },
+    {
+      "type": 4,
+      "id": "REMOVE",
+      "displayName": "Remove",
+      "description": "Bỏ 3 tile khỏi tray",
+      "coinCost": 200,
+      "gemCost": 0,
+      "maxStack": 99,
+      "iconKey": "booster_remove"
+    },
+    {
+      "type": 5,
+      "id": "MAGNET",
+      "displayName": "Magnet",
+      "description": "Hút các tile cùng loại vào tray",
+      "coinCost": 250,
+      "gemCost": 0,
+      "maxStack": 99,
+      "iconKey": "booster_magnet"
+    }
+  ],
+  "audio": [
+    {
+      "key": "bgm_main",
+      "path": "audio/bgm_main",
+      "type": 1,
+      "loop": true,
+      "volume": 0.6
+    },
+    {
+      "key": "sfx_click",
+      "path": "audio/sfx_click",
+      "type": 0,
+      "loop": false,
+      "volume": 0.8
+    },
+    {
+      "key": "sfx_match",
+      "path": "audio/sfx_match",
+      "type": 0,
+      "loop": false,
+      "volume": 0.9
+    },
+    {
+      "key": "sfx_error",
+      "path": "audio/sfx_error",
+      "type": 0,
+      "loop": false,
+      "volume": 0.8
+    },
+    {
+      "key": "ui_open",
+      "path": "audio/ui_open",
+      "type": 2,
+      "loop": false,
+      "volume": 0.7
+    }
+  ],
+  "gameplay": {
+    "tileMoveDuration": 0.3,
+    "matchDelay": 0.5,
+    "shuffleCooldown": 3.0,
+    "hintCooldown": 5.0,
+    "trayShakeIntensity": 5.0
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "skinId": "goc",
+  "displayName": "G.O.C Export",
+  "assets": {
+    "tiles": [
+      { "key": "tile_0", "path": "skins/goc/tiles/corn", "assetType": "sprite" },
+      { "key": "tile_1", "path": "skins/goc/tiles/mango", "assetType": "sprite" },
+      { "key": "tile_2", "path": "skins/goc/tiles/durian", "assetType": "sprite" },
+      { "key": "tile_3", "path": "skins/goc/tiles/rice", "assetType": "sprite" },
+      { "key": "tile_4", "path": "skins/goc/tiles/coffee", "assetType": "sprite" },
+      { "key": "tile_5", "path": "skins/goc/tiles/cashew", "assetType": "sprite" },
+      { "key": "tile_6", "path": "skins/goc/tiles/pepper", "assetType": "sprite" },
+      { "key": "tile_7", "path": "skins/goc/tiles/honey", "assetType": "sprite" }
+    ],
+    "background": [
+      { "key": "bg_gameplay", "path": "skins/goc/bg/bg_gameplay", "assetType": "sprite" }
+    ],
+    "board": [
+      { "key": "board_frame", "path": "skins/goc/board/frame", "assetType": "sprite" }
+    ],
+    "tray": [
+      { "key": "tray_bg", "path": "skins/goc/tray/tray_bg", "assetType": "sprite" }
+    ],
+    "ui": [
+      { "key": "panel_mainmenu", "path": "prefabs/ui/panel_mainmenu", "assetType": "prefab" },
+      { "key": "panel_GameplayPanel", "path": "prefabs/ui/panel_gameplay", "assetType": "prefab" },
+      { "key": "panel_LevelSelectPanel", "path": "prefabs/ui/panel_levelselect", "assetType": "prefab" }
+    ],
+    "particle": [
+      { "key": "fx_match", "path": "skins/goc/fx/match", "assetType": "particle" }
+    ],
+    "audio": [
+      { "key": "bgm_main", "path": "skins/goc/audio/bgm_main", "assetType": "audio" }
+    ],
+    "font": [
+      { "key": "default_font", "path": "skins/goc/font/main", "assetType": "font" }
+    ]
+  },
+  "themeColors": {
+    "primary": "#4A7C59",
+    "secondary": "#8FBC8F",
+    "accent": "#D4A017",
+    "background": "#F5F5DC"
+  },
+  "defaultFont": "default_font",
+  "itemGroups": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
+}
