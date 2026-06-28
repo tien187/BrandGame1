@@ -232,6 +232,14 @@
         "16",
         "16"
       ]
+    },
+    {
+      "id": "order_020",
+      "items": [
+        "15",
+        "10",
+        "13"
+      ]
     }
   ],
   "solutionOrders": [
@@ -329,6 +337,11 @@
       "16",
       "16",
       "16"
+    ],
+    [
+      "15",
+      "10",
+      "13"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1312,7 +1325,7 @@
     "difficultyIndex": 36,
     "shapeName": "lotus_shield",
     "totalTiles": 60,
-    "orderCount": 19,
+    "orderCount": 20,
     "distinctItemCount": 21,
     "maxLayers": 5,
     "startingSelectableTiles": 20,

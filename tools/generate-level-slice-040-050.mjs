@@ -556,8 +556,7 @@ async function main() {
     shapeStats.set(m.shapeName, (shapeStats.get(m.shapeName) || 0) + 1);
     clusterStats.set(m.clusterCount, (clusterStats.get(m.clusterCount) || 0) + 1);
     layerStats.set(m.maxLayers, (layerStats.get(m.maxLayers) || 0) + 1);
-    console.log(`${fileName}: shape=${m.shapeName} c=${m.clusterCount} layers=${m.maxLayers} first3Forced=${m.first3OrdersForcedUnlockSteps} f10Trap=${m.first10TrapSteps} overlap=${m.sameLayerOverlapPairCount}`);
-  }
+      }
 
   const headers = Object.keys(rows[0]);
   fs.writeFileSync(
@@ -599,11 +598,8 @@ ${layerLines.join('\n')}
 `;
   fs.writeFileSync(path.join(OUT_DIR, 'README.md'), readme);
   await writeZip();
-  console.log(`Done: ${OUT_DIR}`);
-  console.log(`ZIP: ${ZIP_PATH}`);
-}
+    }
 
 main().catch(error => {
-  console.error(error);
-  process.exit(1);
+    process.exit(1);
 });

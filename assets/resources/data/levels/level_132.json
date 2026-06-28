@@ -216,6 +216,14 @@
         "16",
         "18"
       ]
+    },
+    {
+      "id": "order_018",
+      "items": [
+        "11",
+        "10",
+        "15"
+      ]
     }
   ],
   "solutionOrders": [
@@ -303,6 +311,11 @@
       "18",
       "16",
       "18"
+    ],
+    [
+      "11",
+      "10",
+      "15"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1190,7 +1203,7 @@
     "difficultyIndex": 32,
     "shapeName": "leaf_diamond",
     "totalTiles": 54,
-    "orderCount": 17,
+    "orderCount": 18,
     "distinctItemCount": 20,
     "maxLayers": 5,
     "startingSelectableTiles": 19,

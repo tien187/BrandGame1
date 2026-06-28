@@ -9,7 +9,6 @@ import { LevelManager } from './LevelManager';
 import { AudioManager } from './AudioManager';
 import { ConfigManager } from '../core/ConfigManager';
 import { BoosterManager } from './BoosterManager';
-import { GameManager } from './GameManager';
 import { OrderManager } from './OrderManager';
 
 const { ccclass } = _decorator;
@@ -31,6 +30,12 @@ export class MatchManager extends Component {
         MatchManager.Instance = this;
 
         EventBus.getInstance().on(GameEvent.TILE_ADDED_TO_TRAY, this.onTrayChanged, this);
+        EventBus.getInstance().on(GameEvent.LEVEL_STARTED, this.onLevelStarted, this);
+    }
+
+    private onLevelStarted(): void {
+        this._isProcessing = false;
+        this._isRestarting = false;
     }
 
     /** Khi tray thay đổi, kiểm tra match hoặc tray full */
@@ -59,8 +64,7 @@ export class MatchManager extends Component {
         // Đợi nếu còn tile đang bay vào tray
         const flyCount = TrayManager.getInstance().getFlyCount();
         if (flyCount > 0) {
-            console.log(`[MatchManager] Waiting for ${flyCount} tiles to land, rescheduling check...`);
-            this.unschedule(this._checkMatchCallback);
+                        this.unschedule(this._checkMatchCallback);
             this.scheduleOnce(this._checkMatchCallback, 0.1);
             return;
         }
@@ -68,31 +72,16 @@ export class MatchManager extends Component {
         const result = this.checkMatch();
         if (lifecycleId !== TileManager.getInstance().getLifecycleId()) return;
         if (result === MatchResult.GAME_OVER || result === MatchResult.TRAY_FULL) {
-            console.log(`[MatchManager] onTrayChanged: result=${result}, calling restartCurrentLevel`);
-            this.restartCurrentLevel();
+            this._isRestarting = true;
+            LevelManager.getInstance().onLevelFailed('tray_full');
         } else if (result === MatchResult.NO_MATCH) {
             // Board không còn tile nào chơi được và tray không match được → thua
             if (!this.hasValidMoves() && !this.hasPendingMatch()) {
-                console.log('[MatchManager] onTrayChanged: no valid moves left, restarting');
-                this.restartCurrentLevel();
+                this._isRestarting = true;
+                LevelManager.getInstance().onLevelFailed('no_valid_moves');
             }
         }
     };
-
-    /** Restart level hiện tại (dùng khi dead end hoặc tray full) */
-    private async restartCurrentLevel(): Promise<void> {
-        if (this._isRestarting) return;
-        this._isRestarting = true;
-        this.unscheduleAllCallbacks();
-
-        const levelId = LevelManager.getInstance().getCurrentLevelId();
-        console.log(`[MatchManager] restartCurrentLevel: levelId=${levelId}`);
-        if (levelId > 0 && GameManager.Instance) {
-            await GameManager.Instance.startLevel(levelId);
-        }
-
-        this._isRestarting = false;
-    }
 
     /** Kiểm tra và xử lý match trong tray */
     public checkMatch(): MatchResult {
@@ -185,7 +174,8 @@ export class MatchManager extends Component {
                     TileManager.getInstance().setInputLocked(false);
                     // Board không còn tile nào chơi được và tray không match được → thua
                     if (LevelManager.getInstance().isLevelActive() && !this.hasValidMoves() && !this.hasPendingMatch()) {
-                        this.restartCurrentLevel();
+                        this._isRestarting = true;
+                        LevelManager.getInstance().onLevelFailed('no_valid_moves');
                     }
                 }
             }, matchDelay * 0.5);
@@ -220,9 +210,9 @@ export class MatchManager extends Component {
         }
     }
 
-    /** Kiểm tra điều kiện thua (đã được xử lý bởi onTrayChanged auto-restart) */
+    /** Kiểm tra điều kiện thua (đã được xử lý bởi onTrayChanged -> popup thua) */
     private checkLoseCondition(): void {
-        // Đã chuyển sang auto-shuffle + auto-restart trong onTrayChanged
+        // Xử lý thua đã chuyển sang LevelManager.onLevelFailed để hiện popup.
     }
 
     /** Kiểm tra có đang xử lý match không */
@@ -241,6 +231,7 @@ export class MatchManager extends Component {
         if (MatchManager.Instance === this) {
             MatchManager.Instance = null;
             EventBus.getInstance().off(GameEvent.TILE_ADDED_TO_TRAY, this.onTrayChanged, this);
+            EventBus.getInstance().off(GameEvent.LEVEL_STARTED, this.onLevelStarted, this);
             this.unscheduleAllCallbacks();
         }
     }

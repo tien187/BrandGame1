@@ -39,8 +39,7 @@ export class LevelValidatorTest extends Component {
         const detail = errors.map((e, i) => `${i + 1}. ${e}`).join('\n');
         const output = detail ? `${header}\n${detail}` : header;
 
-        console.log(output);
-        if (this.resultLabel) {
+                if (this.resultLabel) {
             this.resultLabel.string = output;
         }
     }

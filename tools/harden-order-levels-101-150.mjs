@@ -663,10 +663,7 @@ function main() {
   }
 
   for (const row of report) {
-    console.log(
-      `L${row.id}: tiles=${row.tiles} orders=${row.orders} items=${row.items} unlockers=${row.unlockers} forcedUnlocks=${row.forcedUnlocks} traps=${row.traps} hiddenNext=${row.hiddenNext} maxChoices=${row.maxChoices} score=${row.score}`
-    );
-  }
+      }
 }
 
 main();

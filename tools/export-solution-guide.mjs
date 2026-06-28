@@ -109,7 +109,6 @@ function main() {
   }
 
   fs.writeFileSync(OUT_PATH, chunks.join('\n'), 'utf8');
-  console.log(`Wrote ${OUT_PATH}`);
-}
+  }
 
 main();

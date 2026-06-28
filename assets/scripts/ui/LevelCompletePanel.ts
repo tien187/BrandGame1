@@ -1,23 +1,26 @@
-import { _decorator, Component, Label, Button } from 'cc';
+import { _decorator, Label, Button } from 'cc';
 import { BasePanel } from './BasePanel';
 import { GameManager } from '../managers/GameManager';
 
 const { ccclass, property } = _decorator;
 
 /**
- * LevelCompletePanel - Hiển thị khi hoàn thành level.
- * Gồm score, stars, nút next/retry/menu.
+ * LevelCompletePanel - Popup win.
+ * Su dung prefab co san, gom nut Home va Next.
  */
 @ccclass('LevelCompletePanel')
 export class LevelCompletePanel extends BasePanel {
     @property(Label)
-    public scoreLabel: Label | null = null;
+    public titleLabel: Label | null = null;
+
+    @property(Button)
+    public homeButton: Button | null = null;
+
+    @property(Button)
+    public nextButton: Button | null = null;
 
     @property(Label)
-    public starsLabel: Label | null = null;
-
-    @property(Label)
-    public levelLabel: Label | null = null;
+    public timeLabel: Label | null = null;
 
     private _data: any = null;
 
@@ -25,29 +28,46 @@ export class LevelCompletePanel extends BasePanel {
         super.onShow(data);
         this._data = data || {};
         this.updateUI();
+        this.bindButtons();
+    }
+
+    protected onHide(): void {
+        this.unbindButtons();
+        super.onHide();
     }
 
     private updateUI(): void {
-        const { levelId, score, stars } = this._data;
-        if (this.levelLabel) this.levelLabel.string = `Level ${levelId} Complete!`;
-        if (this.scoreLabel) this.scoreLabel.string = `Score: ${score}`;
-        if (this.starsLabel) this.starsLabel.string = `Stars: ${stars}`;
-    }
-
-    /** Callback nút Next Level */
-    public onNextLevelClicked(): void {
-        const nextLevel = (this._data?.levelId || 1) + 1;
-        GameManager.Instance?.startLevel(nextLevel);
-    }
-
-    /** Callback nút Retry */
-    public onRetryClicked(): void {
         const levelId = this._data?.levelId || 1;
-        GameManager.Instance?.startLevel(levelId);
+        if (this.titleLabel) this.titleLabel.string = `Level ${levelId} Complete!`;
+        if (this.timeLabel) this.timeLabel.string = this.formatTime(this._data?.elapsedSeconds || 0);
     }
 
-    /** Callback nút Return to Menu */
-    public onMenuClicked(): void {
+    private formatTime(totalSeconds: number): string {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        const mm = minutes < 10 ? '0' + minutes : minutes;
+        const ss = seconds < 10 ? '0' + seconds : seconds;
+        return `${mm}:${ss}`;
+    }
+
+    private bindButtons(): void {
+        this.homeButton?.node.on(Button.EventType.CLICK, this.onHomeClicked, this);
+        this.nextButton?.node.on(Button.EventType.CLICK, this.onNextClicked, this);
+    }
+
+    private unbindButtons(): void {
+        this.homeButton?.node.off(Button.EventType.CLICK, this.onHomeClicked, this);
+        this.nextButton?.node.off(Button.EventType.CLICK, this.onNextClicked, this);
+    }
+
+    private onHomeClicked(): void {
+        this.closePanel();
         GameManager.Instance?.returnToMenu();
+    }
+
+    private onNextClicked(): void {
+        const nextLevel = (this._data?.levelId || 1) + 1;
+        this.closePanel();
+        GameManager.Instance?.startLevel(nextLevel);
     }
 }

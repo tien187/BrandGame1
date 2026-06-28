@@ -39,7 +39,6 @@ export class LevelSelectPanel extends BasePanel {
         try {
             await GameManager.Instance?.startLevel(levelId);
         } catch (err) {
-            console.error(`[LevelSelectPanel] Failed to start level ${levelId}:`, err);
-        }
+                    }
     }
 }

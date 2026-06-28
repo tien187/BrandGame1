@@ -163,6 +163,14 @@
         "12",
         "12"
       ]
+    },
+    {
+      "id": "order_012",
+      "items": [
+        "13",
+        "10",
+        "12"
+      ]
     }
   ],
   "solutionOrders": [
@@ -219,6 +227,11 @@
     [
       "12",
       "12",
+      "12"
+    ],
+    [
+      "13",
+      "10",
       "12"
     ]
   ],
@@ -819,7 +832,7 @@
     "difficultyIndex": 14,
     "shapeName": "stacked_vase",
     "totalTiles": 36,
-    "orderCount": 11,
+    "orderCount": 12,
     "distinctItemCount": 14,
     "maxLayers": 4,
     "startingSelectableTiles": 18,

@@ -195,6 +195,14 @@
                                      "5",
                                      "0"
                                  ]
+                   },
+                   {
+                       "id":  "order_016",
+                       "items":  [
+                                     "5",
+                                     "2",
+                                     "12"
+                                 ]
                    }
                ],
     "solutionOrders":  [
@@ -272,6 +280,11 @@
                                "0",
                                "5",
                                "0"
+                           ],
+                           [
+                               "5",
+                               "2",
+                               "12"
                            ]
                        ],
     "solutionMoveTileIds":  [
@@ -1063,7 +1076,7 @@
                               "difficultyIndex":  26,
                               "shapeName":  "solar_cross",
                               "totalTiles":  48,
-                              "orderCount":  15,
+                              "orderCount":  16,
                               "distinctItemCount":  18,
                               "maxLayers":  4,
                               "startingSelectableTiles":  16,

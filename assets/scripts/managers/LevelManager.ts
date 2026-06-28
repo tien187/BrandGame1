@@ -53,33 +53,27 @@ export class LevelManager {
 
     /** Load level từ JSON theo ID */
     public async loadLevel(levelId: number): Promise<void> {
-        console.log(`[LevelManager] loadLevel(${levelId}) starting...`);
-        this.unloadCurrentLevel();
+                this.unloadCurrentLevel();
         const loadToken = ++this._loadToken;
         this._levelRunId++;
-        console.log(`[LM_DEBUG] loadLevel begin level=${levelId} runId=${this._levelRunId}`);
-
+        
         const paddedId = levelId < 10 ? `00${levelId}` : levelId < 100 ? `0${levelId}` : `${levelId}`;
         const path = `data/levels/level_${paddedId}`;
         const loadedLevel = await DataLoader.loadJson<ILevelData>(path);
         if (loadToken !== this._loadToken) return;
         this._currentLevel = this.cloneLevelData(loadedLevel);
         this.normalizeLevelItemIds(this._currentLevel);
-        console.log(`[LevelManager] Loaded level data: ${this._currentLevel?.displayName}, tiles=${this._currentLevel?.tiles?.length}`);
-        
+                
         // Load skin của level trước khi spawn tiles
         const skinId = this._currentLevel.defaultSkin || 'default';
-        console.log(`[LevelManager] Loading skin: ${skinId}`);
-        await SkinManager.getInstance().loadSkin(skinId);
+                await SkinManager.getInstance().loadSkin(skinId);
         if (loadToken !== this._loadToken) return;
-        console.log(`[LevelManager] Skin loaded: ${skinId}`);
-        
+                
         this._currentLevelId = levelId;
         this._score = 0;
         this._stars = 0;
         this._isResolvingLevelEnd = false;
-        console.log(`[LM_DEBUG] loadLevel data ready level=${levelId} runId=${this._levelRunId} orders=${this._currentLevel.orders?.length || 0}`);
-
+        
         SaveManager.getInstance().saveCurrentLevel(levelId);
 
         EventBus.getInstance().emit(GameEvent.LEVEL_LOADED, this._currentLevel);
@@ -90,32 +84,26 @@ export class LevelManager {
     /** Bắt đầu gameplay sau khi load xong */
     private async startLevel(loadToken: number = this._loadToken): Promise<void> {
         if (!this._currentLevel) {
-            console.error('[LevelManager] startLevel: _currentLevel is null');
-            return;
+                        return;
         }
 
         const gameMode = this._currentLevel.gameMode || GameMode.TRIPLE_MATCH;
-        console.log(`[LevelManager] startLevel: gameMode=${gameMode}`);
-
-        console.log('[LevelManager] startLevel: calling BoardManager.buildBoard');
-        const boardMgr = BoardManager.getInstance();
-        console.log('[LevelManager] BoardManager instance=', boardMgr ? 'OK' : 'NULL');
-        boardMgr.buildBoard(this._currentLevel.board);
+        
+                const boardMgr = BoardManager.getInstance();
+                boardMgr.buildBoard(this._currentLevel.board);
 
         // Validate predefined tiles; if unsolvable, regenerate automatically
         let tiles = this._currentLevel.tiles;
         if (!tiles || tiles.length === 0 || !this.areTilesSolvable(tiles)) {
             if (tiles && tiles.length > 0) {
-                console.warn(`[LevelManager] Level ${this._currentLevelId} predefined tiles are not solvable. Regenerating...`);
-            }
+                            }
             tiles = this.generateLevelTiles();
             this._currentLevel.tiles = tiles;
         }
 
         // Clone tiles to avoid mutating cached level data on restart
         const tilesToSpawn = tiles.map(t => ({ ...t }));
-        console.log(`[LevelManager] startLevel: spawning ${tilesToSpawn.length} tiles`);
-
+        
         // Always init TrayManager (tiles fly into tray regardless of mode)
         TrayManager.getInstance().initialize(this._currentLevel.tray);
 
@@ -163,8 +151,7 @@ export class LevelManager {
     /** Kiểm tra tiles có đủ để hoàn thành tất cả orders không */
     private areTilesSolvableForOrderMatch(tiles: ITileData[]): boolean {
         if (!this._currentLevel?.orders || this._currentLevel.orders.length === 0) {
-            console.warn('[LevelManager] ORDER_MATCH mode but no orders defined');
-            return false;
+                        return false;
         }
         const required: Record<string, number> = {};
         for (const order of this._currentLevel.orders) {
@@ -178,8 +165,7 @@ export class LevelManager {
         }
         for (const gid in required) {
             if ((available[gid] || 0) < required[gid]) {
-                console.warn(`[LevelManager] ORDER_MATCH: not enough ${gid} tiles. Required=${required[gid]}, Available=${available[gid] || 0}`);
-                return false;
+                                return false;
             }
         }
         return true;
@@ -241,8 +227,7 @@ export class LevelManager {
 
     /** Dọn dẹp level hiện tại */
     public unloadCurrentLevel(): void {
-        console.log(`[LevelManager] unloadCurrentLevel called, _isLevelActive=${this._isLevelActive}`);
-        this._loadToken++;
+                this._loadToken++;
         this.clearPendingOrderTilesClearedHandler();
         BoardManager.getInstance().clearBoard();
         TileManager.getInstance().clearTiles();
@@ -255,15 +240,13 @@ export class LevelManager {
         this._isLevelActive = false;
         this._isResolvingLevelEnd = false;
         this._levelRunId++;
-        console.log(`[LM_DEBUG] unload complete runId=${this._levelRunId}`);
-    }
+            }
 
     /** Khi tile được thêm vào tray: kiểm tra board empty → win/lose */
     private onTileAddedToTray(): void {
         const runId = this._levelRunId;
         const gameMode = this._currentLevel?.gameMode || GameMode.TRIPLE_MATCH;
-        console.log(`[LM_DEBUG] onTileAddedToTray level=${this._currentLevelId} runId=${runId} mode=${gameMode} active=${this._isLevelActive} remaining=${TileManager.getInstance().getRemainingTileCount()} tray=${TrayManager.getInstance().getTrayTiles().length} fly=${TrayManager.getInstance().getFlyCount()} allOrders=${OrderManager.getInstance().isAllOrdersCompleted()} clearing=${TrayManager.getInstance().isClearingOrderTiles()}`);
-        if (gameMode === GameMode.TRIPLE_MATCH) {
+                if (gameMode === GameMode.TRIPLE_MATCH) {
             this.checkLevelComplete();
             return;
         }
@@ -276,24 +259,20 @@ export class LevelManager {
                 if (runId !== this._levelRunId) return;
                 if (!this._isLevelActive) return;
                 if (OrderManager.getInstance().isPendingTrayCheck()) {
-                    console.log(`[LM_DEBUG] board-empty fail check waits pendingTrayCheck level=${this._currentLevelId} runId=${runId}`);
-                    setTimeout(checkFail, 100);
+                                        setTimeout(checkFail, 100);
                     return;
                 }
                 const flyCount = TrayManager.getInstance().getFlyCount();
                 if (flyCount > 0) {
-                    console.log(`[LM_DEBUG] board-empty fail check waits flyCount=${flyCount} level=${this._currentLevelId} runId=${runId}`);
-                    setTimeout(checkFail, 100);
+                                        setTimeout(checkFail, 100);
                     return;
                 }
                 if (OrderManager.getInstance().isAllOrdersCompleted() || TrayManager.getInstance().isClearingOrderTiles()) {
-                    console.log(`[LM_DEBUG] board-empty fail check skipped because completing level=${this._currentLevelId} runId=${runId}`);
-                    return;
+                                        return;
                 }
                 const remainingTiles = TileManager.getInstance().getRemainingTileCount();
                 if (remainingTiles === 0 && !OrderManager.getInstance().isAllOrdersCompleted()) {
-                    console.warn('[LevelManager] Board empty but orders not completed → level failed');
-                    this.onLevelFailed('board_empty_orders_not_completed');
+                                        this.onLevelFailed('board_empty_orders_not_completed');
                 }
             };
             checkFail();
@@ -321,22 +300,16 @@ export class LevelManager {
         if (!this._isLevelActive) return;
         this._isLevelActive = false;
         if (!skipped) this.calculateStars();
-        console.log(`[LevelManager] completeLevel skipped=${skipped} levelId=${this._currentLevelId}`);
-        EventBus.getInstance().emit(GameEvent.LEVEL_COMPLETED, this._currentLevelId, this._score, this._stars, skipped);
+                EventBus.getInstance().emit(GameEvent.LEVEL_COMPLETED, this._currentLevelId, this._score, this._stars, skipped);
     }
 
     /** Xử lý khi tất cả orders hoàn thành */
     private onAllOrdersCompleted(): void {
         if (!this._isLevelActive) return;
         const runId = this._levelRunId;
-        console.log(`[LM_DEBUG] onAllOrdersCompleted ENTERED level=${this._currentLevelId} runId=${runId} resolving=${this._isResolvingLevelEnd} clearing=${TrayManager.getInstance().isClearingOrderTiles()} fly=${TrayManager.getInstance().getFlyCount()} tray=${TrayManager.getInstance().getTrayTiles().length} remaining=${TileManager.getInstance().getRemainingTileCount()}`);
-        if (this._isResolvingLevelEnd) return;
+                if (this._isResolvingLevelEnd) return;
         this._isResolvingLevelEnd = true;
-        if (TrayManager.getInstance().isClearingOrderTiles()) {
-            this.waitForOrderTilesCleared(runId);
-        } else {
-            setTimeout(() => this.finalizeOrderMatchCompletion(runId), 0);
-        }
+        this.waitForOrderTilesCleared(runId);
         // Đợi TrayManager xóa tile và animation xong mới kiểm tra win
     }
 
@@ -348,6 +321,13 @@ export class LevelManager {
             this.finalizeOrderMatchCompletion(runId);
         };
         EventBus.getInstance().on(GameEvent.ORDER_TILES_CLEARED, this._pendingOrderTilesClearedHandler, this);
+        if (!TrayManager.getInstance().isClearingOrderTiles()) {
+            setTimeout(() => {
+                if (!this._pendingOrderTilesClearedHandler) return;
+                this.clearPendingOrderTilesClearedHandler();
+                this.finalizeOrderMatchCompletion(runId);
+            }, 0);
+        }
     }
 
     private clearPendingOrderTilesClearedHandler(): void {
@@ -358,40 +338,33 @@ export class LevelManager {
 
     private finalizeOrderMatchCompletion(runId: number = this._levelRunId): void {
         if (runId !== this._levelRunId) {
-            console.warn(`[LM_DEBUG] finalize ignored stale run captured=${runId} current=${this._levelRunId}`);
-            return;
+                        return;
         }
         if (!this._isLevelActive) {
-            console.log('[LevelManager] finalizeOrderMatchCompletion: level no longer active, aborting');
-            return;
+                        return;
         }
 
         const remainingTiles = TileManager.getInstance().getRemainingTileCount();
         const trayTiles = TrayManager.getInstance().getTrayTiles().length;
         const flyCount = TrayManager.getInstance().getFlyCount();
         const clearingOrderTiles = TrayManager.getInstance().isClearingOrderTiles();
-        console.log(`[LevelManager] finalizeOrderMatchCompletion: remainingTiles=${remainingTiles}, trayTiles=${trayTiles}, flyCount=${flyCount}, clearingOrderTiles=${clearingOrderTiles}`);
-
+        
         if (clearingOrderTiles) {
-            console.log(`[LM_DEBUG] finalize waits ORDER_TILES_CLEARED level=${this._currentLevelId} runId=${runId}`);
-            this.waitForOrderTilesCleared(runId);
+                        this.waitForOrderTilesCleared(runId);
             return;
         }
 
         if (flyCount > 0) {
-            console.log(`[LM_DEBUG] finalize waits flyCount=${flyCount} level=${this._currentLevelId} runId=${runId}`);
-            setTimeout(() => this.finalizeOrderMatchCompletion(runId), 100);
+                        setTimeout(() => this.finalizeOrderMatchCompletion(runId), 100);
             return;
         }
 
         if (OrderManager.getInstance().isAllOrdersCompleted()) {
             this._isLevelActive = false;
             this.calculateStars();
-            console.log(`[LevelManager] Emitting LEVEL_COMPLETED: levelId=${this._currentLevelId}, score=${this._score}, stars=${this._stars}, remainingTiles=${remainingTiles}, trayTiles=${trayTiles}`);
-            EventBus.getInstance().emit(GameEvent.LEVEL_COMPLETED, this._currentLevelId, this._score, this._stars);
+                        EventBus.getInstance().emit(GameEvent.LEVEL_COMPLETED, this._currentLevelId, this._score, this._stars);
         } else {
-            console.warn(`[LevelManager] Order completion finalize called before all orders completed. remainingTiles=${remainingTiles}, trayTiles=${trayTiles}, flyCount=${flyCount}`);
-            this._isLevelActive = false;
+                        this._isLevelActive = false;
             EventBus.getInstance().emit(GameEvent.LEVEL_FAILED, this._currentLevelId);
         }
     }
@@ -401,8 +374,7 @@ export class LevelManager {
         const runId = this._levelRunId;
         const gameMode = this._currentLevel?.gameMode || GameMode.TRIPLE_MATCH;
         if (gameMode !== GameMode.ORDER_MATCH) return;
-        console.log(`[LM_DEBUG] onTrayFull received level=${this._currentLevelId} runId=${runId} tray=${TrayManager.getInstance().getTrayTiles().length} max=${TrayManager.getInstance().getMaxSlots()} allOrders=${OrderManager.getInstance().isAllOrdersCompleted()} clearing=${TrayManager.getInstance().isClearingOrderTiles()} fly=${TrayManager.getInstance().getFlyCount()}`);
-
+        
         // Delay để onOrderCompleted kịp remove tile nếu vừa hoàn thành order
         setTimeout(() => {
             if (runId !== this._levelRunId) return;
@@ -414,8 +386,7 @@ export class LevelManager {
                 TrayManager.getInstance().getFlyCount() === 0 &&
                 !OrderManager.getInstance().isPendingTrayCheck()
             ) {
-                console.warn('[LevelManager] Tray full in ORDER_MATCH → level failed');
-                this.onLevelFailed('tray_full_order_match');
+                                this.onLevelFailed('tray_full_order_match');
             }
         }, 500);
     }
@@ -428,16 +399,13 @@ export class LevelManager {
             // ORDER_MATCH: chỉ tray chính đầy mới thua, wrong tray không gây thua
             return;
         }
-        console.log('[LevelManager] Wrong tray full - level failed');
-        this.onLevelFailed('wrong_tray_full');
+                this.onLevelFailed('wrong_tray_full');
     }
 
     /** Xử lý level thất bại */
     public onLevelFailed(reason: string = 'unknown'): void {
-        const err = new Error('onLevelFailed trace');
-        console.log(`[LM_DEBUG] onLevelFailed called reason=${reason} level=${this._currentLevelId} runId=${this._levelRunId} active=${this._isLevelActive} resolving=${this._isResolvingLevelEnd} allOrders=${OrderManager.getInstance().isAllOrdersCompleted()} clearing=${TrayManager.getInstance().isClearingOrderTiles()} remaining=${TileManager.getInstance().getRemainingTileCount()} tray=${TrayManager.getInstance().getTrayTiles().length} fly=${TrayManager.getInstance().getFlyCount()}. Stack:`, err.stack);
+        if (!this._isLevelActive) return;
         if (this._isResolvingLevelEnd || OrderManager.getInstance().isAllOrdersCompleted()) {
-            console.warn('[LevelManager] Ignoring fail while ORDER_MATCH completion is resolving');
             return;
         }
         this._isLevelActive = false;

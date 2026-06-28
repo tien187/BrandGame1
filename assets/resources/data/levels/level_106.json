@@ -104,6 +104,14 @@
         "2",
         "8"
       ]
+    },
+    {
+      "id": "order_006",
+      "items": [
+        "1",
+        "6",
+        "0"
+      ]
     }
   ],
   "solutionOrders": [
@@ -131,6 +139,11 @@
       "8",
       "2",
       "8"
+    ],
+    [
+      "1",
+      "6",
+      "0"
     ]
   ],
   "solutionMoveTileIds": [
@@ -442,7 +455,7 @@
     "difficultyIndex": 6,
     "shapeName": "chevron_shield",
     "totalTiles": 18,
-    "orderCount": 5,
+    "orderCount": 6,
     "distinctItemCount": 11,
     "maxLayers": 2,
     "startingSelectableTiles": 8,

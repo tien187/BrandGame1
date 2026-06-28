@@ -29,14 +29,12 @@ export class Level1Exporter extends Component {
             visibleTripletLimit: 2,
             coverThreshold: 0.3,
         };
-        console.log('[Level1Exporter] Generating complex level 1...');
-
+        
         try {
             const level = SmartLevelGenerator.generate(1, difficulty, this.groupIds, 'heart');
             const validator = LevelValidator.validate(level);
 
-            console.log('[Level1Exporter] Validator valid:', validator.valid, 'Cleared:', validator.cleared);
-
+            
             if (validator.valid) {
                 const exportData = {
                     levelId: level.levelId,
@@ -67,18 +65,11 @@ export class Level1Exporter extends Component {
                     const filePath = path.join(projectPath, 'assets/resources/data/levels/level_001.json');
                     fs.mkdirSync(path.dirname(filePath), { recursive: true });
                     fs.writeFileSync(filePath, json, 'utf8');
-                    console.log('[Level1Exporter] File saved to:', filePath);
-                } catch (fsErr) {
-                    console.error('[Level1Exporter] Failed to write file:', fsErr);
-                    console.log('[Level1Exporter] === JSON START ===');
-                    console.log(json);
-                    console.log('[Level1Exporter] === JSON END ===');
-                }
+                                    } catch (fsErr) {
+                                                                                                }
             } else {
-                console.error('[Level1Exporter] Level 1 generation failed:', validator.stuckReason);
-            }
+                            }
         } catch (e) {
-            console.error('[Level1Exporter] Exception:', e);
-        }
+                    }
     }
 }

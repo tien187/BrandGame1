@@ -118,8 +118,7 @@ export class OrderTrayManager extends Component {
     }
 
     public initialize(orders: IOrder[], currentOrder: IOrder | null, config: IOrderConfig | null): void {
-        console.log(`[OTM_DEBUG] initialize called orders=${orders.length} currentOrder=${currentOrder?.id || 'null'}`);
-        this._allOrders = orders && orders.length > 0 ? [...orders] : [];
+                this._allOrders = orders && orders.length > 0 ? [...orders] : [];
         this._currentOrder = currentOrder;
         this._orderConfig = config;
         this._filledCount = 0;
@@ -178,8 +177,7 @@ export class OrderTrayManager extends Component {
 
     /** Xây dựng slot UI cho tối đa 3 order gần nhất, xếp từ trên xuống */
     private buildSlots(): void {
-        console.log(`[OTM_DEBUG] buildSlots called`);
-        this.clearVisuals();
+                this.clearVisuals();
         this._slots = [];
         this._orderStartMap.clear();
 
@@ -357,8 +355,7 @@ export class OrderTrayManager extends Component {
     }
 
     private createSlot(index: number, orderIndex: number, itemIndex: number, position: Vec3, expectedItem: string, parentNode: Node | null): IOrderSlot {
-        console.log(`[OTM_DEBUG] createSlot order=${orderIndex} item=${itemIndex} expected=${expectedItem}`);
-        const container = parentNode || this.trayContainer!;
+                const container = parentNode || this.trayContainer!;
 
         // Background node cho slot (không có Graphics, chỉ dùng để định vị/scale)
         const bgNode = new Node(`SlotBg_${index}`);

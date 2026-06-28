@@ -10,6 +10,7 @@ import { TrayManager } from './TrayManager';
 import { LevelManager } from './LevelManager';
 import { WrongTrayManager } from './WrongTrayManager';
 import { OrderTrayManager } from './OrderTrayManager';
+import { BoardPositionHelper } from '../core/BoardPositionHelper';
 
 const { ccclass } = _decorator;
 
@@ -18,6 +19,14 @@ interface IGameStateSnapshot {
     tray: ITraySnapshot;
     order: IOrderManagerSnapshot;
     wrongTray: { filledCount: number; isFull: boolean } | null;
+}
+
+interface ISimOrderState {
+    orderIndex: number;
+    itemIndex: number;
+    remainingItems: string[];
+    matchedTileIds: string[];
+    submittedTileIds: Set<string>;
 }
 
 @ccclass('BoosterManager')
@@ -73,8 +82,7 @@ export class BoosterManager extends Component {
         if (this._queuedHintCount === 0 && !this.isHintWaitingForBoardSettle()) {
             const tile = this.GetBestHintTile();
             if (!tile) {
-                TileManager.getInstance().shakeAllTiles();
-                EventBus.getInstance().emit(GameEvent.HINT_FAILED);
+                this.focusUndoForHintFail();
                 return false;
             }
         }
@@ -93,7 +101,7 @@ export class BoosterManager extends Component {
             this.emitChanged();
             return;
         }
-        if (this.isHintWaitingForBoardSettle()) {
+        if (this.isHintBlockedByTransition()) {
             this.scheduleHintQueue();
             return;
         }
@@ -101,30 +109,32 @@ export class BoosterManager extends Component {
         const tile = this.GetBestHintTile();
         if (!tile) {
             this.refundQueuedHint();
-            TileManager.getInstance().shakeAllTiles();
-            EventBus.getInstance().emit(GameEvent.HINT_FAILED);
+            this.focusUndoForHintFail();
             this.scheduleHintQueue();
             return;
         }
 
         this.clearHighlight();
+        this._isHintPicking = true;
         let picked = TileManager.getInstance().tryClickTile(tile.id);
         if (!picked) {
             TileManager.getInstance().refreshBlockStatus();
             picked = TileManager.getInstance().tryClickTile(tile.id);
         }
         if (!picked) {
+            this._isHintPicking = false;
             this.refundQueuedHint();
-            TileManager.getInstance().shakeAllTiles();
-            EventBus.getInstance().emit(GameEvent.HINT_FAILED);
+            this.focusUndoForHintFail();
             this.scheduleHintQueue();
             return;
         }
 
         this._queuedHintCount--;
-        this._isHintPicking = true;
+        this._isHintPicking = false;
         this.emitUsed(BoosterType.HINT);
-        this.releaseHintPickingWhenSettled();
+        if (this._queuedHintCount > 0) {
+            this.scheduleHintQueue();
+        }
     }
 
     private scheduleHintQueue(): void {
@@ -156,22 +166,10 @@ export class BoosterManager extends Component {
             TrayManager.getInstance().isClearingOrderTiles();
     }
 
-    private releaseHintPickingWhenSettled(): void {
-        const version = this._hintQueueVersion;
-        this.scheduleOnce(() => {
-            if (version !== this._hintQueueVersion || !LevelManager.getInstance().isLevelActive()) {
-                this._isHintPicking = false;
-                this.emitChanged();
-                return;
-            }
-            if (this.isHintWaitingForBoardSettle()) {
-                this.releaseHintPickingWhenSettled();
-                return;
-            }
-            this._isHintPicking = false;
-            this.emitChanged();
-            this.processHintQueue();
-        }, 0.08);
+    private isHintBlockedByTransition(): boolean {
+        return TileManager.getInstance().isInputLocked() ||
+            TrayManager.getInstance().getFlyCount() > 0 ||
+            TrayManager.getInstance().isClearingOrderTiles();
     }
 
     public GetBestHintTile(): ITileData | null {
@@ -197,26 +195,51 @@ export class BoosterManager extends Component {
             });
             return candidates[0];
         };
+        const sortCandidates = (candidates: ITileData[]): ITileData[] => {
+            const ranked = [...candidates];
+            rankCandidates(ranked);
+            return ranked;
+        };
+        const firstSafeCandidate = (candidates: ITileData[]): ITileData | null => {
+            for (const candidate of candidates) {
+                if (this.isHintCandidateSafe(candidate)) return candidate;
+            }
+            return null;
+        };
 
         const trayTiles = TrayManager.getInstance().getTrayTiles();
         const freeSlots = TrayManager.getInstance().getMaxSlots() - trayTiles.length;
 
         if (OrderManager.getInstance().isActive()) {
+            const orderCandidates: ITileData[] = [];
             if (solution.length > 0) {
                 for (const tileId of solution) {
                     const tile = allTiles.find(t => t.id === tileId);
                     if (!tile || !tile.active) continue;
-                    if (!tile.selectable) return null;
                     if (tile.groupId === expected || (tile as any).strategyRole === 'required_unlocker_wrong_tile') {
-                        return tile;
+                        if (tile.selectable) orderCandidates.push(tile);
+                        continue;
                     }
-                    break;
+                    if (tile.selectable) continue;
                 }
             }
+            const safeSolutionCandidate = firstSafeCandidate(orderCandidates);
+            if (safeSolutionCandidate) return safeSolutionCandidate;
 
             if (expected) {
-                const expectedTile = rankCandidates(selectable.filter(t => t.groupId === expected));
+                const expectedTile = firstSafeCandidate(sortCandidates(selectable.filter(t => t.groupId === expected)));
                 if (expectedTile) return expectedTile;
+            }
+
+            if (solution.length > 0 && freeSlots > 0) {
+                const fallbackSolutionCandidates: ITileData[] = [];
+                for (const tileId of solution) {
+                    const tile = allTiles.find(t => t.id === tileId);
+                    if (!tile || !tile.active || !tile.selectable) continue;
+                    fallbackSolutionCandidates.push(tile);
+                }
+                const fallbackTile = firstSafeCandidate(fallbackSolutionCandidates);
+                if (fallbackTile) return fallbackTile;
             }
 
             // Never suggest an off-order tile in ORDER_MATCH.
@@ -232,7 +255,7 @@ export class BoosterManager extends Component {
             const completingTile = rankCandidates(
                 selectable.filter(t => nearMatchGroups.indexOf(t.groupId) !== -1)
             );
-            if (completingTile) return completingTile;
+            if (completingTile && this.isHintCandidateSafe(completingTile)) return completingTile;
 
             if (freeSlots <= 1) return null;
         }
@@ -245,13 +268,13 @@ export class BoosterManager extends Component {
                 if (!remainingBoardIds.has(tileId)) continue;
                 const tile = activeSelectableById.get(tileId);
                 if (!tile) continue;
-                if (!expected || tile.groupId === expected) return tile;
+                if ((!expected || tile.groupId === expected) && this.isHintCandidateSafe(tile)) return tile;
                 break;
             }
 
             for (const tileId of solution) {
                 const tile = activeSelectableById.get(tileId);
-                if (tile) return tile;
+                if (tile && this.isHintCandidateSafe(tile)) return tile;
             }
         }
 
@@ -259,7 +282,208 @@ export class BoosterManager extends Component {
             ? selectable.filter(t => t.groupId === expected)
             : selectable;
         const candidates = expectedSelectable.length > 0 ? expectedSelectable : selectable;
-        return rankCandidates(candidates);
+        return firstSafeCandidate(sortCandidates(candidates));
+    }
+
+    private focusUndoForHintFail(): void {
+        if (!this.canUseUndo()) {
+            TileManager.getInstance().shakeAllTiles();
+        }
+        EventBus.getInstance().emit(GameEvent.HINT_FAILED);
+    }
+
+    private isHintCandidateSafe(candidate: ITileData): boolean {
+        if (!candidate || !candidate.active || !candidate.selectable) return false;
+        if (!OrderManager.getInstance().isActive()) {
+            return this.isTripleHintCandidateSafe(candidate);
+        }
+        return this.canSolveOrderMatchAfterSelecting(candidate);
+    }
+
+    private isTripleHintCandidateSafe(candidate: ITileData): boolean {
+        const trayTiles = TrayManager.getInstance().getTrayTiles();
+        const maxSlots = TrayManager.getInstance().getMaxSlots();
+        const matchCount = TrayManager.getInstance().getMatchCount();
+        const nextTray = [...trayTiles, candidate];
+        const sameGroupCount = nextTray.filter(tile => tile.groupId === candidate.groupId).length;
+        if (sameGroupCount >= matchCount) return true;
+        return nextTray.length < maxSlots;
+    }
+
+    private canSolveOrderMatchAfterSelecting(candidate: ITileData): boolean {
+        const level = LevelManager.getInstance().getCurrentLevel();
+        if (!level?.board || !level.solutionMoveTileIds || level.solutionMoveTileIds.length === 0) return true;
+
+        const orders = OrderManager.getInstance().getAllOrders();
+        const snapshot = OrderManager.getInstance().captureSnapshot();
+        const orderConfig = OrderManager.getInstance().getOrderConfig();
+        const maxSlots = TrayManager.getInstance().getMaxSlots();
+
+        const tileMap = new Map<string, ITileData>();
+        for (const tile of TileManager.getInstance().getAllTileData()) {
+            tileMap.set(tile.id, { ...tile });
+        }
+
+        const tray = TrayManager.getInstance().getTrayTiles().map(tile => ({ ...tile }));
+        const simOrder: ISimOrderState = {
+            orderIndex: snapshot.currentOrderIndex,
+            itemIndex: snapshot.currentItemIndex,
+            remainingItems: [...snapshot.currentOrderRemainingItems],
+            matchedTileIds: [...snapshot.currentOrderMatchedTileIds],
+            submittedTileIds: new Set(snapshot.submittedTileIds),
+        };
+
+        const selectTile = (tileId: string): boolean => {
+            const tile = tileMap.get(tileId);
+            if (!tile || !tile.active) return false;
+            this.refreshSimSelectable(tileMap);
+            if (!tile.selectable) return false;
+            tile.active = false;
+            tile.selectable = false;
+            tile.isBlocked = true;
+            tray.push({ ...tile });
+            this.processSimOrderTray(tray, simOrder, orders, orderConfig?.orderMode || 'EXACT_ORDER');
+            return simOrder.orderIndex >= orders.length || tray.length < maxSlots;
+        };
+
+        if (!selectTile(candidate.id)) return false;
+        if (simOrder.orderIndex >= orders.length) return tray.length === 0;
+
+        const solution = level.solutionMoveTileIds;
+        for (const tileId of solution) {
+            if (tileId === candidate.id) continue;
+            const tile = tileMap.get(tileId);
+            if (!tile || !tile.active) continue;
+            if (!selectTile(tileId)) return false;
+            if (simOrder.orderIndex >= orders.length) {
+                const hasActiveTile = Array.from(tileMap.values()).some(t => t.active);
+                return tray.length === 0 && !hasActiveTile;
+            }
+        }
+
+        const hasActiveTile = Array.from(tileMap.values()).some(t => t.active);
+        return simOrder.orderIndex >= orders.length && tray.length === 0 && !hasActiveTile;
+    }
+
+    private refreshSimSelectable(tileMap: Map<string, ITileData>): void {
+        const level = LevelManager.getInstance().getCurrentLevel();
+        const board = level?.board;
+        const allTiles = Array.from(tileMap.values());
+        const activeTiles = allTiles.filter(tile => tile.active);
+        for (const tile of allTiles) {
+            if (!tile.active || !board) {
+                tile.selectable = false;
+                tile.isBlocked = true;
+                continue;
+            }
+            tile.isBlocked = BoardPositionHelper.isTileBlocked(tile, activeTiles, board);
+            tile.selectable = !tile.isBlocked;
+        }
+    }
+
+    private processSimOrderTray(
+        tray: ITileData[],
+        state: ISimOrderState,
+        orders: { items: string[] }[],
+        orderMode: string
+    ): void {
+        let changed = true;
+        while (changed && state.orderIndex < orders.length) {
+            changed = false;
+            const order = orders[state.orderIndex];
+            const fullMatch = this.findSimOrderMatch(order.items, tray, orderMode);
+            if (fullMatch) {
+                this.consumeSimOrderMatch(tray, fullMatch, state, orders, orderMode);
+                changed = true;
+                continue;
+            }
+
+            for (const tile of [...tray]) {
+                if (state.submittedTileIds.has(tile.id)) continue;
+                state.submittedTileIds.add(tile.id);
+
+                if (orderMode === 'ANY_ORDER') {
+                    const idx = state.remainingItems.indexOf(tile.groupId);
+                    if (idx === -1) continue;
+                    state.remainingItems.splice(idx, 1);
+                    state.matchedTileIds.push(tile.id);
+                    if (state.remainingItems.length === 0) {
+                        this.consumeSimOrderMatchByIds(tray, state.matchedTileIds, state, orders, orderMode);
+                        changed = true;
+                        break;
+                    }
+                    continue;
+                }
+
+                const expected = order.items[state.itemIndex];
+                if (expected !== tile.groupId) continue;
+                state.itemIndex++;
+                state.matchedTileIds.push(tile.id);
+                if (state.itemIndex >= order.items.length) {
+                    this.consumeSimOrderMatchByIds(tray, state.matchedTileIds, state, orders, orderMode);
+                    changed = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    private findSimOrderMatch(orderItems: string[], tray: ITileData[], orderMode: string): ITileData[] | null {
+        if (!orderItems || tray.length < orderItems.length) return null;
+        if (orderMode === 'ANY_ORDER') {
+            const remaining = [...orderItems];
+            const matched: ITileData[] = [];
+            for (const tile of tray) {
+                const idx = remaining.indexOf(tile.groupId);
+                if (idx === -1) continue;
+                remaining.splice(idx, 1);
+                matched.push(tile);
+                if (remaining.length === 0) return matched;
+            }
+            return null;
+        }
+
+        const matched: ITileData[] = [];
+        let itemIndex = 0;
+        for (const tile of tray) {
+            if (tile.groupId !== orderItems[itemIndex]) continue;
+            matched.push(tile);
+            itemIndex++;
+            if (itemIndex >= orderItems.length) return matched;
+        }
+        return null;
+    }
+
+    private consumeSimOrderMatch(
+        tray: ITileData[],
+        matched: ITileData[],
+        state: ISimOrderState,
+        orders: { items: string[] }[],
+        orderMode: string
+    ): void {
+        this.consumeSimOrderMatchByIds(tray, matched.map(tile => tile.id), state, orders, orderMode);
+    }
+
+    private consumeSimOrderMatchByIds(
+        tray: ITileData[],
+        matchedIds: string[],
+        state: ISimOrderState,
+        orders: { items: string[] }[],
+        orderMode: string
+    ): void {
+        const removeIds = new Set(matchedIds);
+        for (let i = tray.length - 1; i >= 0; i--) {
+            if (removeIds.has(tray[i].id)) tray.splice(i, 1);
+        }
+        state.orderIndex++;
+        state.itemIndex = 0;
+        state.remainingItems = [];
+        state.matchedTileIds = [];
+        state.submittedTileIds.clear();
+        const nextOrder = orders[state.orderIndex];
+        if (orderMode === 'ANY_ORDER' && nextOrder) {
+            state.remainingItems = [...nextOrder.items];
+        }
     }
 
     public HighlightTile(tileId: string): void {

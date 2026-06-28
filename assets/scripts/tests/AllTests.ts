@@ -12,8 +12,7 @@ import { runTileManagerTests } from './TileManager.test';
  * hoặc từ DevTools console.
  */
 export function runAllTests(): void {
-    console.log('>>> Starting All Tests...\n');
-
+    
     const runners = [
         runBoardManagerTests(),
         runTrayManagerTests(),
@@ -32,8 +31,7 @@ export function runAllTests(): void {
         totalFailed += results.filter(r => !r.passed).length;
     }
 
-    console.log(`\n>>> ALL TESTS COMPLETE: ${totalPassed} passed, ${totalFailed} failed`);
-}
+    }
 
 // Optional: auto-run khi import trong dev environment
 // if (typeof CC_DEV !== 'undefined' && CC_DEV) { runAllTests(); }

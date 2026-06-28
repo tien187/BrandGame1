@@ -32,8 +32,7 @@ export class TestRunnerComponent extends Component {
         const tileMgr = (TileManager as any).Instance;
 
         if (!skinMgr || !tileMgr) {
-            console.warn('[TestRunner] Scene managers not yet initialized. Skipping tests. Make sure GameManager node is active and has GameManager.ts attached.');
-            return;
+                        return;
         }
 
         // Save original singleton instances before tests overwrite them
@@ -48,20 +47,9 @@ export class TestRunnerComponent extends Component {
             pool: poolInstance,
         };
 
-        console.log('[TestRunner] Saved originals:', {
-            skin: !!originals.skin,
-            tile: !!originals.tile,
-            board: !!originals.board,
-            tray: !!originals.tray,
-            match: !!originals.match,
-            booster: !!originals.booster,
-            pool: !!originals.pool,
-        });
-
-        console.log('=== RUNNING ALL TESTS ===');
-        runAllTests();
-        console.log('=== ALL TESTS COMPLETE ===');
-
+        
+                runAllTests();
+        
         // Restore original instances so scene managers continue working
         if (originals.skin) (SkinManager as any).Instance = originals.skin;
         if (originals.tile) (TileManager as any).Instance = originals.tile;
@@ -71,6 +59,5 @@ export class TestRunnerComponent extends Component {
         if (originals.booster) (BoosterManager as any).Instance = originals.booster;
         if (originals.pool) (PoolManager as any)._instance = originals.pool;
 
-        console.log('[TestRunner] Restored singleton instances.');
-    }
+            }
 }

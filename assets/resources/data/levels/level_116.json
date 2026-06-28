@@ -156,6 +156,14 @@
         "13",
         "13"
       ]
+    },
+    {
+      "id": "order_012",
+      "items": [
+        "7",
+        "9",
+        "3"
+      ]
     }
   ],
   "solutionOrders": [
@@ -213,6 +221,11 @@
       "13",
       "13",
       "13"
+    ],
+    [
+      "7",
+      "9",
+      "3"
     ]
   ],
   "solutionMoveTileIds": [
@@ -812,7 +825,7 @@
     "difficultyIndex": 16,
     "shapeName": "woven_star",
     "totalTiles": 36,
-    "orderCount": 11,
+    "orderCount": 12,
     "distinctItemCount": 14,
     "maxLayers": 3,
     "startingSelectableTiles": 13,

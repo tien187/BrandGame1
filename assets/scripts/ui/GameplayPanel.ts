@@ -1,4 +1,4 @@
-import { _decorator, Component, Label, Button, tween, Vec3 } from 'cc';
+import { _decorator, Component, Label, Button, tween, Tween, Vec3 } from 'cc';
 import { BasePanel } from './BasePanel';
 import { GameEvent } from '../enums/GameEvent';
 import { EventBus } from '../core/EventBus';
@@ -46,9 +46,21 @@ export class GameplayPanel extends BasePanel {
     @property(Label)
     public skipCountLabel: Label | null = null;
 
+    @property(Label)
+    public timeLabel: Label | null = null;
+
+    private _undoButtonOriginalPos: Vec3 | null = null;
+    private _elapsedSeconds: number = 0;
+
     protected onShow(data?: any): void {
         super.onShow(data);
+        if (!this.timeLabel) {
+            this.timeLabel = this.node.getChildByName('TimeLabel')?.getComponent(Label) || null;
+        }
         this.updateUI();
+        if (this.undoButton && this.undoButton.node.isValid) {
+            this._undoButtonOriginalPos = this.undoButton.node.position.clone();
+        }
         EventBus.getInstance().on(GameEvent.SCORE_CHANGED, this.onScoreChanged, this);
         EventBus.getInstance().on(GameEvent.LEVEL_COMPLETED, this.onLevelCompleted, this);
         EventBus.getInstance().on(GameEvent.ORDER_CHANGED, this.onOrderChanged, this);
@@ -56,6 +68,7 @@ export class GameplayPanel extends BasePanel {
         EventBus.getInstance().on(GameEvent.LEVEL_STARTED, this.onLevelStarted, this);
         EventBus.getInstance().on(GameEvent.LEVEL_FAILED, this.onLevelEnded, this);
         EventBus.getInstance().on(GameEvent.HINT_FAILED, this.onHintFailed, this);
+        EventBus.getInstance().on(GameEvent.LEVEL_TIME_UPDATED, this.onLevelTimeUpdated, this);
         this.bindBoosterButtons();
         this.updateBoosterUI();
     }
@@ -68,6 +81,7 @@ export class GameplayPanel extends BasePanel {
         EventBus.getInstance().off(GameEvent.LEVEL_STARTED, this.onLevelStarted, this);
         EventBus.getInstance().off(GameEvent.LEVEL_FAILED, this.onLevelEnded, this);
         EventBus.getInstance().off(GameEvent.HINT_FAILED, this.onHintFailed, this);
+        EventBus.getInstance().off(GameEvent.LEVEL_TIME_UPDATED, this.onLevelTimeUpdated, this);
         this.unbindBoosterButtons();
     }
 
@@ -79,6 +93,7 @@ export class GameplayPanel extends BasePanel {
         if (this.levelLabel) this.levelLabel.string = `Level ${levelId}`;
         if (this.scoreLabel) this.scoreLabel.string = `${score}`;
         if (this.starLabel) this.starLabel.string = `Stars: ${stars}`;
+        if (this.timeLabel) this.timeLabel.string = this.formatTime(this._elapsedSeconds);
         this.updateOrderLabel();
         this.updateBoosterUI();
     }
@@ -107,6 +122,19 @@ export class GameplayPanel extends BasePanel {
         this.updateBoosterUI();
     }
 
+    private onLevelTimeUpdated(seconds: number): void {
+        this._elapsedSeconds = seconds;
+        if (this.timeLabel) this.timeLabel.string = this.formatTime(seconds);
+    }
+
+    private formatTime(totalSeconds: number): string {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        const mm = minutes < 10 ? '0' + minutes : minutes;
+        const ss = seconds < 10 ? '0' + seconds : seconds;
+        return `${mm}:${ss}`;
+    }
+
     private onHintFailed(): void {
         if (BoosterManager.getInstance()?.getBoosterCount(BoosterType.UNDO) > 0) {
             this.shakeUndoButton();
@@ -116,7 +144,12 @@ export class GameplayPanel extends BasePanel {
     private shakeUndoButton(): void {
         if (!this.undoButton || !this.undoButton.node.isValid) return;
         const node = this.undoButton.node;
-        const originalPos = node.position.clone();
+        Tween.stopAllByTarget(node);
+        if (!this._undoButtonOriginalPos) {
+            this._undoButtonOriginalPos = node.position.clone();
+        }
+        const originalPos = this._undoButtonOriginalPos;
+        node.setPosition(originalPos);
         tween(node)
             .to(0.05, { position: new Vec3(originalPos.x - 8, originalPos.y, originalPos.z) })
             .to(0.05, { position: new Vec3(originalPos.x + 8, originalPos.y, originalPos.z) })

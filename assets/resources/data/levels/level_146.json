@@ -264,6 +264,14 @@
         "7",
         "7"
       ]
+    },
+    {
+      "id": "order_024",
+      "items": [
+        "0",
+        "1",
+        "21"
+      ]
     }
   ],
   "solutionOrders": [
@@ -381,6 +389,11 @@
       "7",
       "7",
       "7"
+    ],
+    [
+      "0",
+      "1",
+      "21"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1556,7 +1569,7 @@
     "difficultyIndex": 46,
     "shapeName": "zigzag_crown",
     "totalTiles": 72,
-    "orderCount": 23,
+    "orderCount": 24,
     "distinctItemCount": 24,
     "maxLayers": 5,
     "startingSelectableTiles": 19,

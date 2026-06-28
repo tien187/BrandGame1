@@ -224,6 +224,14 @@
         "4",
         "17"
       ]
+    },
+    {
+      "id": "order_019",
+      "items": [
+        "1",
+        "7",
+        "13"
+      ]
     }
   ],
   "solutionOrders": [
@@ -316,6 +324,11 @@
       "17",
       "4",
       "17"
+    ],
+    [
+      "1",
+      "7",
+      "13"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1251,7 +1264,7 @@
     "difficultyIndex": 34,
     "shapeName": "wave_totem",
     "totalTiles": 57,
-    "orderCount": 18,
+    "orderCount": 19,
     "distinctItemCount": 20,
     "maxLayers": 5,
     "startingSelectableTiles": 19,

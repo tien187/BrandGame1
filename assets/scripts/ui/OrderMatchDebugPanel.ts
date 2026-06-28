@@ -138,8 +138,7 @@ export class OrderMatchDebugPanel extends Component {
         if (!this._isAutoPlaying) return;
         if (this._autoPlayIndex >= this._solutionIds.length) {
             this._isAutoPlaying = false;
-            console.log('[OrderMatchDebugPanel] Auto-play complete');
-            return;
+                        return;
         }
 
         this.playSingleMove(this._solutionIds[this._autoPlayIndex]);
@@ -152,8 +151,7 @@ export class OrderMatchDebugPanel extends Component {
     private playSingleMove(tileId: string): void {
         const tileData = TileManager.getInstance().getTileData(tileId);
         if (!tileData || !tileData.active || !tileData.selectable) {
-            console.warn(`[OrderMatchDebugPanel] Cannot play move: tile ${tileId} not selectable`);
-            return;
+                        return;
         }
         EventBus.getInstance().emit(GameEvent.TILE_CLICKED, tileData);
     }

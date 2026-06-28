@@ -77,8 +77,7 @@ export class OrderMatchTestRunner extends Component {
         lines.push(`\nTotal: ${this._results.length} | Pass: ${passCount} | Fail: ${failCount}`);
 
         const output = lines.join('\n');
-        console.log(output);
-
+        
         if (this.resultLabel) {
             this.resultLabel.string = output;
         }

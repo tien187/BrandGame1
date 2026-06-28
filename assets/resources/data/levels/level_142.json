@@ -248,6 +248,14 @@
         "17",
         "17"
       ]
+    },
+    {
+      "id": "order_022",
+      "items": [
+        "5",
+        "8",
+        "15"
+      ]
     }
   ],
   "solutionOrders": [
@@ -355,6 +363,11 @@
       "17",
       "17",
       "17"
+    ],
+    [
+      "5",
+      "8",
+      "15"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1434,7 +1447,7 @@
     "difficultyIndex": 42,
     "shapeName": "orbit_frame",
     "totalTiles": 66,
-    "orderCount": 21,
+    "orderCount": 22,
     "distinctItemCount": 23,
     "maxLayers": 4,
     "startingSelectableTiles": 20,

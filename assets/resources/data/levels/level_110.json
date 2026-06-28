@@ -132,6 +132,14 @@
         "0",
         "11"
       ]
+    },
+    {
+      "id": "order_009",
+      "items": [
+        "1",
+        "5",
+        "4"
+      ]
     }
   ],
   "solutionOrders": [
@@ -174,6 +182,11 @@
       "11",
       "0",
       "11"
+    ],
+    [
+      "1",
+      "5",
+      "4"
     ]
   ],
   "solutionMoveTileIds": [
@@ -629,7 +642,7 @@
     "difficultyIndex": 10,
     "shapeName": "double_wave",
     "totalTiles": 27,
-    "orderCount": 8,
+    "orderCount": 9,
     "distinctItemCount": 12,
     "maxLayers": 3,
     "startingSelectableTiles": 13,

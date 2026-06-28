@@ -112,6 +112,14 @@
         "6",
         "9"
       ]
+    },
+    {
+      "id": "order_007",
+      "items": [
+        "5",
+        "8",
+        "6"
+      ]
     }
   ],
   "solutionOrders": [
@@ -144,6 +152,11 @@
       "9",
       "6",
       "9"
+    ],
+    [
+      "5",
+      "8",
+      "6"
     ]
   ],
   "solutionMoveTileIds": [
@@ -503,7 +516,7 @@
     "difficultyIndex": 4,
     "shapeName": "hourglass_path",
     "totalTiles": 21,
-    "orderCount": 6,
+    "orderCount": 7,
     "distinctItemCount": 10,
     "maxLayers": 2,
     "startingSelectableTiles": 10,

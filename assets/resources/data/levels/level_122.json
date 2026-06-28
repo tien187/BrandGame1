@@ -179,6 +179,14 @@
         "8",
         "9"
       ]
+    },
+    {
+      "id": "order_014",
+      "items": [
+        "3",
+        "7",
+        "12"
+      ]
     }
   ],
   "solutionOrders": [
@@ -246,6 +254,11 @@
       "9",
       "8",
       "9"
+    ],
+    [
+      "3",
+      "7",
+      "12"
     ]
   ],
   "solutionMoveTileIds": [
@@ -941,7 +954,7 @@
     "difficultyIndex": 22,
     "shapeName": "comet_lane",
     "totalTiles": 42,
-    "orderCount": 13,
+    "orderCount": 14,
     "distinctItemCount": 16,
     "maxLayers": 4,
     "startingSelectableTiles": 16,

@@ -52,15 +52,14 @@ export class UIManager extends Component {
 
         const prefab = await SkinManager.getInstance().getPanelPrefab(panelName);
         if (!prefab) {
-            console.warn(`[UIManager] Panel prefab not found for: ${panelName}. Ensure skin JSON has a UI asset with key "panel_${panelName}".`);
             return null;
         }
         if (!this.uiRoot) {
-            console.warn('[UIManager] Cannot open panel: uiRoot is null');
             return null;
         }
 
         const node = instantiate(prefab);
+        node.layer = this.popupLayer?.layer ?? this.uiRoot.layer;
         node.setParent(this.popupLayer || this.uiRoot);
         node.setPosition(0, 0, 0);
 

@@ -64,13 +64,11 @@ export class SkinManager extends Component {
         // skinOverride format: "uma/0"
         const [brand, item] = skinOverride.split('/');
         if (!brand || !item || typeof item !== 'string') {
-            console.warn(`[SkinManager] Invalid skinOverride format: ${skinOverride}, item=${item}`);
-            return;
+                        return;
         }
         const itemId = normalizeItemId(item);
         const key = `tile_${itemId}`;
-        console.log(`[SkinManager] Loading sprite key=${key} for override=${skinOverride} node=${node.name}`);
-
+        
         // Tăng applyId để tránh promise cũ gán sprite lên node đã được reuse
         const applyId = ((node as any).__skinApplyId || 0) + 1;
         (node as any).__skinApplyId = applyId;
@@ -78,12 +76,10 @@ export class SkinManager extends Component {
         this.getTileSprite(itemId).then((spriteFrame) => {
             if (!node || !node.isValid) return;
             if ((node as any).__skinApplyId !== applyId) {
-                console.log(`[SkinManager] Stale apply ignored: ${key} node=${node.name}`);
-                return;
+                                return;
             }
             if (!spriteFrame) {
-                console.warn(`[SkinManager] Sprite not found for key: ${key} in category tiles`);
-                return;
+                                return;
             }
             // Gán vào visual child node cụ thể, không phải root node
             const visualNode = node.getChildByName('visual');
@@ -97,10 +93,8 @@ export class SkinManager extends Component {
                 } else if (tileComp && tileComp.updateVisualState) {
                     tileComp.updateVisualState();
                 }
-                console.log(`[SkinManager] Assigned sprite ${key} (frame=${spriteFrame.name}) to node=${node.name} visual=${!!visualNode} old=${oldName}`);
-            } else {
-                console.warn(`[SkinManager] No Sprite component found on tile node or its visual child`);
-            }
+                            } else {
+                            }
         });
     }
 
@@ -120,8 +114,7 @@ export class SkinManager extends Component {
         const validIds = (Array.isArray(groupIds) ? groupIds : [])
             .filter(gid => typeof gid === 'string');
         if (validIds.length === 0) {
-            console.warn('[SkinManager] prewarmSkinSprites: no valid groupIds provided', groupIds);
-            return;
+                        return;
         }
         const promises = validIds.map(gid => this.getTileSprite(normalizeItemId(gid)));
         await Promise.all(promises);
@@ -129,8 +122,7 @@ export class SkinManager extends Component {
 
     private async getTileSprite(itemId: string): Promise<SpriteFrame | null> {
         const sprite = await this.getSprite(`tile_${itemId}`, SkinCategory.TILES);
-        console.log(`[SkinManager] getTileSprite itemId=${itemId} found=${!!sprite}`);
-        if (sprite || !isCanonicalItemId(itemId)) {
+                if (sprite || !isCanonicalItemId(itemId)) {
             return sprite;
         }
 
@@ -141,8 +133,7 @@ export class SkinManager extends Component {
         if (availableIds.length === 0) return null;
 
         const fallbackId = availableIds[Number(itemId) % availableIds.length];
-        console.warn(`[SkinManager] Missing sprite tile_${itemId}; fallback to tile_${fallbackId}`);
-        return this.getSprite(`tile_${fallbackId}`, SkinCategory.TILES);
+                return this.getSprite(`tile_${fallbackId}`, SkinCategory.TILES);
     }
 
     /** Lấy font mặc định */
@@ -158,15 +149,13 @@ export class SkinManager extends Component {
         }
 
         if (!this._currentSkin) {
-            console.warn(`[SkinManager] getAsset: _currentSkin is null!`);
-            return null;
+                        return null;
         }
 
         const assets = this._currentSkin.assets[category] || [];
         const assetDef = assets.find(a => a.key === key);
         if (!assetDef) {
-            console.warn(`[SkinManager] getAsset: assetDef not found for key=${key} in category=${category}`);
-            return null;
+                        return null;
         }
 
         const asset = await this.loadAssetByPath<T>(assetDef.path, assetDef.assetType);
@@ -184,12 +173,10 @@ export class SkinManager extends Component {
                 const spritePath = `${path}/spriteFrame`;
                 resources.load(spritePath, SpriteFrame, (err: any, sf: SpriteFrame) => {
                     if (err) {
-                        console.warn(`[SkinManager] FAILED spriteFrame path (${spritePath}):`, err?.message || JSON.stringify(err));
-                        // Fallback: load Texture2D rồi wrap
+                                                // Fallback: load Texture2D rồi wrap
                         resources.load(path, Texture2D, (err2: any, tex: Texture2D) => {
                             if (err2) {
-                                console.warn(`[SkinManager] FAILED texture path (${path}):`, err2?.message || JSON.stringify(err2));
-                                resolve(null);
+                                                                resolve(null);
                             } else {
                                 const frame = new SpriteFrame();
                                 frame.texture = tex;
@@ -202,7 +189,7 @@ export class SkinManager extends Component {
                 });
             } else if (assetType === 'prefab') {
                 resources.load(path, Prefab, (err: any, asset: Prefab) => {
-                    if (err) { console.warn(`[SkinManager] FAILED prefab: ${path}`, err?.message); resolve(null); }
+                    if (err) {  resolve(null); }
                     else { resolve(asset as unknown as T); }
                 });
             } else if (assetType === 'audio') {
@@ -210,7 +197,7 @@ export class SkinManager extends Component {
                 resolve(null as unknown as T);
             } else {
                 resources.load(path, (err: any, asset: any) => {
-                    if (err) { console.warn(`[SkinManager] FAILED asset: ${path}`, err?.message); resolve(null); }
+                    if (err) {  resolve(null); }
                     else { resolve(asset as unknown as T); }
                 });
             }

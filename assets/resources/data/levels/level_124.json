@@ -187,6 +187,14 @@
         "3",
         "3"
       ]
+    },
+    {
+      "id": "order_015",
+      "items": [
+        "11",
+        "12",
+        "0"
+      ]
     }
   ],
   "solutionOrders": [
@@ -259,6 +267,11 @@
       "3",
       "3",
       "3"
+    ],
+    [
+      "11",
+      "12",
+      "0"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1002,7 +1015,7 @@
     "difficultyIndex": 24,
     "shapeName": "broken_ring",
     "totalTiles": 45,
-    "orderCount": 14,
+    "orderCount": 15,
     "distinctItemCount": 17,
     "maxLayers": 5,
     "startingSelectableTiles": 15,

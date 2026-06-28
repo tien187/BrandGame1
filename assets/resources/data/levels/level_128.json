@@ -203,6 +203,14 @@
         "14",
         "12"
       ]
+    },
+    {
+      "id": "order_017",
+      "items": [
+        "0",
+        "6",
+        "5"
+      ]
     }
   ],
   "solutionOrders": [
@@ -285,6 +293,11 @@
       "12",
       "14",
       "12"
+    ],
+    [
+      "0",
+      "6",
+      "5"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1124,7 +1137,7 @@
     "difficultyIndex": 28,
     "shapeName": "butterfly",
     "totalTiles": 51,
-    "orderCount": 16,
+    "orderCount": 17,
     "distinctItemCount": 18,
     "maxLayers": 4,
     "startingSelectableTiles": 19,

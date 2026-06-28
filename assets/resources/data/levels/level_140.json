@@ -248,6 +248,14 @@
         "13",
         "13"
       ]
+    },
+    {
+      "id": "order_022",
+      "items": [
+        "3",
+        "9",
+        "15"
+      ]
     }
   ],
   "solutionOrders": [
@@ -355,6 +363,11 @@
       "13",
       "13",
       "13"
+    ],
+    [
+      "3",
+      "9",
+      "15"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1434,7 +1447,7 @@
     "difficultyIndex": 40,
     "shapeName": "hourglass_crown",
     "totalTiles": 66,
-    "orderCount": 21,
+    "orderCount": 22,
     "distinctItemCount": 22,
     "maxLayers": 5,
     "startingSelectableTiles": 22,

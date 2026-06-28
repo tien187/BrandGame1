@@ -256,6 +256,14 @@
         "16",
         "16"
       ]
+    },
+    {
+      "id": "order_023",
+      "items": [
+        "17",
+        "17",
+        "15"
+      ]
     }
   ],
   "solutionOrders": [
@@ -368,6 +376,11 @@
       "16",
       "16",
       "16"
+    ],
+    [
+      "17",
+      "17",
+      "15"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1495,7 +1508,7 @@
     "difficultyIndex": 44,
     "shapeName": "star_forge",
     "totalTiles": 69,
-    "orderCount": 22,
+    "orderCount": 23,
     "distinctItemCount": 24,
     "maxLayers": 5,
     "startingSelectableTiles": 17,

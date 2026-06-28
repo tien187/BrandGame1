@@ -171,6 +171,14 @@
         "5",
         "1"
       ]
+    },
+    {
+      "id": "order_013",
+      "items": [
+        "5",
+        "2",
+        "1"
+      ]
     }
   ],
   "solutionOrders": [
@@ -232,6 +240,11 @@
     [
       "1",
       "5",
+      "1"
+    ],
+    [
+      "5",
+      "2",
       "1"
     ]
   ],
@@ -880,7 +893,7 @@
     "difficultyIndex": 18,
     "shapeName": "oval_seal",
     "totalTiles": 39,
-    "orderCount": 12,
+    "orderCount": 13,
     "distinctItemCount": 15,
     "maxLayers": 3,
     "startingSelectableTiles": 14,

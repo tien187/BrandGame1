@@ -147,6 +147,14 @@
         "5",
         "4"
       ]
+    },
+    {
+      "id": "order_010",
+      "items": [
+        "12",
+        "2",
+        "1"
+      ]
     }
   ],
   "solutionOrders": [
@@ -194,6 +202,11 @@
       "4",
       "5",
       "4"
+    ],
+    [
+      "12",
+      "2",
+      "1"
     ]
   ],
   "solutionMoveTileIds": [
@@ -697,7 +710,7 @@
     "difficultyIndex": 12,
     "shapeName": "moon_gate",
     "totalTiles": 30,
-    "orderCount": 9,
+    "orderCount": 10,
     "distinctItemCount": 13,
     "maxLayers": 4,
     "startingSelectableTiles": 14,

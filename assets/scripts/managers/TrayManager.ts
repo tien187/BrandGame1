@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3, tween, Label, Tween, UIOpacity } from 'cc';
+import { _decorator, Component, Node, Vec3, tween, Label, Tween, UIOpacity, director, instantiate } from 'cc';
 import { ITileData } from '../interfaces/ITileData';
 import { ITrayConfig } from '../interfaces/ITrayConfig';
 import { IOrder } from '../interfaces/IOrder';
@@ -118,38 +118,39 @@ export class TrayManager extends Component {
     private onOrderCompletedWithEffect(order: IOrder | null, orderIndex: number, tileIds?: string[]): void {
         if (!tileIds || tileIds.length === 0) return;
         const lifecycleId = this._lifecycleId;
-        console.log(`[TM_DEBUG] onOrderCompletedWithEffect orderIndex=${orderIndex} orderId=${order?.id || '?'} tileIds=${tileIds.join(',')} trayBefore=${this._trayTiles.length} fly=${this._flyCount}`);
-
+        
         const orderTargetWorldPos = OrderTrayManager.getInstance()?.getCurrentOrderEffectWorldPosition() ?? null;
         const matchedNodes: Map<string, Node> = new Map();
 
         // Remove from tray state immediately so the player can keep choosing tiles while the effect plays.
         for (const tileId of tileIds) {
+            const node = TileManager.getInstance().getTileNode(tileId);
+            if (node && node.isValid) {
+                Tween.stopAllByTarget(node);
+                const tileComp = node.getComponent('Tile') as any;
+                if (tileComp && tileComp.stopAllTweens) {
+                    tileComp.stopAllTweens();
+                }
+                matchedNodes.set(tileId, node);
+            }
+
             const index = this._trayTiles.findIndex(t => t.id === tileId);
             if (index !== -1) this._trayTiles.splice(index, 1);
             const histIndex = this._history.findIndex(h => h.tileId === tileId);
             if (histIndex !== -1) this._history.splice(histIndex, 1);
             this._settledTileIds.delete(tileId);
-
-            const node = TileManager.getInstance().getTileNode(tileId);
-            if (node && node.isValid) {
-                matchedNodes.set(tileId, node);
-            }
         }
 
         this.compactTray();
         this.updateSlotLabel();
 
         this._pendingOrderClearEffects = tileIds.length;
-        console.log(`[TM_DEBUG] order clear effects started pending=${this._pendingOrderClearEffects} trayAfterRemove=${this._trayTiles.length}`);
-        const onEffectComplete = () => {
+                const onEffectComplete = () => {
             if (lifecycleId !== this._lifecycleId) return;
             this._pendingOrderClearEffects--;
-            console.log(`[TM_DEBUG] order clear effect complete pending=${this._pendingOrderClearEffects}`);
-            if (this._pendingOrderClearEffects <= 0) {
+                        if (this._pendingOrderClearEffects <= 0) {
                 this._pendingOrderClearEffects = 0;
-                console.log('[TM_DEBUG] emitting ORDER_TILES_CLEARED');
-                EventBus.getInstance().emit(GameEvent.ORDER_TILES_CLEARED);
+                                EventBus.getInstance().emit(GameEvent.ORDER_TILES_CLEARED);
             }
         };
 
@@ -158,8 +159,7 @@ export class TrayManager extends Component {
         }
 
         if (this.isFull()) {
-            console.warn(`[TM_DEBUG] emitting TRAY_FULL after order complete effect tray=${this._trayTiles.length} max=${this.getMaxSlots()} pending=${this._pendingOrderClearEffects}`);
-            EventBus.getInstance().emit(GameEvent.TRAY_FULL);
+                        EventBus.getInstance().emit(GameEvent.TRAY_FULL);
         }
     }
 
@@ -182,46 +182,68 @@ export class TrayManager extends Component {
             return;
         }
 
+        const startWorld = node.getWorldPosition();
+        const effectParent = this.trayContainer?.parent || node.parent || director.getScene();
+        const effectNode = instantiate(node);
+        effectNode.name = `${node.name}_OrderConsumeEffect`;
+        effectNode.active = true;
+        effectNode.layer = node.layer;
+        if (effectParent) {
+            effectNode.setParent(effectParent);
+            effectNode.setWorldPosition(startWorld);
+            effectNode.setSiblingIndex(effectParent.children.length - 1);
+        }
+
         Tween.stopAllByTarget(node);
+        Tween.stopAllByTarget(effectNode);
         const tileComp = node.getComponent('Tile') as any;
         if (tileComp && tileComp.stopAllTweens) {
             tileComp.stopAllTweens();
         }
+        const effectTileComp = effectNode.getComponent('Tile') as any;
+        if (effectTileComp && effectTileComp.stopAllTweens) {
+            effectTileComp.stopAllTweens();
+        }
 
-        const opacity = node.getComponent(UIOpacity) || node.addComponent(UIOpacity);
+        const opacity = effectNode.getComponent(UIOpacity) || effectNode.addComponent(UIOpacity);
         opacity.opacity = 255;
+        const effectVisual = effectNode.getChildByName('visual');
+        if (effectVisual && effectVisual.isValid) {
+            Tween.stopAllByTarget(effectVisual);
+            effectVisual.active = true;
+            effectVisual.setScale(1, 1, 1);
+            const visualOpacity = effectVisual.getComponent(UIOpacity) || effectVisual.addComponent(UIOpacity);
+            visualOpacity.opacity = 255;
+        }
 
-        const startWorld = node.getWorldPosition();
+        TileManager.getInstance().removeTile(tileId);
+
+        const startLocal = effectNode.position.clone();
         const direction = index - (total - 1) / 2;
         const side = direction === 0 ? 0 : direction > 0 ? 1 : -1;
         const peakOffsetX = side * 46;
         const fallOffsetX = side * 190;
         const jumpHeight = 170;
         const fallDistance = 860;
-        const startScale = node.scale.clone();
-        node.angle = 0;
-        node.setScale(startScale.x, startScale.y, startScale.z);
-        const proxy = {
-            t: 0,
-        };
+        const startScale = effectNode.scale.clone();
+        effectNode.angle = 0;
+        effectNode.setScale(startScale.x, startScale.y, startScale.z);
         const smoothStep = (t: number): number => t * t * (3 - 2 * t);
-        const applyJump = () => {
-            if (lifecycleId !== this._lifecycleId) return;
-            if (!node || !node.isValid) return;
-            const t = Math.max(0, Math.min(1, proxy.t));
+        const getJumpState = (t: number): { x: number; y: number; scale: number } => {
+            t = Math.max(0, Math.min(1, t));
             const jumpPortion = 0.25;
             const hangPortion = 0.04;
-            const peakX = startWorld.x + peakOffsetX;
-            const peakY = startWorld.y + jumpHeight;
-            const endX = startWorld.x + fallOffsetX;
+            const peakX = startLocal.x + peakOffsetX;
+            const peakY = startLocal.y + jumpHeight;
+            const endX = startLocal.x + fallOffsetX;
             let x: number;
             let y: number;
             let scale = 1;
 
             if (t <= jumpPortion) {
                 const jumpT = smoothStep(t / jumpPortion);
-                x = startWorld.x + (peakX - startWorld.x) * jumpT;
-                y = startWorld.y + jumpHeight * jumpT;
+                x = startLocal.x + (peakX - startLocal.x) * jumpT;
+                y = startLocal.y + jumpHeight * jumpT;
                 scale = 1 + 0.144 * jumpT;
             } else if (t <= jumpPortion + hangPortion) {
                 const hangT = (t - jumpPortion) / hangPortion;
@@ -236,26 +258,29 @@ export class TrayManager extends Component {
                 scale = 1.126 - 0.126 * smoothStep(fallT);
             }
 
-            node.setWorldPosition(
-                x,
-                y,
-                startWorld.z
-            );
-            node.setScale(startScale.x * scale, startScale.y * scale, startScale.z);
-            node.angle = 0;
-            opacity.opacity = 255;
+            return { x, y, scale };
         };
+        const endState = getJumpState(1);
 
-        tween(proxy)
+        tween(effectNode)
             .to(0.56, {
-                t: 1,
+                position: new Vec3(endState.x, endState.y, startLocal.z),
+                scale: new Vec3(startScale.x * endState.scale, startScale.y * endState.scale, startScale.z),
             }, {
                 easing: 'linear',
-                onUpdate: applyJump,
+                onUpdate: (target: Node, ratio: number) => {
+                    if (lifecycleId !== this._lifecycleId) return;
+                    if (!target || !target.isValid) return;
+                    const state = getJumpState(ratio);
+                    target.setPosition(state.x, state.y, startLocal.z);
+                    target.setScale(startScale.x * state.scale, startScale.y * state.scale, startScale.z);
+                    target.angle = 0;
+                    opacity.opacity = 255;
+                },
             })
             .call(() => {
                 if (lifecycleId !== this._lifecycleId) return;
-                TileManager.getInstance().removeTile(tileId);
+                effectNode.destroy();
                 if (index === total - 1) {
                     OrderTrayManager.getInstance()?.hideCurrentOrderConsumeEffect();
                 }

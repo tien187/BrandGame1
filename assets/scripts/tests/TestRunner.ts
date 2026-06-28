@@ -61,24 +61,16 @@ export class TestRunner {
         const passed = this._results.filter(r => r.passed).length;
         const failed = total - passed;
 
-        console.log(`\n========== TEST REPORT ==========`);
-        console.log(`Total: ${total} | Passed: ${passed} | Failed: ${failed}\n`);
-
+                
         for (const r of this._results) {
             if (r.passed) {
-                console.log(`[PASS] ${r.name}`);
-            } else {
-                console.error(`[FAIL] ${r.name}`);
-                console.error(`       ${r.error}`);
-            }
+                            } else {
+                                            }
         }
 
-        console.log(`\n=================================`);
-        if (failed === 0) {
-            console.log('ALL TESTS PASSED!');
-        } else {
-            console.error(`${failed} TEST(S) FAILED!`);
-        }
+                if (failed === 0) {
+                    } else {
+                    }
     }
 
     public getResults(): TestResult[] {

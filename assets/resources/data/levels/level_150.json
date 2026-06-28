@@ -280,6 +280,14 @@
         "21",
         "5"
       ]
+    },
+    {
+      "id": "order_026",
+      "items": [
+        "8",
+        "6",
+        "16"
+      ]
     }
   ],
   "solutionOrders": [
@@ -407,6 +415,11 @@
       "5",
       "21",
       "5"
+    ],
+    [
+      "8",
+      "6",
+      "16"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1678,7 +1691,7 @@
     "difficultyIndex": 50,
     "shapeName": "trident_core",
     "totalTiles": 78,
-    "orderCount": 25,
+    "orderCount": 26,
     "distinctItemCount": 25,
     "maxLayers": 5,
     "startingSelectableTiles": 17,

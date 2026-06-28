@@ -14,13 +14,11 @@ export class ResetButton extends Component {
         if (button) {
             button.node.on('click', this.onResetClicked, this);
         } else {
-            console.warn('[ResetButton] No Button component found on this node');
-        }
+                    }
     }
 
     private onResetClicked(): void {
-        console.log('[ResetButton] Reset clicked → triggering level failed');
-        LevelManager.getInstance().onLevelFailed();
+                LevelManager.getInstance().onLevelFailed();
     }
 
     protected onDestroy(): void {

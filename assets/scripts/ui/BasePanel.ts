@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, tween, Vec3 } from 'cc';
 import { UIManager } from '../managers/UIManager';
 
 const { ccclass, property } = _decorator;
@@ -57,11 +57,13 @@ export class BasePanel extends Component {
         this.playHideAnimation();
     }
 
-    /** Animation khi show */
+    /** Animation khi show - zoom scale nhe tu 0 len 1 */
     protected playShowAnimation(): void {
         if (this.contentNode) {
-            this.contentNode.setScale(0.8, 0.8, 1);
-            // tween(this.contentNode).to(0.2, { scale: new Vec3(1, 1, 1) }).start();
+            this.contentNode.setScale(0, 0, 1);
+            tween(this.contentNode)
+                .to(0.3, { scale: new Vec3(1, 1, 1) }, { easing: 'backOut' })
+                .start();
         }
     }
 

@@ -1,4 +1,4 @@
-import { _decorator, Component, director, Node, Prefab, resources, input, Input, KeyCode, EventKeyboard, UITransform, EditBox, Button } from 'cc';
+import { _decorator, Component, director, Node, Prefab, resources, input, Input, KeyCode, EventKeyboard, UITransform, EditBox, Button, view, ResolutionPolicy, tween, UIOpacity } from 'cc';
 import { GameState } from '../enums/GameState';
 import { GameEvent } from '../enums/GameEvent';
 import { EventBus } from '../core/EventBus';
@@ -37,13 +37,23 @@ export class GameManager extends Component {
     private _currentState: GameState = GameState.NONE;
     private _previousState: GameState = GameState.NONE;
     private _startLevelToken: number = 0;
-    private _autoAdvanceTimer: any = null;
+    private _elapsedSeconds: number = 0;
+    private _timerRunning: boolean = false;
 
     @property(EditBox)
     public levelJumpInput: EditBox | null = null;
 
     @property(Button)
     public levelJumpOk: Button | null = null;
+
+    @property(Node)
+    public splashNode: Node | null = null;
+
+    @property(Node)
+    public splashLogoNode: Node | null = null;
+
+    @property(Node)
+    public gameScreen: Node | null = null;
 
     protected onLoad(): void {
         if (GameManager.Instance) {
@@ -52,10 +62,65 @@ export class GameManager extends Component {
         }
         GameManager.Instance = this;
         director.addPersistRootNode(this.node);
+
+        // Lock web build to 1080x1920 aspect ratio, fit inside browser without stretching.
+        view.setDesignResolutionSize(1080, 1920, ResolutionPolicy.SHOW_ALL);
     }
 
     protected async start(): Promise<void> {
-        await this.initializeGame();
+        // SplashScreen active=true, GameScreen active=false at start.
+        if (this.splashNode) this.splashNode.active = true;
+        if (this.gameScreen) this.gameScreen.active = false;
+
+        // Ensure splash has UIOpacity for fade-out.
+        if (this.splashNode && !this.splashNode.getComponent(UIOpacity)) {
+            this.splashNode.addComponent(UIOpacity);
+        }
+
+        const initPromise = this.initializeGame();
+        // Wait at least 2 seconds and for init to finish.
+        await Promise.all([
+            initPromise,
+            new Promise<void>(resolve => setTimeout(resolve, 2000))
+        ]);
+
+        // Step 1: Fade out logo first.
+        if (this.splashLogoNode) {
+            if (!this.splashLogoNode.getComponent(UIOpacity)) {
+                this.splashLogoNode.addComponent(UIOpacity);
+            }
+            const logoOpacity = this.splashLogoNode.getComponent(UIOpacity)!;
+            await new Promise<void>(resolve => {
+                tween(logoOpacity)
+                    .to(0.4, { opacity: 0 })
+                    .call(() => resolve())
+                    .start();
+            });
+        }
+
+        // Step 2: Fade out entire splash + fade in game screen simultaneously.
+        if (this.gameScreen) {
+            this.gameScreen.active = true;
+            if (!this.gameScreen.getComponent(UIOpacity)) {
+                this.gameScreen.addComponent(UIOpacity);
+            }
+            const gameOpacity = this.gameScreen.getComponent(UIOpacity)!;
+            gameOpacity.opacity = 0;
+            tween(gameOpacity).to(0.4, { opacity: 255 }).start();
+        }
+
+        if (this.splashNode) {
+            const splashOpacity = this.splashNode.getComponent(UIOpacity)!;
+            await new Promise<void>(resolve => {
+                tween(splashOpacity)
+                    .to(0.4, { opacity: 0 })
+                    .call(() => {
+                        if (this.splashNode) this.splashNode.active = false;
+                        resolve();
+                    })
+                    .start();
+            });
+        }
 
         // Listen for level end events to switch panels
         EventBus.getInstance().on(GameEvent.LEVEL_COMPLETED, this.onLevelCompleted, this);
@@ -86,72 +151,48 @@ export class GameManager extends Component {
 
     private async onLevelCompleted(levelId: number, score: number, stars: number): Promise<void> {
         try {
-            console.log(`[GameManager] onLevelCompleted called: levelId=${levelId}, score=${score}, stars=${stars}`);
-            console.log(`[GM_DEBUG] LEVEL_COMPLETED received level=${levelId} currentState=${this._currentState}`);
-            UIManager.getInstance().closePanel('GameplayPanel');
-            const panel = await UIManager.getInstance().openPanel('LevelCompletePanel', { levelId, score, stars });
-            console.log(`[GameManager] LevelCompletePanel result: ${panel ? 'opened' : 'NOT FOUND'}`);
-
-            // Luôn auto-advance sau 1.5s (panel nếu có chỉ là visual)
-            if (this._autoAdvanceTimer) {
-                clearTimeout(this._autoAdvanceTimer);
-                this._autoAdvanceTimer = null;
+            this.stopTimer();
+            const panel = await UIManager.getInstance().openPanel('LevelCompletePanel', { levelId, score, stars, elapsedSeconds: this._elapsedSeconds });
+            if (!panel) {
+                this.returnToMenu();
             }
-            this._autoAdvanceTimer = setTimeout(async () => {
-                this._autoAdvanceTimer = null;
-                UIManager.getInstance().closePanel('LevelCompletePanel');
-                const nextLevel = levelId + 1;
-                console.log(`[GM_DEBUG] Auto-advancing from level=${levelId} to nextLevel=${nextLevel}`);
-                await this.startLevel(nextLevel);
-            }, 1500);
         } catch (err) {
-            console.error('[GameManager] onLevelCompleted ERROR:', err);
             this.returnToMenu();
         }
     }
 
     private async onLevelFailed(levelId: number): Promise<void> {
         try {
-            console.warn(`[GM_DEBUG] LEVEL_FAILED received level=${levelId} currentState=${this._currentState}`);
-            UIManager.getInstance().closePanel('GameplayPanel');
+            this.stopTimer();
             const panel = await UIManager.getInstance().openPanel('LevelFailedPanel', { levelId });
             if (!panel) {
-                console.warn(`[GM_DEBUG] LevelFailedPanel not found, auto-restarting level=${levelId}`);
-                await this.startLevel(levelId);
+                this.returnToMenu();
             }
         } catch (err) {
-            console.error('[GameManager] onLevelFailed ERROR:', err);
             this.returnToMenu();
         }
     }
+
 
     /** Khởi tạo tuần tự các hệ thống */
     private async initializeGame(): Promise<void> {
         this.setState(GameState.LOADING);
 
-        console.log('[GameManager] Initializing...');
-        console.log('[GameManager] SkinManager.Instance =', (SkinManager as any).Instance);
-        console.log('[GameManager] TileManager.Instance =', (TileManager as any).Instance);
-        console.log('[GameManager] AudioManager.Instance =', (AudioManager as any).Instance);
-        console.log('[GameManager] UIManager.Instance =', (UIManager as any).Instance);
-
+                                        
         await ConfigManager.getInstance().loadConfig();
 
         const skinMgr = SkinManager.getInstance();
         if (!skinMgr) {
-            console.error('[GameManager] SkinManager.getInstance() returned null. Ensure a scene node has SkinManager.ts attached.');
-            return;
+                        return;
         }
         if (typeof skinMgr.loadDefaultSkin !== 'function') {
-            console.error('[GameManager] SkinManager instance missing loadDefaultSkin. Instance type:', typeof skinMgr, 'Keys:', Object.keys(skinMgr));
-            return;
+                        return;
         }
         await skinMgr.loadDefaultSkin();
 
         const audioMgr = AudioManager.getInstance();
         if (!audioMgr) {
-            console.error('[GameManager] AudioManager.getInstance() returned null. Ensure a scene node has AudioManager.ts attached.');
-            return;
+                        return;
         }
         await audioMgr.initialize();
 
@@ -166,8 +207,7 @@ export class GameManager extends Component {
 
         const savedLevel = SaveManager.getInstance().getCurrentLevel();
         if (savedLevel > 0) {
-            console.log(`[GameManager] Resuming saved level ${savedLevel}`);
-            await this.startLevel(savedLevel);
+                        await this.startLevel(savedLevel);
         } else {
             UIManager.getInstance().openPanel('LevelSelectPanel');
         }
@@ -178,8 +218,7 @@ export class GameManager extends Component {
         return new Promise((resolve) => {
             if (this.tilePrefab) {
                 PoolManager.getInstance().registerPrefab('tile_default', this.tilePrefab);
-                console.log('[GameManager] Registered tile_default prefab from Inspector assignment.');
-                resolve();
+                                resolve();
                 return;
             }
 
@@ -187,13 +226,11 @@ export class GameManager extends Component {
             // Prefab must be placed under assets/resources/prefabs/tiles/
             resources.load('prefabs/tiles/tile_default', Prefab, (err, prefab) => {
                 if (err) {
-                    console.warn('[GameManager] tile_default prefab not found at resources/prefabs/tiles/tile_default. Tile spawning will create new instances instead of pooling.');
-                    resolve();
+                                        resolve();
                     return;
                 }
                 PoolManager.getInstance().registerPrefab('tile_default', prefab);
-                console.log('[GameManager] Registered tile_default prefab from resources.');
-                resolve();
+                                resolve();
             });
         });
     }
@@ -221,39 +258,32 @@ export class GameManager extends Component {
     /** Bắt đầu level mới */
     public async startLevel(levelId: number): Promise<void> {
         const startToken = ++this._startLevelToken;
-        if (this._autoAdvanceTimer) {
-            clearTimeout(this._autoAdvanceTimer);
-            this._autoAdvanceTimer = null;
-        }
-        console.log(`[GameManager] startLevel(${levelId}) called`);
         this.setState(GameState.GAMEPLAY);
 
         // Ensure ORDER_MATCH managers exist in scene
-        console.log('[GameManager] Calling ensureOrderManagers...');
-        this.ensureOrderManagers();
+                this.ensureOrderManagers();
 
         // Close menu panels and show loading BEFORE loading assets
         UIManager.getInstance().closePanel('LevelSelectPanel');
+        UIManager.getInstance().closePanel('LevelCompletePanel');
+        UIManager.getInstance().closePanel('LevelFailedPanel');
         UIManager.getInstance().showLoading(`Loading Level ${levelId}...`);
 
         try {
             // Load all level data, skin assets and spawn tiles first
-            console.log(`[GameManager] Calling loadLevel(${levelId})...`);
-            await LevelManager.getInstance().loadLevel(levelId);
+                        await LevelManager.getInstance().loadLevel(levelId);
             if (startToken !== this._startLevelToken) return;
-            console.log(`[GameManager] loadLevel(${levelId}) finished`);
-
+            
             // Only open GameplayPanel AFTER everything is loaded and ready
-            console.log('[GameManager] Opening GameplayPanel...');
-            const gameplayPanel = await UIManager.getInstance().openPanel('GameplayPanel');
+                        const gameplayPanel = await UIManager.getInstance().openPanel('GameplayPanel');
             if (!gameplayPanel) {
-                console.warn('[GameManager] GameplayPanel could not be opened');
-            } else {
-                console.log('[GameManager] GameplayPanel opened');
-            }
+                            } else {
+                            }
+            this.stopTimer();
+            this._elapsedSeconds = 0;
+            this.startTimer();
         } catch (err) {
-            console.error(`[GameManager] Failed to load level ${levelId}:`, err);
-            this.returnToMenu();
+                        this.returnToMenu();
         } finally {
             if (startToken === this._startLevelToken) {
                 UIManager.getInstance().hideLoading();
@@ -281,8 +311,7 @@ export class GameManager extends Component {
             orderTrayNode.addComponent(OrderTrayManager);
             orderTrayNode.setParent(effectiveParent);
             orderTrayNode.setPosition(540, 320, 0);
-            console.log('[GameManager] Created OrderTrayManager node');
-        }
+                    }
 
         if (!isManagerValid(WrongTrayManager.Instance)) {
             if (WrongTrayManager.Instance) (WrongTrayManager as any).Instance = null;
@@ -292,8 +321,7 @@ export class GameManager extends Component {
             wrongTrayNode.addComponent(WrongTrayManager);
             wrongTrayNode.setParent(effectiveParent);
             wrongTrayNode.setPosition(850, 320, 0);
-            console.log('[GameManager] Created WrongTrayManager node');
-        }
+                    }
 
         if (!isManagerValid(BoosterManager.Instance)) {
             if (BoosterManager.Instance) (BoosterManager as any).Instance = null;
@@ -301,8 +329,7 @@ export class GameManager extends Component {
             boosterNode.layer = effectiveParent?.layer ?? 0;
             boosterNode.addComponent(BoosterManager);
             boosterNode.setParent(effectiveParent);
-            console.log('[GameManager] Created BoosterManager node');
-        }
+                    }
     }
 
     /** Tạm dừng game */
@@ -321,10 +348,7 @@ export class GameManager extends Component {
 
     /** Thoát về menu */
     public returnToMenu(): void {
-        if (this._autoAdvanceTimer) {
-            clearTimeout(this._autoAdvanceTimer);
-            this._autoAdvanceTimer = null;
-        }
+        this.stopTimer();
         this.setState(GameState.MAIN_MENU);
         LevelManager.getInstance().unloadCurrentLevel();
         UIManager.getInstance().closePanel('GameplayPanel');
@@ -339,10 +363,6 @@ export class GameManager extends Component {
             GameManager.Instance = null;
             EventBus.getInstance().off(GameEvent.LEVEL_COMPLETED, this.onLevelCompleted, this);
             EventBus.getInstance().off(GameEvent.LEVEL_FAILED, this.onLevelFailed, this);
-            if (this._autoAdvanceTimer) {
-                clearTimeout(this._autoAdvanceTimer);
-                this._autoAdvanceTimer = null;
-            }
             input.off(Input.EventType.KEY_DOWN, this.onKeyDown, this);
             if (this.levelJumpOk) {
                 this.levelJumpOk.node.off(Button.EventType.CLICK, this.onClickLevelJump, this);
@@ -365,5 +385,26 @@ export class GameManager extends Component {
         if (this.levelJumpInput) {
             this.levelJumpInput.string = '';
         }
+    }
+
+    private startTimer(): void {
+        if (this._timerRunning) return;
+        this._timerRunning = true;
+        this.schedule(this._timerTick, 1);
+    }
+
+    private stopTimer(): void {
+        if (!this._timerRunning) return;
+        this._timerRunning = false;
+        this.unschedule(this._timerTick);
+    }
+
+    private _timerTick(): void {
+        this._elapsedSeconds++;
+        EventBus.getInstance().emit(GameEvent.LEVEL_TIME_UPDATED, this._elapsedSeconds);
+    }
+
+    public getElapsedSeconds(): number {
+        return this._elapsedSeconds;
     }
 }

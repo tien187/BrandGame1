@@ -45,6 +45,7 @@ export class TileManager extends Component {
     private _isInputLocked: boolean = false;
     private _enforceGroupMatchBlock: boolean = true;
     private _lifecycleId: number = 0;
+    private _tileContainerOriginalPos: Vec3 | null = null;
 
     public static getInstance(): TileManager {
         return TileManager.Instance;
@@ -56,6 +57,9 @@ export class TileManager extends Component {
             return;
         }
         TileManager.Instance = this;
+        if (this.tileContainer && this.tileContainer.isValid) {
+            this._tileContainerOriginalPos = this.tileContainer.position.clone();
+        }
     }
 
     /** Spawn tiles từ level data. animateDrop=true sẽ chơi animation rơi từ trên xuống theo thứ tự layer dưới trước. */
@@ -143,8 +147,7 @@ export class TileManager extends Component {
         const uiTransform = node.getComponent(UITransform);
         const visualNode = node.getChildByName('visual');
         const visualTransform = visualNode?.getComponent(UITransform);
-        console.log(`[TileManager] createTileNode id=${data.id} group=${data.groupId} nodeSize=${uiTransform?.width || 0}x${uiTransform?.height || 0} visualSize=${visualTransform?.width || 0}x${visualTransform?.height || 0} scale=${node.scale.x.toFixed(2)},${node.scale.y.toFixed(2)}`);
-
+        
         // Reset và khởi tạo lại component Tile từ pool TRƯỚC khi set vị trí / skin
         const tileComponent = node.getComponent('Tile') || node.addComponent('Tile');
         if (tileComponent) {
@@ -223,8 +226,7 @@ export class TileManager extends Component {
             const currentSkin = skinMgr.getCurrentSkin();
             const skinId = currentSkin?.skinId || 'default';
             if (typeof data.groupId !== 'string') {
-                console.warn(`[TileManager] Invalid groupId for tile ${data.id}: expected string, got ${typeof data.groupId}`, data.groupId);
-                return;
+                                return;
             }
             skinOverride = `${skinId}/${data.groupId}`;
         }
@@ -431,7 +433,12 @@ export class TileManager extends Component {
             if (node) {
                 const tileComp = node.getComponent('Tile') as any;
                 if (tileComp) {
-                    if (forceVisual && tileComp.forceUpdateVisualState) {
+                    const isInTray = trayTiles.some(t => t.id === data.id);
+                    if (isInTray && tileComp.setTrayVisual) {
+                        tileComp.setTrayVisual();
+                    } else if (forceVisual && tileComp.forceUpdateBoardVisualState) {
+                        tileComp.forceUpdateBoardVisualState();
+                    } else if (forceVisual && tileComp.forceUpdateVisualState) {
                         tileComp.forceUpdateVisualState();
                     } else {
                         tileComp.updateVisualState();
@@ -537,7 +544,12 @@ export class TileManager extends Component {
     public shakeAllTiles(): void {
         if (!this.tileContainer || !this.tileContainer.isValid) return;
         const node = this.tileContainer;
-        const originalPos = node.position.clone();
+        Tween.stopAllByTarget(node);
+        if (!this._tileContainerOriginalPos) {
+            this._tileContainerOriginalPos = node.position.clone();
+        }
+        const originalPos = this._tileContainerOriginalPos;
+        node.setPosition(originalPos);
         tween(node)
             .to(0.05, { position: new Vec3(originalPos.x - 8, originalPos.y, originalPos.z) })
             .to(0.05, { position: new Vec3(originalPos.x + 8, originalPos.y, originalPos.z) })

@@ -61,8 +61,7 @@ export class OrderManagerTest extends Component {
         this._results.push(summary);
 
         const output = this._results.join('\n');
-        console.log(output);
-        if (this.resultLabel) {
+                if (this.resultLabel) {
             this.resultLabel.string = output;
         }
     }

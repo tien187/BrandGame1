@@ -65,8 +65,7 @@ export function runSmartLevelGeneratorTests(): TestRunner {
             const level = SmartLevelGenerator.generate(10, defaultDifficulty, groupIds);
             const result = LevelSolver.validate(level);
             if (!result.valid) {
-                console.error('Validation errors:', result.errors);
-            }
+                            }
             t.assertTrue(result.valid, `Level should be valid: ${result.errors.join('; ')}`);
         });
 

@@ -3,32 +3,90 @@
   "displayName": "Default Skin",
   "assets": {
     "tiles": [
-      { "key": "tile_0", "path": "skins/default/tiles/apple", "assetType": "sprite" },
-      { "key": "tile_1", "path": "skins/default/tiles/banana", "assetType": "sprite" },
-      { "key": "tile_2", "path": "skins/default/tiles/cherry", "assetType": "sprite" }
+      {
+        "key": "tile_0",
+        "path": "skins/default/tiles/apple",
+        "assetType": "sprite"
+      },
+      {
+        "key": "tile_1",
+        "path": "skins/default/tiles/banana",
+        "assetType": "sprite"
+      },
+      {
+        "key": "tile_2",
+        "path": "skins/default/tiles/cherry",
+        "assetType": "sprite"
+      }
     ],
     "background": [
-      { "key": "bg_gameplay", "path": "skins/default/bg/bg_gameplay", "assetType": "sprite" }
+      {
+        "key": "bg_gameplay",
+        "path": "skins/default/bg/bg_gameplay",
+        "assetType": "sprite"
+      }
     ],
     "board": [
-      { "key": "board_frame", "path": "skins/default/board/frame", "assetType": "sprite" }
+      {
+        "key": "board_frame",
+        "path": "skins/default/board/frame",
+        "assetType": "sprite"
+      }
     ],
     "tray": [
-      { "key": "tray_bg", "path": "skins/default/tray/tray_bg", "assetType": "sprite" }
+      {
+        "key": "tray_bg",
+        "path": "skins/default/tray/tray_bg",
+        "assetType": "sprite"
+      }
     ],
     "ui": [
-      { "key": "panel_mainmenu", "path": "prefabs/ui/panel_mainmenu", "assetType": "prefab" },
-      { "key": "panel_GameplayPanel", "path": "prefabs/ui/panel_gameplay", "assetType": "prefab" },
-      { "key": "panel_LevelSelectPanel", "path": "prefabs/ui/panel_levelselect", "assetType": "prefab" }
+      {
+        "key": "panel_mainmenu",
+        "path": "prefabs/ui/panel_mainmenu",
+        "assetType": "prefab"
+      },
+      {
+        "key": "panel_GameplayPanel",
+        "path": "prefabs/ui/panel_gameplay",
+        "assetType": "prefab"
+      },
+      {
+        "key": "panel_LevelSelectPanel",
+        "path": "prefabs/ui/panel_levelselect",
+        "assetType": "prefab"
+      },
+      {
+        "key": "panel_LevelCompletePanel",
+        "path": "prefabs/ui/panel_win",
+        "assetType": "prefab"
+      },
+      {
+        "key": "panel_LevelFailedPanel",
+        "path": "prefabs/ui/panel_lose",
+        "assetType": "prefab"
+      }
     ],
     "particle": [
-      { "key": "fx_match", "path": "skins/default/fx/match", "assetType": "particle" }
+      {
+        "key": "fx_match",
+        "path": "skins/default/fx/match",
+        "assetType": "particle"
+      }
     ],
     "audio": [
-      { "key": "bgm_main", "path": "skins/default/audio/bgm_main", "assetType": "audio" }
+      {
+        "key": "bgm_main",
+        "path": "skins/default/audio/bgm_main",
+        "assetType": "audio"
+      }
     ],
     "font": [
-      { "key": "default_font", "path": "skins/default/font/main", "assetType": "font" }
+      {
+        "key": "default_font",
+        "path": "skins/default/font/main",
+        "assetType": "font"
+      }
     ]
   },
   "themeColors": {
@@ -38,5 +96,31 @@
     "background": "#F5F5F5"
   },
   "defaultFont": "default_font",
-  "itemGroups": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
+  "itemGroups": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24"
+  ]
 }

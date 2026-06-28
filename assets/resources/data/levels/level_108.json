@@ -120,6 +120,14 @@
         "7",
         "1"
       ]
+    },
+    {
+      "id": "order_008",
+      "items": [
+        "6",
+        "10",
+        "3"
+      ]
     }
   ],
   "solutionOrders": [
@@ -157,6 +165,11 @@
       "1",
       "7",
       "1"
+    ],
+    [
+      "6",
+      "10",
+      "3"
     ]
   ],
   "solutionMoveTileIds": [
@@ -564,7 +577,7 @@
     "difficultyIndex": 8,
     "shapeName": "crown_step",
     "totalTiles": 24,
-    "orderCount": 7,
+    "orderCount": 8,
     "distinctItemCount": 12,
     "maxLayers": 2,
     "startingSelectableTiles": 12,

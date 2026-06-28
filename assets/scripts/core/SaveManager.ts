@@ -21,8 +21,7 @@ export class SaveManager {
         try {
             sys.localStorage.setItem(SaveManager.KEY, `${levelId}`);
         } catch (err) {
-            console.warn('[SaveManager] Failed to save current level:', err);
-        }
+                    }
     }
 
     public getCurrentLevel(): number {
@@ -32,8 +31,7 @@ export class SaveManager {
             const num = parseInt(value, 10);
             return isNaN(num) ? 0 : num;
         } catch (err) {
-            console.warn('[SaveManager] Failed to load current level:', err);
-            return 0;
+                        return 0;
         }
     }
 
@@ -41,8 +39,7 @@ export class SaveManager {
         try {
             sys.localStorage.removeItem(SaveManager.KEY);
         } catch (err) {
-            console.warn('[SaveManager] Failed to clear save:', err);
-        }
+                    }
     }
 
     public static reset(): void {

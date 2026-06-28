@@ -64,32 +64,26 @@ export class BoardManager extends Component {
     private _gridCells: Map<string, ITileData[]> = new Map();
 
     protected onLoad(): void {
-        console.log(`[BoardManager] onLoad called, existingInstance=${BoardManager.Instance ? 'YES' : 'NULL'}, this.node=${this.node?.name || 'NO_NODE'}`);
-        if (BoardManager.Instance) {
-            console.warn(`[BoardManager] DESTROYING duplicate instance on node ${this.node?.name}`);
-            this.destroy();
+                if (BoardManager.Instance) {
+                        this.destroy();
             return;
         }
         BoardManager.Instance = this;
-        console.log(`[BoardManager] Instance set to node ${this.node?.name}`);
-    }
+            }
 
     /** Xây dựng board theo config */
     public buildBoard(config: IBoardConfig): void {
-        console.log(`[BoardManager] buildBoard called, rows=${config.rows}, cols=${config.cols}, spacing=${config.tileSpacing}`);
-        this._config = config;
+                this._config = config;
         this._gridCells.clear();
     }
 
     /** Tính world position từ gridX, gridY, layer */
     public getWorldPosition(gridX: number, gridY: number, layer: number): Vec3 {
         if (!this._config) {
-            console.warn(`[BoardManager] getWorldPosition: _config is null! grid=(${gridX},${gridY})`);
-            return Vec3.ZERO;
+                        return Vec3.ZERO;
         }
         if (!Number.isFinite(gridX) || !Number.isFinite(gridY) || !Number.isFinite(layer)) {
-            console.warn(`[BoardManager] getWorldPosition: non-finite values! gridX=${gridX}, gridY=${gridY}, layer=${layer}`);
-            return Vec3.ZERO;
+                        return Vec3.ZERO;
         }
 
         const center = BoardPositionHelper.getTileCenter({ gridX, gridY, layer }, this._config);

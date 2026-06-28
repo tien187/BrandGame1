@@ -211,6 +211,14 @@
         "14",
         "7"
       ]
+    },
+    {
+      "id": "order_018",
+      "items": [
+        "14",
+        "12",
+        "1"
+      ]
     }
   ],
   "solutionOrders": [
@@ -298,6 +306,11 @@
       "7",
       "14",
       "7"
+    ],
+    [
+      "14",
+      "12",
+      "1"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1185,7 +1198,7 @@
     "difficultyIndex": 30,
     "shapeName": "crystal_fan",
     "totalTiles": 54,
-    "orderCount": 17,
+    "orderCount": 18,
     "distinctItemCount": 19,
     "maxLayers": 4,
     "startingSelectableTiles": 11,

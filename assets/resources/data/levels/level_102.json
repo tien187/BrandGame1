@@ -104,6 +104,14 @@
         "5",
         "3"
       ]
+    },
+    {
+      "id": "order_006",
+      "items": [
+        "9",
+        "2",
+        "9"
+      ]
     }
   ],
   "solutionOrders": [
@@ -131,6 +139,11 @@
       "4",
       "5",
       "3"
+    ],
+    [
+      "9",
+      "2",
+      "9"
     ]
   ],
   "solutionMoveTileIds": [
@@ -442,7 +455,7 @@
     "difficultyIndex": 2,
     "shapeName": "x_knot",
     "totalTiles": 18,
-    "orderCount": 5,
+    "orderCount": 6,
     "distinctItemCount": 10,
     "maxLayers": 2,
     "startingSelectableTiles": 10,

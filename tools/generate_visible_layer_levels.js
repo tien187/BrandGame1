@@ -791,13 +791,3 @@ for (let idx = 0; idx < levels.length; idx++) {
   });
 }
 
-console.log(JSON.stringify({
-  generated: summary.length,
-  uniqueShapes: signatures.size,
-  layers: summary.reduce((m, s) => (m[s.layers] = (m[s.layers] || 0) + 1, m), {}),
-  first: summary[0],
-  mid: summary[24],
-  last: summary[49],
-  minTiles: Math.min(...summary.map(s => s.tiles)),
-  maxTiles: Math.max(...summary.map(s => s.tiles)),
-}, null, 2));

@@ -172,9 +172,13 @@ export class Tile extends Component {
         if (this._glowTween) { this._glowTween.stop(); this._glowTween = null; }
         if (this._unlockTween) { this._unlockTween.stop(); this._unlockTween = null; }
         this._isGlowing = false;
-        this._isInTrayVisual = false;
         this._lastVisualState = null;
         this.updateVisualState();
+    }
+
+    public forceUpdateBoardVisualState(): void {
+        this._isInTrayVisual = false;
+        this.forceUpdateVisualState();
     }
 
     public setSelected(selected: boolean): void {

@@ -240,6 +240,14 @@
         "0",
         "0"
       ]
+    },
+    {
+      "id": "order_021",
+      "items": [
+        "11",
+        "11",
+        "13"
+      ]
     }
   ],
   "solutionOrders": [
@@ -342,6 +350,11 @@
       "0",
       "0",
       "0"
+    ],
+    [
+      "11",
+      "11",
+      "13"
     ]
   ],
   "solutionMoveTileIds": [
@@ -1373,7 +1386,7 @@
     "difficultyIndex": 38,
     "shapeName": "mask_shape",
     "totalTiles": 63,
-    "orderCount": 20,
+    "orderCount": 21,
     "distinctItemCount": 22,
     "maxLayers": 4,
     "startingSelectableTiles": 20,

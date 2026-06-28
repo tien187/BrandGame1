@@ -272,6 +272,14 @@
         "9",
         "9"
       ]
+    },
+    {
+      "id": "order_025",
+      "items": [
+        "0",
+        "9",
+        "9"
+      ]
     }
   ],
   "solutionOrders": [
@@ -392,6 +400,11 @@
     ],
     [
       "9",
+      "9",
+      "9"
+    ],
+    [
+      "0",
       "9",
       "9"
     ]
@@ -1617,7 +1630,7 @@
     "difficultyIndex": 48,
     "shapeName": "compass_mark",
     "totalTiles": 75,
-    "orderCount": 24,
+    "orderCount": 25,
     "distinctItemCount": 25,
     "maxLayers": 5,
     "startingSelectableTiles": 15,

@@ -28,6 +28,7 @@ export class OrderManager {
     private _isActive: boolean = false;
     private _pendingTrayCheck: any = null;
     private _isPendingTrayCheck: boolean = false;
+    private _isCompletingOrder: boolean = false;
     private _submittedTileIds: Set<string> = new Set();
     private readonly _trayCheckDelay: number = 0.5;
 
@@ -49,6 +50,7 @@ export class OrderManager {
         this._currentOrderIndex = 0;
         this._currentItemIndex = 0;
         this._isActive = true;
+        this._isCompletingOrder = false;
         this._resetOrderTracking();
         this._submittedTileIds.clear();
         EventBus.getInstance().on(GameEvent.TILE_ADDED_TO_TRAY, this.onTileAddedToTray, this);
@@ -74,6 +76,9 @@ export class OrderManager {
 
     private onTraySettled(): void {
         if (!this._isActive) return;
+        if (this._isCompletingOrder) {
+            return;
+        }
         const order = this.getCurrentOrder();
         if (!order) return;
 
@@ -167,8 +172,7 @@ export class OrderManager {
         }
 
         EventBus.getInstance().emit(GameEvent.ORDER_ITEM_WRONG, tileData);
-        console.log(`[OM_DEBUG] WRONG tile=${tileData.id}:${tileData.groupId} expected=${this.getExpectedItem()}`);
-        return { correct: false, orderComplete: false };
+                return { correct: false, orderComplete: false };
     }
 
     /**
@@ -223,32 +227,62 @@ export class OrderManager {
 
     public completeCurrentOrder(tileIds?: string[]): void {
         const completedOrder = this.getCurrentOrder();
-        console.log(`[OM_DEBUG] completeCurrentOrder index=${this._currentOrderIndex}/${this._orders.length} orderId=${completedOrder?.id || '?'} tileIds=${tileIds?.join(',') || 'none'}`);
-        EventBus.getInstance().emit(GameEvent.ORDER_COMPLETED, completedOrder, this._currentOrderIndex, tileIds);
+        let completedTileIds = tileIds;
+        if ((!completedTileIds || completedTileIds.length === 0) && completedOrder) {
+            const matchedTiles = this.findOrderMatchInTray(completedOrder, TrayManager.getInstance().getSettledTrayTiles());
+            completedTileIds = matchedTiles?.map(t => t.id);
+        }
+        const willCompleteAllOrders = this._currentOrderIndex + 1 >= this._orders.length;
+
+        if (willCompleteAllOrders && completedTileIds && completedTileIds.length > 0) {
+            this._isCompletingOrder = true;
+            let finalized = false;
+            const finalizeFinalOrder = () => {
+                if (finalized) return;
+                if (!this._isActive || !this._isCompletingOrder) {
+                    return;
+                }
+                finalized = true;
+                this._isCompletingOrder = false;
+                this._currentOrderIndex++;
+                this._currentItemIndex = 0;
+                this._submittedTileIds.clear();
+                EventBus.getInstance().emit(GameEvent.ALL_ORDERS_COMPLETED);
+            };
+
+            EventBus.getInstance().once(GameEvent.ORDER_TILES_CLEARED, finalizeFinalOrder, this);
+            EventBus.getInstance().emit(GameEvent.ORDER_COMPLETED, completedOrder, this._currentOrderIndex, completedTileIds);
+            if (!TrayManager.getInstance().isClearingOrderTiles()) {
+                setTimeout(finalizeFinalOrder, 0);
+            }
+            return;
+        }
+
+                EventBus.getInstance().emit(GameEvent.ORDER_COMPLETED, completedOrder, this._currentOrderIndex, completedTileIds);
 
         this._currentOrderIndex++;
         this._currentItemIndex = 0;
         this._submittedTileIds.clear();
 
         if (this._currentOrderIndex >= this._orders.length) {
-            console.log(`[OM_DEBUG] emitting ALL_ORDERS_COMPLETED index=${this._currentOrderIndex}/${this._orders.length}`);
             EventBus.getInstance().emit(GameEvent.ALL_ORDERS_COMPLETED);
         } else {
             this._resetOrderTracking();
             EventBus.getInstance().emit(GameEvent.ORDER_CHANGED, this.getCurrentOrder(), this._currentOrderIndex);
-            this._clearPendingTrayCheck();
-            this._isPendingTrayCheck = true;
-            this._pendingTrayCheck = setTimeout(() => {
-                this._isPendingTrayCheck = false;
-                this._pendingTrayCheck = null;
-                this.checkTrayMatchCurrentOrder();
-            }, this._trayCheckDelay * 1000);
+            this._scheduleTrayCheck();
         }
     }
 
     private checkTrayMatchCurrentOrder(): void {
+        if (this._isCompletingOrder) {
+            return;
+        }
         const order = this.getCurrentOrder();
         if (!order) return;
+        if (TrayManager.getInstance().isClearingOrderTiles() || TrayManager.getInstance().getFlyCount() > 0) {
+            this._scheduleTrayCheck(0.1);
+            return;
+        }
 
         const trayTiles = TrayManager.getInstance().getSettledTrayTiles();
         const matchedTiles = this.findOrderMatchInTray(order, trayTiles);
@@ -286,6 +320,7 @@ export class OrderManager {
         this._currentOrderRemainingItems = [];
         this._currentOrderMatchedTileIds = [];
         this._submittedTileIds.clear();
+        this._isCompletingOrder = false;
         this._isActive = false;
     }
 
@@ -295,6 +330,16 @@ export class OrderManager {
             this._pendingTrayCheck = null;
         }
         this._isPendingTrayCheck = false;
+    }
+
+    private _scheduleTrayCheck(delaySeconds: number = this._trayCheckDelay): void {
+        this._clearPendingTrayCheck();
+        this._isPendingTrayCheck = true;
+        this._pendingTrayCheck = setTimeout(() => {
+            this._isPendingTrayCheck = false;
+            this._pendingTrayCheck = null;
+            this.checkTrayMatchCurrentOrder();
+        }, delaySeconds * 1000);
     }
 
     public isPendingTrayCheck(): boolean {
@@ -318,6 +363,7 @@ export class OrderManager {
         this._currentOrderRemainingItems = [...snapshot.currentOrderRemainingItems];
         this._currentOrderMatchedTileIds = [...snapshot.currentOrderMatchedTileIds];
         this._submittedTileIds = new Set(snapshot.submittedTileIds);
+        this._isCompletingOrder = false;
         EventBus.getInstance().emit(GameEvent.ORDER_CHANGED, this.getCurrentOrder(), this._currentOrderIndex);
     }
 
