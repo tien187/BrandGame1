@@ -34,6 +34,7 @@ export class SkinManager extends Component {
 
     /** Load skin theo ID */
     public async loadSkin(skinId: string): Promise<void> {
+        if (this._currentSkin?.skinId === skinId) return;
         const loadToken = ++this._skinLoadToken;
         const path = `data/skins/${skinId}_skin`;
         const skin = await DataLoader.loadJson<ISkinConfig>(path);
@@ -67,11 +68,15 @@ export class SkinManager extends Component {
                         return;
         }
         const itemId = normalizeItemId(item);
-        const key = `tile_${itemId}`;
-        
         // Tăng applyId để tránh promise cũ gán sprite lên node đã được reuse
         const applyId = ((node as any).__skinApplyId || 0) + 1;
         (node as any).__skinApplyId = applyId;
+
+        const cachedSprite = this.getCachedTileSprite(itemId);
+        if (cachedSprite) {
+            this.assignTileSprite(node, cachedSprite, applyId);
+            return;
+        }
 
         this.getTileSprite(itemId).then((spriteFrame) => {
             if (!node || !node.isValid) return;
@@ -109,15 +114,54 @@ export class SkinManager extends Component {
     }
 
     /** Preload sprite cho tất cả groupId để tránh async hitch khi spawn tile */
-    public async prewarmSkinSprites(groupIds: string[]): Promise<void> {
+    public async prewarmSkinSprites(groupIds?: string[]): Promise<void> {
         if (!this._currentSkin) return;
-        const validIds = (Array.isArray(groupIds) ? groupIds : [])
-            .filter(gid => typeof gid === 'string');
+        const tileAssets = this._currentSkin.assets[SkinCategory.TILES] || [];
+        const allSkinIds = tileAssets
+            .map(asset => asset.key)
+            .filter(key => key.startsWith('tile_'))
+            .map(key => normalizeItemId(key.substring('tile_'.length)));
+        const requestedIds = (Array.isArray(groupIds) ? groupIds : allSkinIds)
+            .filter(gid => typeof gid === 'string')
+            .map(gid => normalizeItemId(gid));
+        const validIds = [...new Set(requestedIds.length > 0 ? requestedIds : allSkinIds)];
         if (validIds.length === 0) {
                         return;
         }
         const promises = validIds.map(gid => this.getTileSprite(normalizeItemId(gid)));
         await Promise.all(promises);
+    }
+
+    private getCachedTileSprite(itemId: string): SpriteFrame | null {
+        const exactKey = `${SkinCategory.TILES}_tile_${normalizeItemId(itemId)}`;
+        const exact = this._assetCache.get(exactKey);
+        if (exact) return exact as SpriteFrame;
+
+        const tileAssets = this._currentSkin?.assets[SkinCategory.TILES] || [];
+        const availableIds = ITEM_ID_GROUPS.filter(id =>
+            tileAssets.some(asset => asset.key === `tile_${id}`)
+        );
+        if (availableIds.length === 0) return null;
+
+        const fallbackId = availableIds[Number(itemId) % availableIds.length];
+        return (this._assetCache.get(`${SkinCategory.TILES}_tile_${fallbackId}`) as SpriteFrame) || null;
+    }
+
+    private assignTileSprite(node: Node, spriteFrame: SpriteFrame, applyId: number): void {
+        if (!node || !node.isValid) return;
+        if ((node as any).__skinApplyId !== applyId) return;
+
+        const visualNode = node.getChildByName('visual');
+        const sprite = visualNode?.getComponent(Sprite) || node.getComponentInChildren(Sprite);
+        if (!sprite) return;
+
+        sprite.spriteFrame = spriteFrame;
+        const tileComp = node.getComponent('Tile') as any;
+        if (tileComp && tileComp.forceUpdateVisualState) {
+            tileComp.forceUpdateVisualState();
+        } else if (tileComp && tileComp.updateVisualState) {
+            tileComp.updateVisualState();
+        }
     }
 
     private async getTileSprite(itemId: string): Promise<SpriteFrame | null> {

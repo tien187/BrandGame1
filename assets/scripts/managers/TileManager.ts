@@ -346,6 +346,10 @@ export class TileManager extends Component {
         }
     }
 
+    public sortTileNodesByLayer(): void {
+        this._sortTileNodesByLayer();
+    }
+
     /** Xóa tile khỏi board (khi đã match) */
     public removeTile(tileId: string): void {
         const data = this._tileDataMap.get(tileId);
@@ -504,7 +508,7 @@ export class TileManager extends Component {
             }
         }
         this._sortTileNodesByLayer();
-        this.refreshBlockStatus();
+        this.refreshBlockStatus(true);
     }
 
     /** Clear tất cả tiles */

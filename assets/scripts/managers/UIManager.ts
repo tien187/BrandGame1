@@ -39,6 +39,20 @@ export class UIManager extends Component {
         this.uiRoot = uiRoot || this.node;
     }
 
+    public async preloadPanel(panelName: string): Promise<void> {
+        if (this._panelMap.has(panelName)) return;
+        let prefab = this._prefabCache.get(panelName) || null;
+        if (!prefab) {
+            prefab = await SkinManager.getInstance().getPanelPrefab(panelName);
+            if (prefab) this._prefabCache.set(panelName, prefab);
+        }
+        if (prefab) this.createPanelInstance(panelName, prefab, false);
+    }
+
+    public async preloadPanels(panelNames: string[]): Promise<void> {
+        await Promise.all(panelNames.map(panelName => this.preloadPanel(panelName)));
+    }
+
     /** Mở panel theo tên */
     public async openPanel(panelName: string, data?: any): Promise<BasePanel | null> {
         if (this._panelMap.has(panelName)) {
@@ -50,15 +64,24 @@ export class UIManager extends Component {
             return panel;
         }
 
-        const prefab = await SkinManager.getInstance().getPanelPrefab(panelName);
+        let prefab = this._prefabCache.get(panelName) || null;
+        if (!prefab) {
+            prefab = await SkinManager.getInstance().getPanelPrefab(panelName);
+            if (prefab) this._prefabCache.set(panelName, prefab);
+        }
         if (!prefab) {
             return null;
         }
+
+        return this.createPanelInstance(panelName, prefab, true, data);
+    }
+
+    private createPanelInstance(panelName: string, prefab: Prefab, showNow: boolean, data?: any): BasePanel | null {
         if (!this.uiRoot) {
             return null;
         }
-
         const node = instantiate(prefab);
+        node.name = panelName;
         node.layer = this.popupLayer?.layer ?? this.uiRoot.layer;
         node.setParent(this.popupLayer || this.uiRoot);
         node.setPosition(0, 0, 0);
@@ -66,12 +89,17 @@ export class UIManager extends Component {
         const panel = node.getComponent(BasePanel);
         if (panel) {
             panel.initialize(this);
-            panel.show(data);
             this._panelMap.set(panelName, panel);
-            this._panelStack.push(panelName);
+            if (showNow) {
+                panel.show(data);
+                this._panelStack.push(panelName);
+            } else {
+                node.active = false;
+            }
             return panel;
         }
 
+        node.destroy();
         return null;
     }
 

@@ -69,6 +69,8 @@ export class GameplayPanel extends BasePanel {
         EventBus.getInstance().on(GameEvent.LEVEL_FAILED, this.onLevelEnded, this);
         EventBus.getInstance().on(GameEvent.HINT_FAILED, this.onHintFailed, this);
         EventBus.getInstance().on(GameEvent.LEVEL_TIME_UPDATED, this.onLevelTimeUpdated, this);
+        EventBus.getInstance().on(GameEvent.TILE_ADDED_TO_TRAY, this.onTrayMotionChanged, this);
+        EventBus.getInstance().on(GameEvent.TRAY_SETTLED, this.onTrayMotionChanged, this);
         this.bindBoosterButtons();
         this.updateBoosterUI();
     }
@@ -82,6 +84,8 @@ export class GameplayPanel extends BasePanel {
         EventBus.getInstance().off(GameEvent.LEVEL_FAILED, this.onLevelEnded, this);
         EventBus.getInstance().off(GameEvent.HINT_FAILED, this.onHintFailed, this);
         EventBus.getInstance().off(GameEvent.LEVEL_TIME_UPDATED, this.onLevelTimeUpdated, this);
+        EventBus.getInstance().off(GameEvent.TILE_ADDED_TO_TRAY, this.onTrayMotionChanged, this);
+        EventBus.getInstance().off(GameEvent.TRAY_SETTLED, this.onTrayMotionChanged, this);
         this.unbindBoosterButtons();
     }
 
@@ -125,6 +129,10 @@ export class GameplayPanel extends BasePanel {
     private onLevelTimeUpdated(seconds: number): void {
         this._elapsedSeconds = seconds;
         if (this.timeLabel) this.timeLabel.string = this.formatTime(seconds);
+    }
+
+    private onTrayMotionChanged(): void {
+        this.updateBoosterUI();
     }
 
     private formatTime(totalSeconds: number): string {

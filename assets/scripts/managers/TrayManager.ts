@@ -108,9 +108,7 @@ export class TrayManager extends Component {
             this.compactTray();
             this.updateSlotLabel();
             // Sau khi remove, nếu tray vẫn đầy → emit TRAY_FULL
-            if (this.isFull()) {
-                EventBus.getInstance().emit(GameEvent.TRAY_FULL);
-            }
+            this.emitTrayFullIfNeeded();
         }, 0.25);
     }
 
@@ -158,9 +156,7 @@ export class TrayManager extends Component {
             this.playOrderConsumeTileEffect(tileIds[i], matchedNodes.get(tileIds[i]), orderTargetWorldPos, i, tileIds.length, lifecycleId, onEffectComplete);
         }
 
-        if (this.isFull()) {
-                        EventBus.getInstance().emit(GameEvent.TRAY_FULL);
-        }
+        this.emitTrayFullIfNeeded();
     }
 
     private playOrderConsumeTileEffect(
@@ -351,9 +347,7 @@ export class TrayManager extends Component {
                 EventBus.getInstance().emit(GameEvent.TRAY_SETTLED);
             }
             // Sau khi OrderManager xử lý xong (cùng frame), check tray full
-            if (this.isFull()) {
-                EventBus.getInstance().emit(GameEvent.TRAY_FULL);
-            }
+            this.emitTrayFullIfNeeded();
         };
 
         if (node && this.trayContainer) {
@@ -667,6 +661,19 @@ export class TrayManager extends Component {
         const curr = this._trayTiles.length;
         const max = this.getMaxSlots();
         this.slotLabel.string = `${curr} / ${max}`;
+    }
+
+    private emitTrayFullIfNeeded(): void {
+        if (!this.isFull()) return;
+        const orderManager = OrderManager.getInstance();
+        if (orderManager.isActive()) {
+            if (this.isClearingOrderTiles()) return;
+            if (orderManager.isPendingTrayCheck()) {
+                this.scheduleOnce(() => this.emitTrayFullIfNeeded(), 0.1);
+                return;
+            }
+        }
+        EventBus.getInstance().emit(GameEvent.TRAY_FULL);
     }
 
     /** Clear tray */

@@ -3,6 +3,7 @@ import { ITileData } from '../interfaces/ITileData';
 import { TileManager } from '../managers/TileManager';
 
 const { ccclass, property } = _decorator;
+const BOARD_BLOCKED_COLOR = new Color(129, 129, 129, 255);
 
 /**
  * Tile - Component gắn vào node tile trong scene.
@@ -21,10 +22,10 @@ export class Tile extends Component {
     public selectableColor: Color = Color.WHITE;
 
     @property
-    public blockedColor: Color = new Color(129, 129, 129, 255);
+    public blockedColor: Color = BOARD_BLOCKED_COLOR.clone();
 
     @property
-    public dimmedColor: Color = new Color(129, 129, 129, 255);
+    public dimmedColor: Color = BOARD_BLOCKED_COLOR.clone();
 
     @property
     public selectedColor: Color = new Color(255, 220, 100, 255);
@@ -53,6 +54,7 @@ export class Tile extends Component {
     public unlockFadeDuration: number = 0.3;
 
     protected onLoad(): void {
+        this.normalizeBoardColors();
         this._originalScale = this.node.scale.clone();
         if (this.visualNode) {
             this._originalVisualScale = this.visualNode.scale.clone();
@@ -70,6 +72,7 @@ export class Tile extends Component {
 
     /** Khởi tạo tile với data */
     public initialize(data: ITileData): void {
+        this.normalizeBoardColors();
         if (!this.visualNode) {
             this.visualNode = this.node.getChildByName('visual');
         }
@@ -82,6 +85,11 @@ export class Tile extends Component {
         this._isSelected = false;
         this._lastVisualState = null;
         this.updateVisualState();
+    }
+
+    private normalizeBoardColors(): void {
+        this.blockedColor = BOARD_BLOCKED_COLOR.clone();
+        this.dimmedColor = BOARD_BLOCKED_COLOR.clone();
     }
 
     /** Cập nhật trạng thái visual theo data (selectable / blocked / selected) */
@@ -154,17 +162,26 @@ export class Tile extends Component {
                 })
                 .start();
             sprite.node.setScale(targetVisualScaleX, targetVisualScaleY, this._originalVisualScale.z);
-        } else if (newState !== this._lastVisualState) {
+        } else if (newState !== this._lastVisualState || newState === 'blocked' || newState === 'dimmed') {
             if (this._unlockTween) {
                 this._unlockTween.stop();
                 this._unlockTween = null;
             }
-            sprite.color = targetColor;
-            sprite.node.setScale(targetVisualScaleX, targetVisualScaleY, this._originalVisualScale.z);
+            this.applySpriteVisual(sprite, targetColor, targetVisualScaleX, targetVisualScaleY, this._originalVisualScale.z);
         }
 
         this._lastVisualState = newState;
         this.node.active = true;
+    }
+
+    private applySpriteVisual(sprite: Sprite, color: Color, scaleX: number, scaleY: number, scaleZ: number): void {
+        Tween.stopAllByTarget(sprite.node);
+        sprite.color = new Color(color.r, color.g, color.b, color.a);
+        sprite.node.setScale(scaleX, scaleY, scaleZ);
+        sprite.node.angle = 0;
+        sprite.node.setRotationFromEuler(0, 0, 0);
+        const opacity = sprite.node.getComponent(UIOpacity);
+        if (opacity) opacity.opacity = 255;
     }
 
     /** Đặt trạng thái selected và cập nhật visual */
@@ -178,6 +195,13 @@ export class Tile extends Component {
 
     public forceUpdateBoardVisualState(): void {
         this._isInTrayVisual = false;
+        this._isSelected = false;
+        Tween.stopAllByTarget(this.node);
+        if (this.visualNode) Tween.stopAllByTarget(this.visualNode);
+        const opacity = this.node.getComponent(UIOpacity);
+        if (opacity) opacity.opacity = 255;
+        this.node.angle = 0;
+        this.node.setRotationFromEuler(0, 0, 0);
         this.forceUpdateVisualState();
     }
 

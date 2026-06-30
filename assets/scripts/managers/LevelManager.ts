@@ -118,8 +118,7 @@ export class LevelManager {
 
         // Prewarm pool và preload sprite để tránh giật khi instantiate/runtime load
         TileManager.getInstance().prewarmPool(tilesToSpawn.length);
-        const groupIds = [...new Set(tilesToSpawn.map(t => t.groupId))];
-        await SkinManager.getInstance().prewarmSkinSprites(groupIds);
+        await SkinManager.getInstance().prewarmSkinSprites();
         if (loadToken !== this._loadToken) return;
 
         // Spawn với animation rơi từ trên xuống theo thứ tự layer dưới trước
@@ -388,7 +387,7 @@ export class LevelManager {
             ) {
                                 this.onLevelFailed('tray_full_order_match');
             }
-        }, 500);
+        }, 0);
     }
 
     /** Xử lý khi wrong tray đầy (chỉ thua trong TRIPLE_MATCH) */

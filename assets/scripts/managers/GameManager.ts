@@ -189,6 +189,7 @@ export class GameManager extends Component {
                         return;
         }
         await skinMgr.loadDefaultSkin();
+        await skinMgr.prewarmSkinSprites();
 
         const audioMgr = AudioManager.getInstance();
         if (!audioMgr) {
@@ -202,6 +203,12 @@ export class GameManager extends Component {
         await this.registerTilePrefab();
 
         UIManager.getInstance().initialize(this.uiRoot);
+        await UIManager.getInstance().preloadPanels([
+            'GameplayPanel',
+            'LevelCompletePanel',
+            'LevelFailedPanel',
+            'LevelSelectPanel',
+        ]);
 
         this.setState(GameState.MAIN_MENU);
 
